@@ -16,7 +16,6 @@ const LandingPage = () => {
                 }}
             >
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', my: 4 }}>
-                    <Image src={logo} alt="Logo" width={120} height={120} priority />
                 </Box>
 
                 <Button
