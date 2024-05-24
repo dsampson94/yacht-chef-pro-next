@@ -54,7 +54,7 @@ export const Header = () => {
                     <MenuItem onClick={ handleMenuClose }>Logout</MenuItem>
                 </Menu>
                 <Typography variant="h6" component="div" sx={ { flexGrow: 1 } }>
-                    Invoisseur
+                    Yacht Chef Pro
                 </Typography>
                 <Button color="inherit">Login</Button>
             </Toolbar>

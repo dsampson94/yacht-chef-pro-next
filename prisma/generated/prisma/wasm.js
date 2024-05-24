@@ -123,9 +123,32 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
   username: 'username',
+  password: 'password',
   role: 'role',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AccountScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  provider: 'provider',
+  providerAccountId: 'providerAccountId',
+  refresh_token: 'refresh_token',
+  access_token: 'access_token',
+  expires_at: 'expires_at',
+  token_type: 'token_type',
+  scope: 'scope',
+  id_token: 'id_token',
+  session_state: 'session_state'
+};
+
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  sessionToken: 'sessionToken',
+  userId: 'userId',
+  expires: 'expires'
 };
 
 exports.Prisma.ChefScalarFieldEnum = {
@@ -157,6 +180,8 @@ exports.Prisma.IngredientScalarFieldEnum = {
   menuItemId: 'menuItemId',
   name: 'name',
   description: 'description',
+  weight: 'weight',
+  price: 'price',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -164,6 +189,8 @@ exports.Prisma.IngredientScalarFieldEnum = {
 exports.Prisma.SupplierScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  email: 'email',
+  phone: 'phone',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -177,11 +204,13 @@ exports.Prisma.LocationScalarFieldEnum = {
 };
 
 exports.Prisma.SupplierLocationScalarFieldEnum = {
+  id: 'id',
   supplierId: 'supplierId',
   locationId: 'locationId'
 };
 
 exports.Prisma.SupplierIngredientScalarFieldEnum = {
+  id: 'id',
   supplierId: 'supplierId',
   ingredientId: 'ingredientId',
   locationId: 'locationId'
@@ -200,6 +229,8 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
   ingredientId: 'ingredientId',
+  supplierId: 'supplierId',
+  locationId: 'locationId',
   quantity: 'quantity',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -244,6 +275,8 @@ exports.OrderStatus = exports.$Enums.OrderStatus = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Account: 'Account',
+  Session: 'Session',
   Chef: 'Chef',
   Menu: 'Menu',
   MenuItem: 'MenuItem',

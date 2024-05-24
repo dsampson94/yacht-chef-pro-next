@@ -5,18 +5,49 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("POSTGRES_URL")
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
+  id        String    @id @default(uuid())
+  email     String    @unique
   username  String
-  role      UserRole @default(USER)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  password  String
+  role      UserRole  @default(USER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  accounts  Account[]
+  sessions  Session[]
   chef      Chef?
   orders    Order[]
+}
+
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id])
 }
 
 model Chef {
@@ -52,24 +83,33 @@ model MenuItem {
 
 model Ingredient {
   id                  String               @id @default(uuid())
-  menuItemId          String
-  menuItem            MenuItem             @relation(fields: [menuItemId], references: [id])
+  menuItemId          String?
+  menuItem            MenuItem?            @relation(fields: [menuItemId], references: [id])
   name                String
   description         String?
+  weight              Float
+  price               Float
   supplierIngredients SupplierIngredient[]
   orderItems          OrderItem[]
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt
+
+  @@unique([name, weight, price])
 }
 
 model Supplier {
   id                  String               @id @default(uuid())
   name                String
+  email               String               @unique
+  phone               String
   locations           SupplierLocation[]
   supplierIngredients SupplierIngredient[]
   reviews             Review[]
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @updatedAt
+  OrderItem           OrderItem[]
+
+  @@unique([name])
 }
 
 model Location {
@@ -78,20 +118,25 @@ model Location {
   country            String
   suppliers          SupplierLocation[]
   createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
+  updatedAt          DateTime             @default(now())
   SupplierIngredient SupplierIngredient[]
+  OrderItem          OrderItem[]
+
+  @@unique([city, country])
 }
 
 model SupplierLocation {
+  id         String   @id @default(uuid())
   supplierId String
   locationId String
   supplier   Supplier @relation(fields: [supplierId], references: [id])
   location   Location @relation(fields: [locationId], references: [id])
 
-  @@id([supplierId, locationId])
+  @@unique([supplierId, locationId])
 }
 
 model SupplierIngredient {
+  id           String     @id @default(uuid())
   supplierId   String
   ingredientId String
   locationId   String
@@ -99,7 +144,7 @@ model SupplierIngredient {
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
   location     Location   @relation(fields: [locationId], references: [id])
 
-  @@id([supplierId, ingredientId, locationId])
+  @@unique([supplierId, ingredientId, locationId])
 }
 
 model Order {
@@ -117,11 +162,17 @@ model OrderItem {
   id           String     @id @default(uuid())
   orderId      String
   ingredientId String
+  supplierId   String
+  locationId   String
   order        Order      @relation(fields: [orderId], references: [id])
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  supplier     Supplier   @relation(fields: [supplierId], references: [id])
+  location     Location   @relation(fields: [locationId], references: [id])
   quantity     Int
   createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  updatedAt    DateTime   @default(now())
+
+  @@unique([orderId, ingredientId, supplierId, locationId])
 }
 
 model Review {
@@ -133,7 +184,7 @@ model Review {
   rating     Int
   comment    String?
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  updatedAt  DateTime @default(now())
 }
 
 enum UserRole {

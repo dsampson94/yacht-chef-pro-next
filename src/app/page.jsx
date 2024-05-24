@@ -1,7 +1,7 @@
-import LandingPage from '../../pages/landing';
+import Auth from '../../pages/auth';
 
 export default async function Home() {
     return (
-       <LandingPage/>
+        <Auth />
     );
 }
