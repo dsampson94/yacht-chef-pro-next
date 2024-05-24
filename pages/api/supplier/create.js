@@ -1,6 +1,6 @@
 // pages/api/suppliers/create.js
 import { getSession } from 'next-auth/react';
-import prisma from '../../../../lib/prisma';
+import prisma from '../../../lib/prisma';
 
 export default async function handle(req, res) {
     const session = await getSession({ req });
