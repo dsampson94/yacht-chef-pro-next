@@ -1,4 +1,3 @@
-// pages/api/auth/[...nextauth].js
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
@@ -10,16 +9,16 @@ export default NextAuth({
         CredentialsProvider({
             name: 'Credentials',
             credentials: {
-                email: { label: 'Email', type: 'email' },
+                username: { label: 'Username', type: 'text' },
                 password: { label: 'Password', type: 'password' }
             },
             async authorize(credentials) {
                 const user = await prisma.user.findUnique({
-                    where: { email: credentials.email },
+                    where: { username: credentials.username },
                 });
 
                 if (user && await bcrypt.compare(credentials.password, user.password)) {
-                    return { id: user.id, email: user.email, name: user.username };
+                    return { id: user.id, username: user.username };
                 }
 
                 return null;
@@ -37,11 +36,13 @@ export default NextAuth({
         async jwt(token, user) {
             if (user) {
                 token.id = user.id;
+                token.username = user.username;
             }
             return token;
         },
         async session(session, token) {
             session.user.id = token.id;
+            session.user.username = token.username;
             return session;
         },
     },

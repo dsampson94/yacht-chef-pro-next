@@ -434,8 +434,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.13.0
-   * Query Engine version: b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b
+   * Prisma Client JS version: 5.14.0
+   * Query Engine version: e9771e62de70f79a5e1c604a2d7c8e2a0a874b48
    */
   export type PrismaVersion = {
     client: string
@@ -920,6 +920,10 @@ export namespace Prisma {
             args: Prisma.UserCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
           delete: {
             args: Prisma.UserDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$UserPayload>
@@ -985,6 +989,10 @@ export namespace Prisma {
           createMany: {
             args: Prisma.AccountCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AccountCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AccountPayload>[]
           }
           delete: {
             args: Prisma.AccountDeleteArgs<ExtArgs>,
@@ -1052,6 +1060,10 @@ export namespace Prisma {
             args: Prisma.SessionCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.SessionCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>[]
+          }
           delete: {
             args: Prisma.SessionDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$SessionPayload>
@@ -1117,6 +1129,10 @@ export namespace Prisma {
           createMany: {
             args: Prisma.ChefCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ChefCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ChefPayload>[]
           }
           delete: {
             args: Prisma.ChefDeleteArgs<ExtArgs>,
@@ -1184,6 +1200,10 @@ export namespace Prisma {
             args: Prisma.MenuCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.MenuCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MenuPayload>[]
+          }
           delete: {
             args: Prisma.MenuDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$MenuPayload>
@@ -1249,6 +1269,10 @@ export namespace Prisma {
           createMany: {
             args: Prisma.MenuItemCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MenuItemCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$MenuItemPayload>[]
           }
           delete: {
             args: Prisma.MenuItemDeleteArgs<ExtArgs>,
@@ -1316,6 +1340,10 @@ export namespace Prisma {
             args: Prisma.IngredientCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.IngredientCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$IngredientPayload>[]
+          }
           delete: {
             args: Prisma.IngredientDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$IngredientPayload>
@@ -1381,6 +1409,10 @@ export namespace Prisma {
           createMany: {
             args: Prisma.SupplierCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SupplierCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SupplierPayload>[]
           }
           delete: {
             args: Prisma.SupplierDeleteArgs<ExtArgs>,
@@ -1448,6 +1480,10 @@ export namespace Prisma {
             args: Prisma.LocationCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.LocationCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$LocationPayload>[]
+          }
           delete: {
             args: Prisma.LocationDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$LocationPayload>
@@ -1513,6 +1549,10 @@ export namespace Prisma {
           createMany: {
             args: Prisma.SupplierLocationCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SupplierLocationCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SupplierLocationPayload>[]
           }
           delete: {
             args: Prisma.SupplierLocationDeleteArgs<ExtArgs>,
@@ -1580,6 +1620,10 @@ export namespace Prisma {
             args: Prisma.SupplierIngredientCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.SupplierIngredientCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$SupplierIngredientPayload>[]
+          }
           delete: {
             args: Prisma.SupplierIngredientDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$SupplierIngredientPayload>
@@ -1645,6 +1689,10 @@ export namespace Prisma {
           createMany: {
             args: Prisma.OrderCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OrderCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OrderPayload>[]
           }
           delete: {
             args: Prisma.OrderDeleteArgs<ExtArgs>,
@@ -1712,6 +1760,10 @@ export namespace Prisma {
             args: Prisma.OrderItemCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.OrderItemCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$OrderItemPayload>[]
+          }
           delete: {
             args: Prisma.OrderItemDeleteArgs<ExtArgs>,
             result: $Utils.PayloadToResult<Prisma.$OrderItemPayload>
@@ -1777,6 +1829,10 @@ export namespace Prisma {
           createMany: {
             args: Prisma.ReviewCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReviewCreateManyAndReturnArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
           }
           delete: {
             args: Prisma.ReviewDeleteArgs<ExtArgs>,
@@ -1917,6 +1973,7 @@ export namespace Prisma {
     | 'findFirstOrThrow'
     | 'create'
     | 'createMany'
+    | 'createManyAndReturn'
     | 'update'
     | 'updateMany'
     | 'upsert'
@@ -2552,8 +2609,8 @@ export namespace Prisma {
     ): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one User that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one User that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {UserFindUniqueOrThrowArgs} args - Arguments to find a User
      * @example
      * // Get one User
@@ -2606,7 +2663,7 @@ export namespace Prisma {
      * Find zero or more Users that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {UserFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {UserFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Users
      * const users = await prisma.user.findMany()
@@ -2640,19 +2697,45 @@ export namespace Prisma {
 
     /**
      * Create many Users.
-     *     @param {UserCreateManyArgs} args - Arguments to create many Users.
-     *     @example
-     *     // Create many Users
-     *     const user = await prisma.user.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {UserCreateManyArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const user = await prisma.user.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends UserCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Users and returns the data saved in the database.
+     * @param {UserCreateManyAndReturnArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const user = await prisma.user.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends UserCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a User.
@@ -3131,6 +3214,25 @@ export namespace Prisma {
    * User createMany
    */
   export type UserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * User createManyAndReturn
+   */
+  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data used to create many Users.
      */
@@ -3644,8 +3746,8 @@ export namespace Prisma {
     ): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Account that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one Account that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {AccountFindUniqueOrThrowArgs} args - Arguments to find a Account
      * @example
      * // Get one Account
@@ -3698,7 +3800,7 @@ export namespace Prisma {
      * Find zero or more Accounts that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {AccountFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {AccountFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Accounts
      * const accounts = await prisma.account.findMany()
@@ -3732,19 +3834,45 @@ export namespace Prisma {
 
     /**
      * Create many Accounts.
-     *     @param {AccountCreateManyArgs} args - Arguments to create many Accounts.
-     *     @example
-     *     // Create many Accounts
-     *     const account = await prisma.account.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {AccountCreateManyArgs} args - Arguments to create many Accounts.
+     * @example
+     * // Create many Accounts
+     * const account = await prisma.account.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends AccountCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, AccountCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Accounts and returns the data saved in the database.
+     * @param {AccountCreateManyAndReturnArgs} args - Arguments to create many Accounts.
+     * @example
+     * // Create many Accounts
+     * const account = await prisma.account.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Accounts and only return the `id`
+     * const accountWithIdOnly = await prisma.account.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends AccountCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, AccountCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a Account.
@@ -4230,6 +4358,25 @@ export namespace Prisma {
   }
 
   /**
+   * Account createManyAndReturn
+   */
+  export type AccountCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Account
+     */
+    select?: AccountSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AccountInclude<ExtArgs> | null
+    /**
+     * The data used to create many Accounts.
+     */
+    data: AccountCreateManyInput | AccountCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * Account update
    */
   export type AccountUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4546,8 +4693,8 @@ export namespace Prisma {
     ): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Session that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one Session that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {SessionFindUniqueOrThrowArgs} args - Arguments to find a Session
      * @example
      * // Get one Session
@@ -4600,7 +4747,7 @@ export namespace Prisma {
      * Find zero or more Sessions that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SessionFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {SessionFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Sessions
      * const sessions = await prisma.session.findMany()
@@ -4634,19 +4781,45 @@ export namespace Prisma {
 
     /**
      * Create many Sessions.
-     *     @param {SessionCreateManyArgs} args - Arguments to create many Sessions.
-     *     @example
-     *     // Create many Sessions
-     *     const session = await prisma.session.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {SessionCreateManyArgs} args - Arguments to create many Sessions.
+     * @example
+     * // Create many Sessions
+     * const session = await prisma.session.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends SessionCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, SessionCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Sessions and returns the data saved in the database.
+     * @param {SessionCreateManyAndReturnArgs} args - Arguments to create many Sessions.
+     * @example
+     * // Create many Sessions
+     * const session = await prisma.session.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Sessions and only return the `id`
+     * const sessionWithIdOnly = await prisma.session.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends SessionCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, SessionCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a Session.
@@ -5124,6 +5297,25 @@ export namespace Prisma {
   }
 
   /**
+   * Session createManyAndReturn
+   */
+  export type SessionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * The data used to create many Sessions.
+     */
+    data: SessionCreateManyInput | SessionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * Session update
    */
   export type SessionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5448,8 +5640,8 @@ export namespace Prisma {
     ): Prisma__ChefClient<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Chef that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one Chef that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {ChefFindUniqueOrThrowArgs} args - Arguments to find a Chef
      * @example
      * // Get one Chef
@@ -5502,7 +5694,7 @@ export namespace Prisma {
      * Find zero or more Chefs that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChefFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {ChefFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Chefs
      * const chefs = await prisma.chef.findMany()
@@ -5536,19 +5728,45 @@ export namespace Prisma {
 
     /**
      * Create many Chefs.
-     *     @param {ChefCreateManyArgs} args - Arguments to create many Chefs.
-     *     @example
-     *     // Create many Chefs
-     *     const chef = await prisma.chef.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {ChefCreateManyArgs} args - Arguments to create many Chefs.
+     * @example
+     * // Create many Chefs
+     * const chef = await prisma.chef.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends ChefCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ChefCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Chefs and returns the data saved in the database.
+     * @param {ChefCreateManyAndReturnArgs} args - Arguments to create many Chefs.
+     * @example
+     * // Create many Chefs
+     * const chef = await prisma.chef.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Chefs and only return the `id`
+     * const chefWithIdOnly = await prisma.chef.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends ChefCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, ChefCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a Chef.
@@ -6030,6 +6248,25 @@ export namespace Prisma {
   }
 
   /**
+   * Chef createManyAndReturn
+   */
+  export type ChefCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chef
+     */
+    select?: ChefSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChefInclude<ExtArgs> | null
+    /**
+     * The data used to create many Chefs.
+     */
+    data: ChefCreateManyInput | ChefCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * Chef update
    */
   export type ChefUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6435,8 +6672,8 @@ export namespace Prisma {
     ): Prisma__MenuClient<$Result.GetResult<Prisma.$MenuPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Menu that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one Menu that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {MenuFindUniqueOrThrowArgs} args - Arguments to find a Menu
      * @example
      * // Get one Menu
@@ -6489,7 +6726,7 @@ export namespace Prisma {
      * Find zero or more Menus that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MenuFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {MenuFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Menus
      * const menus = await prisma.menu.findMany()
@@ -6523,19 +6760,45 @@ export namespace Prisma {
 
     /**
      * Create many Menus.
-     *     @param {MenuCreateManyArgs} args - Arguments to create many Menus.
-     *     @example
-     *     // Create many Menus
-     *     const menu = await prisma.menu.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {MenuCreateManyArgs} args - Arguments to create many Menus.
+     * @example
+     * // Create many Menus
+     * const menu = await prisma.menu.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends MenuCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, MenuCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Menus and returns the data saved in the database.
+     * @param {MenuCreateManyAndReturnArgs} args - Arguments to create many Menus.
+     * @example
+     * // Create many Menus
+     * const menu = await prisma.menu.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Menus and only return the `id`
+     * const menuWithIdOnly = await prisma.menu.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends MenuCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, MenuCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a Menu.
@@ -7016,6 +7279,25 @@ export namespace Prisma {
   }
 
   /**
+   * Menu createManyAndReturn
+   */
+  export type MenuCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Menu
+     */
+    select?: MenuSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuInclude<ExtArgs> | null
+    /**
+     * The data used to create many Menus.
+     */
+    data: MenuCreateManyInput | MenuCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * Menu update
    */
   export type MenuUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7377,8 +7659,8 @@ export namespace Prisma {
     ): Prisma__MenuItemClient<$Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one MenuItem that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one MenuItem that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {MenuItemFindUniqueOrThrowArgs} args - Arguments to find a MenuItem
      * @example
      * // Get one MenuItem
@@ -7431,7 +7713,7 @@ export namespace Prisma {
      * Find zero or more MenuItems that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {MenuItemFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {MenuItemFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all MenuItems
      * const menuItems = await prisma.menuItem.findMany()
@@ -7465,19 +7747,45 @@ export namespace Prisma {
 
     /**
      * Create many MenuItems.
-     *     @param {MenuItemCreateManyArgs} args - Arguments to create many MenuItems.
-     *     @example
-     *     // Create many MenuItems
-     *     const menuItem = await prisma.menuItem.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {MenuItemCreateManyArgs} args - Arguments to create many MenuItems.
+     * @example
+     * // Create many MenuItems
+     * const menuItem = await prisma.menuItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends MenuItemCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, MenuItemCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MenuItems and returns the data saved in the database.
+     * @param {MenuItemCreateManyAndReturnArgs} args - Arguments to create many MenuItems.
+     * @example
+     * // Create many MenuItems
+     * const menuItem = await prisma.menuItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MenuItems and only return the `id`
+     * const menuItemWithIdOnly = await prisma.menuItem.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends MenuItemCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, MenuItemCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a MenuItem.
@@ -7959,6 +8267,25 @@ export namespace Prisma {
   }
 
   /**
+   * MenuItem createManyAndReturn
+   */
+  export type MenuItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItem
+     */
+    select?: MenuItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemInclude<ExtArgs> | null
+    /**
+     * The data used to create many MenuItems.
+     */
+    data: MenuItemCreateManyInput | MenuItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * MenuItem update
    */
   export type MenuItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8381,8 +8708,8 @@ export namespace Prisma {
     ): Prisma__IngredientClient<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Ingredient that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one Ingredient that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {IngredientFindUniqueOrThrowArgs} args - Arguments to find a Ingredient
      * @example
      * // Get one Ingredient
@@ -8435,7 +8762,7 @@ export namespace Prisma {
      * Find zero or more Ingredients that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {IngredientFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {IngredientFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Ingredients
      * const ingredients = await prisma.ingredient.findMany()
@@ -8469,19 +8796,45 @@ export namespace Prisma {
 
     /**
      * Create many Ingredients.
-     *     @param {IngredientCreateManyArgs} args - Arguments to create many Ingredients.
-     *     @example
-     *     // Create many Ingredients
-     *     const ingredient = await prisma.ingredient.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {IngredientCreateManyArgs} args - Arguments to create many Ingredients.
+     * @example
+     * // Create many Ingredients
+     * const ingredient = await prisma.ingredient.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends IngredientCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, IngredientCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Ingredients and returns the data saved in the database.
+     * @param {IngredientCreateManyAndReturnArgs} args - Arguments to create many Ingredients.
+     * @example
+     * // Create many Ingredients
+     * const ingredient = await prisma.ingredient.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Ingredients and only return the `id`
+     * const ingredientWithIdOnly = await prisma.ingredient.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends IngredientCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, IngredientCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a Ingredient.
@@ -8967,6 +9320,25 @@ export namespace Prisma {
   }
 
   /**
+   * Ingredient createManyAndReturn
+   */
+  export type IngredientCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ingredient
+     */
+    select?: IngredientSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: IngredientInclude<ExtArgs> | null
+    /**
+     * The data used to create many Ingredients.
+     */
+    data: IngredientCreateManyInput | IngredientCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * Ingredient update
    */
   export type IngredientUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9369,8 +9741,8 @@ export namespace Prisma {
     ): Prisma__SupplierClient<$Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Supplier that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one Supplier that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {SupplierFindUniqueOrThrowArgs} args - Arguments to find a Supplier
      * @example
      * // Get one Supplier
@@ -9423,7 +9795,7 @@ export namespace Prisma {
      * Find zero or more Suppliers that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {SupplierFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Suppliers
      * const suppliers = await prisma.supplier.findMany()
@@ -9457,19 +9829,45 @@ export namespace Prisma {
 
     /**
      * Create many Suppliers.
-     *     @param {SupplierCreateManyArgs} args - Arguments to create many Suppliers.
-     *     @example
-     *     // Create many Suppliers
-     *     const supplier = await prisma.supplier.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {SupplierCreateManyArgs} args - Arguments to create many Suppliers.
+     * @example
+     * // Create many Suppliers
+     * const supplier = await prisma.supplier.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends SupplierCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, SupplierCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Suppliers and returns the data saved in the database.
+     * @param {SupplierCreateManyAndReturnArgs} args - Arguments to create many Suppliers.
+     * @example
+     * // Create many Suppliers
+     * const supplier = await prisma.supplier.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Suppliers and only return the `id`
+     * const supplierWithIdOnly = await prisma.supplier.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends SupplierCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, SupplierCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a Supplier.
@@ -9955,6 +10353,25 @@ export namespace Prisma {
   }
 
   /**
+   * Supplier createManyAndReturn
+   */
+  export type SupplierCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Supplier
+     */
+    select?: SupplierSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupplierInclude<ExtArgs> | null
+    /**
+     * The data used to create many Suppliers.
+     */
+    data: SupplierCreateManyInput | SupplierCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * Supplier update
    */
   export type SupplierUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10369,8 +10786,8 @@ export namespace Prisma {
     ): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Location that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one Location that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {LocationFindUniqueOrThrowArgs} args - Arguments to find a Location
      * @example
      * // Get one Location
@@ -10423,7 +10840,7 @@ export namespace Prisma {
      * Find zero or more Locations that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {LocationFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {LocationFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Locations
      * const locations = await prisma.location.findMany()
@@ -10457,19 +10874,45 @@ export namespace Prisma {
 
     /**
      * Create many Locations.
-     *     @param {LocationCreateManyArgs} args - Arguments to create many Locations.
-     *     @example
-     *     // Create many Locations
-     *     const location = await prisma.location.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {LocationCreateManyArgs} args - Arguments to create many Locations.
+     * @example
+     * // Create many Locations
+     * const location = await prisma.location.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends LocationCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, LocationCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Locations and returns the data saved in the database.
+     * @param {LocationCreateManyAndReturnArgs} args - Arguments to create many Locations.
+     * @example
+     * // Create many Locations
+     * const location = await prisma.location.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Locations and only return the `id`
+     * const locationWithIdOnly = await prisma.location.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends LocationCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, LocationCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a Location.
@@ -10952,6 +11395,25 @@ export namespace Prisma {
   }
 
   /**
+   * Location createManyAndReturn
+   */
+  export type LocationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Location
+     */
+    select?: LocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LocationInclude<ExtArgs> | null
+    /**
+     * The data used to create many Locations.
+     */
+    data: LocationCreateManyInput | LocationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * Location update
    */
   export type LocationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11321,8 +11783,8 @@ export namespace Prisma {
     ): Prisma__SupplierLocationClient<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one SupplierLocation that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one SupplierLocation that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {SupplierLocationFindUniqueOrThrowArgs} args - Arguments to find a SupplierLocation
      * @example
      * // Get one SupplierLocation
@@ -11375,7 +11837,7 @@ export namespace Prisma {
      * Find zero or more SupplierLocations that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierLocationFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {SupplierLocationFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all SupplierLocations
      * const supplierLocations = await prisma.supplierLocation.findMany()
@@ -11409,19 +11871,45 @@ export namespace Prisma {
 
     /**
      * Create many SupplierLocations.
-     *     @param {SupplierLocationCreateManyArgs} args - Arguments to create many SupplierLocations.
-     *     @example
-     *     // Create many SupplierLocations
-     *     const supplierLocation = await prisma.supplierLocation.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {SupplierLocationCreateManyArgs} args - Arguments to create many SupplierLocations.
+     * @example
+     * // Create many SupplierLocations
+     * const supplierLocation = await prisma.supplierLocation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends SupplierLocationCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, SupplierLocationCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SupplierLocations and returns the data saved in the database.
+     * @param {SupplierLocationCreateManyAndReturnArgs} args - Arguments to create many SupplierLocations.
+     * @example
+     * // Create many SupplierLocations
+     * const supplierLocation = await prisma.supplierLocation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SupplierLocations and only return the `id`
+     * const supplierLocationWithIdOnly = await prisma.supplierLocation.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends SupplierLocationCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, SupplierLocationCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a SupplierLocation.
@@ -11900,6 +12388,25 @@ export namespace Prisma {
   }
 
   /**
+   * SupplierLocation createManyAndReturn
+   */
+  export type SupplierLocationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupplierLocation
+     */
+    select?: SupplierLocationSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupplierLocationInclude<ExtArgs> | null
+    /**
+     * The data used to create many SupplierLocations.
+     */
+    data: SupplierLocationCreateManyInput | SupplierLocationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * SupplierLocation update
    */
   export type SupplierLocationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12222,8 +12729,8 @@ export namespace Prisma {
     ): Prisma__SupplierIngredientClient<$Result.GetResult<Prisma.$SupplierIngredientPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one SupplierIngredient that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one SupplierIngredient that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {SupplierIngredientFindUniqueOrThrowArgs} args - Arguments to find a SupplierIngredient
      * @example
      * // Get one SupplierIngredient
@@ -12276,7 +12783,7 @@ export namespace Prisma {
      * Find zero or more SupplierIngredients that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierIngredientFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {SupplierIngredientFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all SupplierIngredients
      * const supplierIngredients = await prisma.supplierIngredient.findMany()
@@ -12310,19 +12817,45 @@ export namespace Prisma {
 
     /**
      * Create many SupplierIngredients.
-     *     @param {SupplierIngredientCreateManyArgs} args - Arguments to create many SupplierIngredients.
-     *     @example
-     *     // Create many SupplierIngredients
-     *     const supplierIngredient = await prisma.supplierIngredient.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {SupplierIngredientCreateManyArgs} args - Arguments to create many SupplierIngredients.
+     * @example
+     * // Create many SupplierIngredients
+     * const supplierIngredient = await prisma.supplierIngredient.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends SupplierIngredientCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, SupplierIngredientCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SupplierIngredients and returns the data saved in the database.
+     * @param {SupplierIngredientCreateManyAndReturnArgs} args - Arguments to create many SupplierIngredients.
+     * @example
+     * // Create many SupplierIngredients
+     * const supplierIngredient = await prisma.supplierIngredient.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SupplierIngredients and only return the `id`
+     * const supplierIngredientWithIdOnly = await prisma.supplierIngredient.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends SupplierIngredientCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, SupplierIngredientCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierIngredientPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a SupplierIngredient.
@@ -12804,6 +13337,25 @@ export namespace Prisma {
   }
 
   /**
+   * SupplierIngredient createManyAndReturn
+   */
+  export type SupplierIngredientCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupplierIngredient
+     */
+    select?: SupplierIngredientSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupplierIngredientInclude<ExtArgs> | null
+    /**
+     * The data used to create many SupplierIngredients.
+     */
+    data: SupplierIngredientCreateManyInput | SupplierIngredientCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * SupplierIngredient update
    */
   export type SupplierIngredientUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13145,8 +13697,8 @@ export namespace Prisma {
     ): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Order that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one Order that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {OrderFindUniqueOrThrowArgs} args - Arguments to find a Order
      * @example
      * // Get one Order
@@ -13199,7 +13751,7 @@ export namespace Prisma {
      * Find zero or more Orders that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OrderFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {OrderFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Orders
      * const orders = await prisma.order.findMany()
@@ -13233,19 +13785,45 @@ export namespace Prisma {
 
     /**
      * Create many Orders.
-     *     @param {OrderCreateManyArgs} args - Arguments to create many Orders.
-     *     @example
-     *     // Create many Orders
-     *     const order = await prisma.order.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {OrderCreateManyArgs} args - Arguments to create many Orders.
+     * @example
+     * // Create many Orders
+     * const order = await prisma.order.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends OrderCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, OrderCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Orders and returns the data saved in the database.
+     * @param {OrderCreateManyAndReturnArgs} args - Arguments to create many Orders.
+     * @example
+     * // Create many Orders
+     * const order = await prisma.order.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Orders and only return the `id`
+     * const orderWithIdOnly = await prisma.order.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends OrderCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, OrderCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a Order.
@@ -13727,6 +14305,25 @@ export namespace Prisma {
   }
 
   /**
+   * Order createManyAndReturn
+   */
+  export type OrderCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Order
+     */
+    select?: OrderSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderInclude<ExtArgs> | null
+    /**
+     * The data used to create many Orders.
+     */
+    data: OrderCreateManyInput | OrderCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * Order update
    */
   export type OrderUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14146,8 +14743,8 @@ export namespace Prisma {
     ): Prisma__OrderItemClient<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one OrderItem that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one OrderItem that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {OrderItemFindUniqueOrThrowArgs} args - Arguments to find a OrderItem
      * @example
      * // Get one OrderItem
@@ -14200,7 +14797,7 @@ export namespace Prisma {
      * Find zero or more OrderItems that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OrderItemFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {OrderItemFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all OrderItems
      * const orderItems = await prisma.orderItem.findMany()
@@ -14234,19 +14831,45 @@ export namespace Prisma {
 
     /**
      * Create many OrderItems.
-     *     @param {OrderItemCreateManyArgs} args - Arguments to create many OrderItems.
-     *     @example
-     *     // Create many OrderItems
-     *     const orderItem = await prisma.orderItem.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {OrderItemCreateManyArgs} args - Arguments to create many OrderItems.
+     * @example
+     * // Create many OrderItems
+     * const orderItem = await prisma.orderItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends OrderItemCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, OrderItemCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many OrderItems and returns the data saved in the database.
+     * @param {OrderItemCreateManyAndReturnArgs} args - Arguments to create many OrderItems.
+     * @example
+     * // Create many OrderItems
+     * const orderItem = await prisma.orderItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many OrderItems and only return the `id`
+     * const orderItemWithIdOnly = await prisma.orderItem.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends OrderItemCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, OrderItemCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a OrderItem.
@@ -14734,6 +15357,25 @@ export namespace Prisma {
   }
 
   /**
+   * OrderItem createManyAndReturn
+   */
+  export type OrderItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItem
+     */
+    select?: OrderItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderItemInclude<ExtArgs> | null
+    /**
+     * The data used to create many OrderItems.
+     */
+    data: OrderItemCreateManyInput | OrderItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * OrderItem update
    */
   export type OrderItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15117,8 +15759,8 @@ export namespace Prisma {
     ): Prisma__ReviewClient<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Review that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
+     * Find one Review that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
      * @param {ReviewFindUniqueOrThrowArgs} args - Arguments to find a Review
      * @example
      * // Get one Review
@@ -15171,7 +15813,7 @@ export namespace Prisma {
      * Find zero or more Reviews that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReviewFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {ReviewFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Reviews
      * const reviews = await prisma.review.findMany()
@@ -15205,19 +15847,45 @@ export namespace Prisma {
 
     /**
      * Create many Reviews.
-     *     @param {ReviewCreateManyArgs} args - Arguments to create many Reviews.
-     *     @example
-     *     // Create many Reviews
-     *     const review = await prisma.review.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
+     * @param {ReviewCreateManyArgs} args - Arguments to create many Reviews.
+     * @example
+     * // Create many Reviews
+     * const review = await prisma.review.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
      *     
     **/
     createMany<T extends ReviewCreateManyArgs<ExtArgs>>(
       args?: SelectSubset<T, ReviewCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Reviews and returns the data saved in the database.
+     * @param {ReviewCreateManyAndReturnArgs} args - Arguments to create many Reviews.
+     * @example
+     * // Create many Reviews
+     * const review = await prisma.review.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Reviews and only return the `id`
+     * const reviewWithIdOnly = await prisma.review.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+    **/
+    createManyAndReturn<T extends ReviewCreateManyAndReturnArgs<ExtArgs>>(
+      args?: SelectSubset<T, ReviewCreateManyAndReturnArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, 'createManyAndReturn'>>
 
     /**
      * Delete a Review.
@@ -15700,6 +16368,25 @@ export namespace Prisma {
   }
 
   /**
+   * Review createManyAndReturn
+   */
+  export type ReviewCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    /**
+     * The data used to create many Reviews.
+     */
+    data: ReviewCreateManyInput | ReviewCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * Review update
    */
   export type ReviewUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16137,10 +16824,10 @@ export namespace Prisma {
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
+    username?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    username?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -16149,7 +16836,7 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     chef?: XOR<ChefNullableRelationFilter, ChefWhereInput> | null
     orders?: OrderListRelationFilter
-  }, "id" | "email">
+  }, "id" | "email" | "username">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder

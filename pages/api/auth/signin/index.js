@@ -7,13 +7,21 @@ export default async function handle(req, res) {
         return res.status(405).end(`Method ${req.method} Not Allowed`);
     }
 
-    const { email, password } = req.body;
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        console.log('Missing username or password');
+        return res.status(400).json({ error: 'Username and password are required.' });
+    }
 
     try {
-        const user = await prisma.user.findUnique({ where: { email } });
+        const user = await prisma.user.findUnique({ where: { username } });
+
+        console.log('User Found:', user); // Log the found user
 
         if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(401).json({ error: 'Invalid email or password.' });
+            console.log('Invalid username or password');
+            return res.status(401).json({ error: 'Invalid username or password.' });
         }
 
         return res.status(200).json({ ...user, password: undefined });
