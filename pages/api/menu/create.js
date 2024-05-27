@@ -1,4 +1,4 @@
-// pages/api/ingredients/create.js
+// pages/api/ingredients/index.jsx
 import { getSession } from 'next-auth/react';
 import prisma from '../../../lib/prisma';
 

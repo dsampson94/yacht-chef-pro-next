@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Box, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
 import { useRouter } from 'next/router';
@@ -8,6 +10,7 @@ import RateReviewIcon from '@mui/icons-material/RateReview';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
     const router = useRouter();
@@ -64,6 +67,12 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                         <AccountCircleIcon />
                     </ListItemIcon>
                     { isOpen && <ListItemText primary="Profile" /> }
+                </ListItem>
+                <ListItem button onClick={ () => handleNavigation('/location') }>
+                    <ListItemIcon>
+                        <LocationOnIcon />
+                    </ListItemIcon>
+                    { isOpen && <ListItemText primary="Locations" /> }
                 </ListItem>
             </List>
         </Box>
