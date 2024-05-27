@@ -1,8 +1,7 @@
-import { Providers } from './providers';
-
-import '../styles/tailwind.css';
-import { Header } from '../components/Header';
 import React from 'react';
+import { Providers } from './providers';
+import Header from '../components/Header';
+import '../styles/tailwind.css';
 
 export const metadata = {
     title: {

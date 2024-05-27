@@ -1,33 +1,35 @@
 import React from 'react';
-import { Box, Button, Container } from '@mui/material';
-import Image from 'next/image';
-import Link from 'next/link';
+import { Container, Typography, List, Divider } from '@mui/material';
+import MenuItem from '../components/MenuItem';
+import AppLayout from '../app/AppLayout';
+import withAuth from '../app/withAuth';
 
-const LandingPage = () => {
+const HomePage = () => {
+    const currentWeekMenu = [
+        { id: '1', name: 'Grilled Salmon', description: 'Served with a side of vegetables.' },
+        { id: '2', name: 'Steak Frites', description: 'Juicy steak with crispy fries.' },
+        { id: '3', name: 'Caesar Salad', description: 'Classic Caesar with homemade dressing.' },
+    ];
+
     return (
-        <Container component="main">
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}
-            >
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', my: 4 }}>
-                </Box>
-                <Button
-                    variant="contained"
-                    sx={{ py: 2, px: 4 }}
-                    component={Link}
-                    href="/invoice/create"
-                    noLinkStyle
-                >
-                    Make New Invoice
-                </Button>
-            </Box>
-        </Container>
+        <AppLayout>
+            <Container component="main">
+                <Typography variant="h4" gutterBottom>
+                    This Week's Menu
+                </Typography>
+                <List>
+                    {currentWeekMenu.map((item) => (
+                        <React.Fragment key={item.id}>
+                            <MenuItem name={item.name} description={item.description} />
+                            <Divider />
+                        </React.Fragment>
+                    ))}
+                </List>
+            </Container>
+        </AppLayout>
     );
 };
 
-export default LandingPage;
+HomePage.displayName = 'HomePage';
+
+export default withAuth(HomePage);

@@ -1,15 +1,18 @@
-"use client"
+'use client';
 
 import React, { useState } from 'react';
+import { signOut, useSession } from 'next-auth/react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Avatar from '@mui/material/Avatar';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Menu, MenuItem } from '@mui/material';
 
-export const Header = () => {
+const Header = ({ onMenuClick }) => {
+    const { data: session } = useSession();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
@@ -21,6 +24,10 @@ export const Header = () => {
         setAnchorEl(null);
     };
 
+    const handleSignOut = () => {
+        signOut({ callbackUrl: '/' });
+    };
+
     return (
         <AppBar position="sticky">
             <Toolbar>
@@ -30,34 +37,38 @@ export const Header = () => {
                     color="inherit"
                     aria-label="menu"
                     sx={ { mr: 2 } }
-                    onClick={ handleMenuClick }
+                    onClick={ onMenuClick }
                 >
                     <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" component="div" sx={ { flexGrow: 1 } }>
+                    Yacht Chef Pro
+                </Typography>
+                <IconButton onClick={ handleMenuClick } sx={ { p: 0 } }>
+                    <Avatar alt={ session.user.name } src={ session.user.image } />
                 </IconButton>
                 <Menu
                     id="menu-appbar"
                     anchorEl={ anchorEl }
                     anchorOrigin={ {
                         vertical: 'top',
-                        horizontal: 'left'
+                        horizontal: 'right'
                     } }
                     keepMounted
                     transformOrigin={ {
                         vertical: 'top',
-                        horizontal: 'left'
+                        horizontal: 'right'
                     } }
                     open={ open }
                     onClose={ handleMenuClose }
                 >
                     <MenuItem onClick={ handleMenuClose }>Profile</MenuItem>
                     <MenuItem onClick={ handleMenuClose }>My account</MenuItem>
-                    <MenuItem onClick={ handleMenuClose }>Logout</MenuItem>
+                    <MenuItem onClick={ handleSignOut }>Logout</MenuItem>
                 </Menu>
-                <Typography variant="h6" component="div" sx={ { flexGrow: 1 } }>
-                    Yacht Chef Pro
-                </Typography>
-                <Button color="inherit">Login</Button>
             </Toolbar>
         </AppBar>
     );
 };
+
+export default Header;

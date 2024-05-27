@@ -14,7 +14,7 @@ export default NextAuth({
             },
             async authorize(credentials) {
                 const user = await prisma.user.findUnique({
-                    where: { username: credentials.username },
+                    where: { username: credentials.username }
                 });
 
                 if (user && await bcrypt.compare(credentials.password, user.password)) {
@@ -27,31 +27,33 @@ export default NextAuth({
     ],
     adapter: PrismaAdapter(prisma),
     session: {
-        jwt: true,
+        strategy: 'jwt'
     },
     jwt: {
-        secret: process.env.JWT_SECRET,
+        secret: process.env.JWT_SECRET
     },
     callbacks: {
-        async jwt(token, user) {
+        async jwt({ token, user }) {
             if (user) {
                 token.id = user.id;
                 token.username = user.username;
             }
             return token;
         },
-        async session(session, token) {
-            session.user.id = token.id;
-            session.user.username = token.username;
+        async session({ session, token }) {
+            if (session.user) {
+                session.user.id = token.id;
+                session.user.username = token.username;
+            }
             return session;
-        },
+        }
     },
     pages: {
         signIn: '/auth/signin',
         signOut: '/auth/signout',
         error: '/auth/error',
         verifyRequest: '/auth/verify-request',
-        newUser: null,
+        newUser: null
     },
-    secret: process.env.NEXTAUTH_SECRET,
+    secret: process.env.NEXTAUTH_SECRET
 });
