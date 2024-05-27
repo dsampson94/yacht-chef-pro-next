@@ -15,7 +15,7 @@ const HomePage = () => {
         <AppLayout>
             <Container component="main">
                 <Typography variant="h4" gutterBottom>
-                    This Week's Menu
+                    This Weeks Menu
                 </Typography>
                 <List>
                     {currentWeekMenu.map((item) => (
