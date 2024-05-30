@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Link from 'next/link';
+import { apiRequest } from '../../lib/api';
 
 interface Location {
     id: number;
@@ -19,12 +20,20 @@ const Locations = () => {
 
     useEffect(() => {
         if (session) {
-            fetch('/api/locations')
-                .then(response => response.json())
+            apiRequest('locations')
                 .then(data => setLocations(data))
                 .catch(error => console.error('Error fetching locations:', error));
         }
     }, [session]);
+
+    const deleteLocation = async (id: number) => {
+        try {
+            await apiRequest('locations', 'DELETE', id);
+            setLocations(locations.filter(location => location.id !== id));
+        } catch (error) {
+            console.error('Error deleting location:', error);
+        }
+    };
 
     if (!session) {
         return <p>You need to be authenticated to view this page.</p>;
@@ -56,9 +65,17 @@ const Locations = () => {
                                     <Button
                                         variant="contained"
                                         color="primary"
-                                        onClick={() => router.push(`/screens/location/${location.id}`)}
+                                        onClick={() => router.push(`/location/${location.id}`)}
                                     >
                                         Edit/View
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={() => deleteLocation(location.id)}
+                                        style={{ marginLeft: '10px' }}
+                                    >
+                                        Delete
                                     </Button>
                                 </TableCell>
                             </TableRow>

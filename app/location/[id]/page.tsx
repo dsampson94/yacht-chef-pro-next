@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Box, Button, TextField } from '@mui/material';
+import { apiRequest } from '../../../lib/api';
 
 interface Params {
     params: {
@@ -20,9 +21,9 @@ export default function EditLocation({ params }: Params) {
 
     useEffect(() => {
         if (id) {
-            fetch(`/api/locations/${id}`)
-                .then(response => response.json())
-                .then(data => setLocation(data));
+            apiRequest('locations', 'GET', id)
+                .then(data => setLocation(data))
+                .catch(error => setError(error.message));
         }
     }, [id]);
 
@@ -35,20 +36,8 @@ export default function EditLocation({ params }: Params) {
         }
 
         try {
-            const res = await fetch(`/api/locations/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(location)
-            });
-
-            if (!res.ok) {
-                const data = await res.json();
-                throw new Error(data.error || 'Something went wrong');
-            }
-
-            router.push('/screens/location');
+            await apiRequest('locations', 'PUT', id, location);
+            router.push('/location');
         } catch (error) {
             setError(error.message);
         }
@@ -56,16 +45,8 @@ export default function EditLocation({ params }: Params) {
 
     const handleDelete = async () => {
         try {
-            const res = await fetch(`/api/locations/${id}`, {
-                method: 'DELETE'
-            });
-
-            if (!res.ok) {
-                const data = await res.json();
-                throw new Error(data.error || 'Something went wrong');
-            }
-
-            router.push('/screens/location');
+            await apiRequest('locations', 'DELETE', id);
+            router.push('/location');
         } catch (error) {
             setError(error.message);
         }

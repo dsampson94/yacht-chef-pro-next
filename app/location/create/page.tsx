@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Box, Button, TextField } from '@mui/material';
+import { apiRequest } from '../../../lib/api';
 
 export default function CreateLocation() {
     const { data: session } = useSession();
@@ -21,20 +22,8 @@ export default function CreateLocation() {
         }
 
         try {
-            const res = await fetch('/api/locations', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ city, country })
-            });
-
-            if (!res.ok) {
-                const data = await res.json();
-                throw new Error(data.error || 'Something went wrong');
-            }
-
-            router.push('/screens/location');
+            await apiRequest('locations', 'POST', undefined, { city, country });
+            router.push('/location');
         } catch (error) {
             setError(error.message);
         }
