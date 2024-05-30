@@ -27,7 +27,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
     return (
         <Box
             sx={{
-                width: isOpen ? 240 : '10%',
+                width: isOpen ? 200 : '60px',
                 transition: 'width 0.3s',
                 overflow: 'hidden',
                 display: 'flex',
@@ -43,37 +43,37 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
                 </IconButton>
             </Toolbar>
             <List>
-                <ListItem button onClick={() => handleNavigation('/home')}>
+                <ListItem component="button" onClick={() => handleNavigation('/home')}>
                     <ListItemIcon>
                         <DashboardIcon />
                     </ListItemIcon>
                     {isOpen && <ListItemText primary="Dashboard" />}
                 </ListItem>
-                <ListItem button onClick={() => handleNavigation('/orders')}>
+                <ListItem component="button" onClick={() => handleNavigation('/orders')}>
                     <ListItemIcon>
                         <ShoppingCartIcon />
                     </ListItemIcon>
                     {isOpen && <ListItemText primary="Orders" />}
                 </ListItem>
-                <ListItem button onClick={() => handleNavigation('/menus')}>
+                <ListItem component="button" onClick={() => handleNavigation('/menus')}>
                     <ListItemIcon>
                         <RestaurantMenuIcon />
                     </ListItemIcon>
                     {isOpen && <ListItemText primary="Menus" />}
                 </ListItem>
-                <ListItem button onClick={() => handleNavigation('/reviews')}>
+                <ListItem component="button" onClick={() => handleNavigation('/reviews')}>
                     <ListItemIcon>
                         <RateReviewIcon />
                     </ListItemIcon>
                     {isOpen && <ListItemText primary="Reviews" />}
                 </ListItem>
-                <ListItem button onClick={() => handleNavigation('/profile')}>
+                <ListItem component="button" onClick={() => handleNavigation('/profile')}>
                     <ListItemIcon>
                         <AccountCircleIcon />
                     </ListItemIcon>
                     {isOpen && <ListItemText primary="Profile" />}
                 </ListItem>
-                <ListItem button onClick={() => handleNavigation('/location')}>
+                <ListItem component="button" onClick={() => handleNavigation('/location')}>
                     <ListItemIcon>
                         <LocationOnIcon />
                     </ListItemIcon>
