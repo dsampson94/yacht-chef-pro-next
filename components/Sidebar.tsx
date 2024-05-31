@@ -1,8 +1,20 @@
+// components/Sidebar.tsx
+
 'use client';
 
 import React from 'react';
-import { Box, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
-import { useRouter } from 'next/navigation';
+import {
+    Box,
+    ButtonBase,
+    IconButton,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Toolbar,
+    Tooltip
+} from '@mui/material';
+import { usePathname, useRouter } from 'next/navigation';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
@@ -11,6 +23,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import PeopleIcon from '@mui/icons-material/People';
+import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import KitchenIcon from '@mui/icons-material/Kitchen';
 
 interface SidebarProps {
     isOpen: boolean;
@@ -19,15 +35,30 @@ interface SidebarProps {
 
 const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
     const router = useRouter();
+    const pathname = usePathname();
 
     const handleNavigation = (path: string) => {
         router.push(path);
     };
 
+    const menuItems = [
+        { text: 'Profile', icon: <AccountCircleIcon />, path: '/profile' },
+        { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
+        { text: 'Users', icon: <PeopleIcon />, path: '/user' },
+        { text: 'Orders', icon: <ShoppingCartIcon />, path: '/order' },
+        { text: 'Menus', icon: <RestaurantMenuIcon />, path: '/menu' },
+        { text: 'Menu Items', icon: <ListAltIcon />, path: '/item' },
+        { text: 'Ingredients', icon: <KitchenIcon />, path: '/ingredient' },
+        { text: 'Locations', icon: <LocationOnIcon />, path: '/location' },
+        { text: 'Suppliers', icon: <LocalGroceryStoreIcon />, path: '/supplier' },
+        { text: 'Reviews', icon: <RateReviewIcon />, path: '/review' }
+    ];
+
     return (
         <Box
             sx={{
-                width: isOpen ? 200 : '60px',
+                maxWidth: isOpen ? 200 : 60,
+                minWidth: isOpen ? 200 : 60,
                 transition: 'width 0.3s',
                 overflow: 'hidden',
                 display: 'flex',
@@ -43,42 +74,34 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
                 </IconButton>
             </Toolbar>
             <List>
-                <ListItem component="button" onClick={() => handleNavigation('/dashboard')}>
-                    <ListItemIcon>
-                        <DashboardIcon />
-                    </ListItemIcon>
-                    {isOpen && <ListItemText primary="Dashboard" />}
-                </ListItem>
-                <ListItem component="button" onClick={() => handleNavigation('/orders')}>
-                    <ListItemIcon>
-                        <ShoppingCartIcon />
-                    </ListItemIcon>
-                    {isOpen && <ListItemText primary="Orders" />}
-                </ListItem>
-                <ListItem component="button" onClick={() => handleNavigation('/menus')}>
-                    <ListItemIcon>
-                        <RestaurantMenuIcon />
-                    </ListItemIcon>
-                    {isOpen && <ListItemText primary="Menus" />}
-                </ListItem>
-                <ListItem component="button" onClick={() => handleNavigation('/reviews')}>
-                    <ListItemIcon>
-                        <RateReviewIcon />
-                    </ListItemIcon>
-                    {isOpen && <ListItemText primary="Reviews" />}
-                </ListItem>
-                <ListItem component="button" onClick={() => handleNavigation('/profile')}>
-                    <ListItemIcon>
-                        <AccountCircleIcon />
-                    </ListItemIcon>
-                    {isOpen && <ListItemText primary="Profile" />}
-                </ListItem>
-                <ListItem component="button" onClick={() => handleNavigation('/location')}>
-                    <ListItemIcon>
-                        <LocationOnIcon />
-                    </ListItemIcon>
-                    {isOpen && <ListItemText primary="Locations" />}
-                </ListItem>
+                {menuItems.map(({ text, icon, path }) => (
+                    <Tooltip title={!isOpen ? text : ''} key={text} placement="right">
+                        <ListItem
+                            sx={{
+                                backgroundColor: pathname === path ? 'rgba(0, 0, 0, 0.08)' : 'transparent',
+                                '&:hover': {
+                                    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                                }
+                            }}
+                        >
+                            <ButtonBase
+                                sx={{
+                                    width: '100%',
+                                    display: 'flex',
+                                    justifyContent: 'flex-start',
+                                    alignItems: 'center',
+                                    textAlign: 'left'
+                                }}
+                                onClick={() => handleNavigation(path)}
+                            >
+                                <ListItemIcon>
+                                    {icon}
+                                </ListItemIcon>
+                                {isOpen && <ListItemText primary={text} sx={{ textAlign: 'left' }} />}
+                            </ButtonBase>
+                        </ListItem>
+                    </Tooltip>
+                ))}
             </List>
         </Box>
     );

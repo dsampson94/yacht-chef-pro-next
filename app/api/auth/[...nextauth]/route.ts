@@ -19,7 +19,7 @@ const authOptions = {
                 });
 
                 if (user && await bcrypt.compare(credentials.password, user.password)) {
-                    return { id: user.id, username: user.username };
+                    return { id: user.id, username: user.username, email: user.email };
                 }
 
                 return null;
@@ -38,14 +38,16 @@ const authOptions = {
             if (user) {
                 token.id = user.id;
                 token.username = user.username;
+                token.email = user.email;
             }
             return token;
         },
         async session({ session, token }) {
             session.user = {
+                ...session.user,
                 id: token.id,
                 username: token.username,
-                ...session.user,
+                email: token.email,
             };
             return session;
         },

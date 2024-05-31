@@ -4,20 +4,21 @@ import { useRouter } from 'next/router';
 import ResourceEdit from '../../../components/ResourceEdit';
 import { RESOURCES } from '../../../lib/constants';
 
-const EditLocation = () => {
+const EditSupplier = () => {
     const router = useRouter();
     const { id } = router.query;
 
     return (
         <ResourceEdit
             id={id as string}
-            resource={RESOURCES.LOCATIONS}
+            resource={RESOURCES.SUPPLIERS}
             fields={[
-                { label: 'City', key: 'city' },
-                { label: 'Country', key: 'country' }
+                { label: 'Name', key: 'name' },
+                { label: 'Email', key: 'email' },
+                { label: 'Phone', key: 'phone' }
             ]}
         />
     );
 };
 
-export default EditLocation;
+export default EditSupplier;

@@ -2,8 +2,34 @@ import prisma from '../lib/prisma';
 
 export const getModel = (resource: string) => {
     switch (resource) {
+        case 'users':
+            return prisma.user;
+        case 'accounts':
+            return prisma.account;
+        case 'sessions':
+            return prisma.session;
+        case 'chefs':
+            return prisma.chef;
+        case 'menus':
+            return prisma.menu;
+        case 'menu-items':
+            return prisma.menuItem;
+        case 'ingredients':
+            return prisma.ingredient;
+        case 'suppliers':
+            return prisma.supplier;
         case 'locations':
             return prisma.location;
+        case 'supplier-locations':
+            return prisma.supplierLocation;
+        case 'supplier-ingredients':
+            return prisma.supplierIngredient;
+        case 'orders':
+            return prisma.order;
+        case 'order-items':
+            return prisma.orderItem;
+        case 'reviews':
+            return prisma.review;
         default:
             return null;
     }
