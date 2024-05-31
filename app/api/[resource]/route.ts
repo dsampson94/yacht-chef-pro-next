@@ -33,6 +33,7 @@ export async function GET(req: Request, { params }: Params) {
     if (error) return error;
 
     try {
+        // @ts-ignore
         const items = await model.findMany();
         return NextResponse.json(items);
     } catch (error) {
@@ -51,6 +52,7 @@ export async function POST(req: Request, { params }: Params, requiredFields?: st
     if (validation.error) return validation.error;
 
     try {
+        // @ts-ignore
         const item = await model.create({ data });
         return NextResponse.json(item, { status: 201 });
     } catch (error) {
