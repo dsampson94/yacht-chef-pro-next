@@ -43,7 +43,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
                 </IconButton>
             </Toolbar>
             <List>
-                <ListItem component="button" onClick={() => handleNavigation('/home')}>
+                <ListItem component="button" onClick={() => handleNavigation('/dashboard')}>
                     <ListItemIcon>
                         <DashboardIcon />
                     </ListItemIcon>

@@ -1,48 +1,59 @@
 import { NextResponse } from 'next/server';
 import { getModel } from '../../../lib/api';
 
-export async function GET(req: Request, { params }: { params: { resource: string } }) {
-    const { resource } = params;
+type Params = { params: { resource: string } };
 
+const handleErrorResponse = (error: Error, resource: string, action: string) => {
+    console.error(`Error ${action} ${resource}:`, error.message);
+    return NextResponse.json({ error: `Error ${action} ${resource}` }, { status: 500 });
+};
+
+const getModelAndValidate = (resource: string) => {
     const model = getModel(resource);
-
     if (!model) {
-        return NextResponse.json({ error: `Model for resource "${resource}" not found` }, { status: 400 });
+        return { error: NextResponse.json({ error: `Model for resource "${resource}" not found` }, { status: 400 }) };
     }
+    return { model };
+};
+
+const validateData = (data: any, requiredFields?: string[]) => {
+    if (requiredFields) {
+        for (const field of requiredFields) {
+            if (!data[field]) {
+                return { error: NextResponse.json({ error: `${field} is required` }, { status: 400 }) };
+            }
+        }
+    }
+    return { isValid: true };
+};
+
+export async function GET(req: Request, { params }: Params) {
+    const { resource } = params;
+    const { model, error } = getModelAndValidate(resource);
+    if (error) return error;
 
     try {
         const items = await model.findMany();
         return NextResponse.json(items);
     } catch (error) {
-        console.error('Error fetching items:', error.message);
-        return NextResponse.json({ error: `Error fetching ${resource}` }, { status: 500 });
+        return handleErrorResponse(error, resource, 'fetching');
     }
 }
 
-export async function POST(req: Request, { params }: { params: { resource: string } }) {
+export async function POST(req: Request, { params }: Params, requiredFields?: string[]) {
     const { resource } = params;
     const data = await req.json();
 
-    console.log('Received data:', data);
+    const { model, error } = getModelAndValidate(resource);
+    if (error) return error;
 
-    const model = getModel(resource);
-
-    if (!model) {
-        console.error(`Model for resource "${resource}" not found`);
-        return NextResponse.json({ error: `Model for resource "${resource}" not found` }, { status: 400 });
-    }
-
-    if (!data.city || !data.country) {
-        console.error('Validation error: city and country are required');
-        return NextResponse.json({ error: 'City and country are required' }, { status: 400 });
-    }
+    const validation = validateData(data, requiredFields);
+    if (validation.error) return validation.error;
 
     try {
         const item = await model.create({ data });
-        console.log('Created item:', item);
         return NextResponse.json(item, { status: 201 });
     } catch (error) {
-        console.error('Error creating item:', error.message);
-        return NextResponse.json({ error: `Error creating ${resource}: ${error.message}` }, { status: 500 });
+        return handleErrorResponse(error, resource, 'creating');
     }
 }
