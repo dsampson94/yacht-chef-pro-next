@@ -3,14 +3,21 @@
 import { FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { Box, Button, TextField } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useResource } from '../lib/hooks/useResource';
+import DynamicForm from './DynamicForm';
+
+interface Option {
+    id: string | number;
+    name: string;
+}
 
 interface Field {
     label: string;
     key: string;
-    type?: string;
-    options?: string[];
+    type?: 'text' | 'number' | 'date' | 'select' | 'multiselect';
+    options?: Option[];
+    required?: boolean;
 }
 
 interface Params {
@@ -18,15 +25,28 @@ interface Params {
     fields: Field[];
 }
 
-const ResourceCreate = ({ resource, fields }: Params) => {
+const ResourceCreate: React.FC<Params> = ({ resource, fields }) => {
     const { data: session } = useSession();
     const router = useRouter();
     const { createItem } = useResource(resource);
     const [item, setItem] = useState<any>({});
     const [error, setError] = useState('');
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+
+        const validationErrors: { [key: string]: string } = {};
+        fields.forEach(field => {
+            if (field.required && !item[field.key]) {
+                validationErrors[field.key] = `${field.label} is required`;
+            }
+        });
+
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
 
         try {
             await createItem(item);
@@ -40,23 +60,19 @@ const ResourceCreate = ({ resource, fields }: Params) => {
         return <p>You need to be authenticated to view this page.</p>;
     }
 
+    const handleFieldChange = (key: string, value: any, field: Field) => {
+        setItem({ ...item, [key]: value });
+        setErrors(prev => ({ ...prev, [key]: '' }));
+    };
+
     return (
         <Box>
             <h1>Create {resource.charAt(0).toUpperCase() + resource.slice(1)}</h1>
             <form onSubmit={handleSubmit}>
-                {fields.map(field => (
-                    <TextField
-                        key={field.key}
-                        label={field.label}
-                        value={item[field.key] || ''}
-                        onChange={(e) => setItem({ ...item, [field.key]: e.target.value })}
-                        fullWidth
-                        margin="normal"
-                    />
-                ))}
+                <DynamicForm fields={fields} item={item} errors={errors} handleFieldChange={handleFieldChange} />
                 <Button type="submit" variant="contained" color="primary">Create</Button>
             </form>
-            {error && <p>{error}</p>}
+            {error && <p style={{ color: 'red' }}>{error}</p>}
         </Box>
     );
 };

@@ -9,7 +9,8 @@ const CreateLocation = () => {
             resource={RESOURCES.LOCATIONS}
             fields={[
                 { label: 'City', key: 'city' },
-                { label: 'Country', key: 'country' }
+                { label: 'Country', key: 'country' },
+                { label: 'Suppliers', key: 'suppliers', type: 'multiselect', required: false }
             ]}
         />
     );
