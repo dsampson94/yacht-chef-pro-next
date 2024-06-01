@@ -1,5 +1,3 @@
-// components/Sidebar.tsx
-
 'use client';
 
 import React from 'react';
@@ -27,6 +25,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import KitchenIcon from '@mui/icons-material/Kitchen';
+import { ENDPOINTS } from '../lib/constants';
 
 interface SidebarProps {
     isOpen: boolean;
@@ -44,14 +43,14 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
     const menuItems = [
         { text: 'Profile', icon: <AccountCircleIcon />, path: '/profile' },
         { text: 'Dashboard', icon: <DashboardIcon />, path: '/dashboard' },
-        { text: 'Users', icon: <PeopleIcon />, path: '/user' },
-        { text: 'Orders', icon: <ShoppingCartIcon />, path: '/order' },
-        { text: 'Menus', icon: <RestaurantMenuIcon />, path: '/menu' },
-        { text: 'Menu Items', icon: <ListAltIcon />, path: '/item' },
-        { text: 'Ingredients', icon: <KitchenIcon />, path: '/ingredient' },
-        { text: 'Locations', icon: <LocationOnIcon />, path: '/location' },
-        { text: 'Suppliers', icon: <LocalGroceryStoreIcon />, path: '/supplier' },
-        { text: 'Reviews', icon: <RateReviewIcon />, path: '/review' }
+        { text: 'Users', icon: <PeopleIcon />, path: `/${ENDPOINTS.users.slice(0, -1)}` },
+        { text: 'Orders', icon: <ShoppingCartIcon />, path: `/${ENDPOINTS.orders.slice(0, -1)}` },
+        { text: 'Menus', icon: <RestaurantMenuIcon />, path: `/${ENDPOINTS.menus.slice(0, -1)}` },
+        { text: 'Menu Items', icon: <ListAltIcon />, path: `/${ENDPOINTS['menu-items'].slice(0, -1)}` },
+        { text: 'Ingredients', icon: <KitchenIcon />, path: `/${ENDPOINTS.ingredients.slice(0, -1)}` },
+        { text: 'Locations', icon: <LocationOnIcon />, path: `/${ENDPOINTS.locations.slice(0, -1)}` },
+        { text: 'Suppliers', icon: <LocalGroceryStoreIcon />, path: `/${ENDPOINTS.suppliers.slice(0, -1)}` },
+        { text: 'Reviews', icon: <RateReviewIcon />, path: `/${ENDPOINTS.reviews.slice(0, -1)}` }
     ];
 
     return (
