@@ -14,7 +14,7 @@ interface Params {
     fields: Field[];
 }
 
-const ResourceEdit: React.FC<Params> = ({ id, resource, fields }) => {
+const ResourceEdit = ({ id, resource, fields }: Params) => {
     const { data: session } = useSession();
     const router = useRouter();
     const { fetchItem, updateItem, deleteItem } = useResource(resource);

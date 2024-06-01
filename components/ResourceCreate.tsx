@@ -13,7 +13,7 @@ interface Params {
     fields: Field[];
 }
 
-const ResourceCreate: React.FC<Params> = ({ resource, fields }) => {
+const ResourceCreate = ({ resource, fields }: Params) => {
     const { data: session } = useSession();
     const router = useRouter();
     const { createItem } = useResource(resource);
