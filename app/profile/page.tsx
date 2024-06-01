@@ -21,7 +21,7 @@ const Profile = () => {
                 .then(data => setUser(data))
                 .catch(error => setError(error.message));
         }
-    }, [userId, fetchItem]);
+    }, []);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();

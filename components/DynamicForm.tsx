@@ -12,19 +12,7 @@ import {
     SelectChangeEvent,
     TextField
 } from '@mui/material';
-
-interface Option {
-    id: string | number;
-    name: string;
-}
-
-interface Field {
-    label: string;
-    key: string;
-    type?: 'text' | 'number' | 'date' | 'select' | 'multiselect';
-    options?: Option[];
-    required?: boolean;
-}
+import { Field, Option } from '../lib/types';
 
 interface Params {
     fields: Field[];

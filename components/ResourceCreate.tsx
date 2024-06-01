@@ -6,19 +6,7 @@ import { useSession } from 'next-auth/react';
 import { Box, Button } from '@mui/material';
 import { useResource } from '../lib/hooks/useResource';
 import DynamicForm from './DynamicForm';
-
-interface Option {
-    id: string | number;
-    name: string;
-}
-
-interface Field {
-    label: string;
-    key: string;
-    type?: 'text' | 'number' | 'date' | 'select' | 'multiselect';
-    options?: Option[];
-    required?: boolean;
-}
+import { Field } from '../lib/types';
 
 interface Params {
     resource: string;
