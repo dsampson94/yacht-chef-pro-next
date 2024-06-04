@@ -1,12 +1,9 @@
 import { NextResponse } from 'next/server';
 import { getModel } from '../../../lib/api';
+import { handleErrorResponse } from '../../../lib/errorHandler';
+import { validateData } from '../../../lib/validation';
 
 type Params = { params: { resource: string } };
-
-const handleErrorResponse = (error: Error, resource: string, action: string) => {
-    console.error(`Error ${action} ${resource}:`, error.message);
-    return NextResponse.json({ error: `Error ${action} ${resource}` }, { status: 500 });
-};
 
 const getModelAndValidate = (resource: string) => {
     const model = getModel(resource);
@@ -16,15 +13,12 @@ const getModelAndValidate = (resource: string) => {
     return { model };
 };
 
-const validateData = (data: any, requiredFields?: string[]) => {
-    if (requiredFields) {
-        for (const field of requiredFields) {
-            if (!data[field]) {
-                return { error: NextResponse.json({ error: `${field} is required` }, { status: 400 }) };
-            }
-        }
-    }
-    return { isValid: true };
+const createSupplierLocations = async (locationId: string, suppliers: Array<{ id: string }>) => {
+    const supplierLocationModel = getModel('supplier-locations');
+    const createOperations = suppliers.map(supplier =>
+        supplierLocationModel.create({ data: { supplierId: supplier.id, locationId } })
+    );
+    return await Promise.all(createOperations);
 };
 
 export async function GET(req: Request, { params }: Params) {
@@ -33,7 +27,6 @@ export async function GET(req: Request, { params }: Params) {
     if (error) return error;
 
     try {
-        // @ts-ignore
         const items = await model.findMany();
         return NextResponse.json(items);
     } catch (error) {
@@ -41,20 +34,23 @@ export async function GET(req: Request, { params }: Params) {
     }
 }
 
-export async function POST(req: Request, { params }: Params, requiredFields?: string[]) {
+export async function POST(req: Request, { params }: Params) {
     const { resource } = params;
     const data = await req.json();
-
+    const { suppliers, ...resourceData } = data;
     const { model, error } = getModelAndValidate(resource);
     if (error) return error;
 
-    const validation = validateData(data, requiredFields);
+    const requiredFields: string[] = [];
+    const validation = validateData(resource, resourceData, requiredFields);
     if (validation.error) return validation.error;
 
     try {
-        // @ts-ignore
-        const item = await model.create({ data });
-        return NextResponse.json(item, { status: 201 });
+        const newItem = await model.create({ data: resourceData });
+        if (resource === 'locations' && suppliers && suppliers.length > 0) {
+            await createSupplierLocations(newItem.id, suppliers);
+        }
+        return NextResponse.json(newItem, { status: 201 });
     } catch (error) {
         return handleErrorResponse(error, resource, 'creating');
     }

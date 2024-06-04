@@ -129,7 +129,7 @@ model SupplierLocation {
   id         String   @id @default(uuid())
   supplierId String
   locationId String
-  supplier   Supplier @relation(fields: [supplierId], references: [id])
+  supplier   Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
   location   Location @relation(fields: [locationId], references: [id])
 
   @@unique([supplierId, locationId])

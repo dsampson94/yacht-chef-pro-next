@@ -4,7 +4,7 @@ import { ENDPOINTS } from '../constants';
 import { apiRequest } from '../api';
 
 interface ResourceItem {
-    id: number;
+    id: string;
     [key: string]: any;
 }
 
@@ -21,7 +21,7 @@ export const useResource = (resource: string) => {
         }
     }, [session, resource]);
 
-    const deleteItem = async (id: number) => {
+    const deleteItem = async (id: string) => {
         try {
             await apiRequest(`${ENDPOINTS[resource]}/${id}`, 'DELETE');
             setItems(items.filter(item => item.id !== id));
@@ -39,7 +39,7 @@ export const useResource = (resource: string) => {
         }
     };
 
-    const updateItem = async (id: number, data: any) => {
+    const updateItem = async (id: string, data: any) => {
         try {
             const updatedItem = await apiRequest(`${ENDPOINTS[resource]}/${id}`, 'PUT', undefined, data);
             setItems(items.map(item => (item.id === id ? updatedItem : item)));
@@ -48,7 +48,7 @@ export const useResource = (resource: string) => {
         }
     };
 
-    const fetchItem = async (id: number) => {
+    const fetchItem = async (id: string) => {
         try {
             return await apiRequest(`${ENDPOINTS[resource]}/${id}`, 'GET');
         } catch (error) {

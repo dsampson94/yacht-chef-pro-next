@@ -7,6 +7,6 @@ export interface Field {
     label: string;
     key: string;
     type?: 'text' | 'password' | 'number' | 'date' | 'select' | 'multiselect';
-    options?: Option[];
+    options?: Option[] | String[];
     required?: boolean;
 }

@@ -24,11 +24,16 @@ const ResourceEdit = ({ id, resource, fields }: Params) => {
 
     useEffect(() => {
         if (id) {
-            fetchItem(parseInt(id))
-                .then(data => setItem(data))
+            fetchItem(id)
+                .then(data => {
+                    if (resource === 'locations' && data.suppliers) {
+                        data.suppliers = data.suppliers.map((supplierLoc: any) => supplierLoc.supplier.id);
+                    }
+                    setItem(data);
+                })
                 .catch(error => setError(error.message));
         }
-    }, [id, fetchItem]);
+    }, []);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
@@ -46,7 +51,7 @@ const ResourceEdit = ({ id, resource, fields }: Params) => {
         }
 
         try {
-            await updateItem(parseInt(id), item);
+            await updateItem(id, item);
             router.push(`/${resource.slice(0, -1)}`);
         } catch (error) {
             setError(error.message);
@@ -55,7 +60,7 @@ const ResourceEdit = ({ id, resource, fields }: Params) => {
 
     const handleDelete = async () => {
         try {
-            await deleteItem(parseInt(id));
+            await deleteItem(id);
             router.push(`/${resource.slice(0, -1)}`);
         } catch (error) {
             setError(error.message);
