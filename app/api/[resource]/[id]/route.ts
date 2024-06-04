@@ -20,6 +20,7 @@ export async function GET(req: Request, { params }: Params) {
     try {
         let item;
         if (resource === 'locations') {
+            // @ts-ignore
             item = await model.findUnique({
                 where: { id },
                 include: {
@@ -31,6 +32,7 @@ export async function GET(req: Request, { params }: Params) {
                 }
             });
         } else {
+            // @ts-ignore
             item = await model.findUnique({ where: { id } });
         }
         return NextResponse.json(item);
@@ -46,6 +48,7 @@ export async function PUT(req: Request, { params }: Params) {
     if (error) return error;
 
     try {
+        // @ts-ignore
         const item = await model.update({ where: { id }, data });
         return NextResponse.json(item);
     } catch (error) {
@@ -59,6 +62,7 @@ export async function DELETE(req: Request, { params }: Params) {
     if (error) return error;
 
     try {
+        // @ts-ignore
         await model.delete({ where: { id } });
         return NextResponse.json({ message: `${resource} deleted` });
     } catch (error) {
