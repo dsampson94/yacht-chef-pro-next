@@ -10,16 +10,7 @@ export async function GET(req: Request, { params }: Params) {
     const { id } = params;
 
     try {
-        const item = await model.findUnique({
-            where: { id },
-            include: {
-                suppliers: {
-                    include: {
-                        supplier: true
-                    }
-                }
-            }
-        });
+        const item = await model.findUnique({ where: { id } });
         return NextResponse.json(item);
     } catch (error) {
         console.error(`Error fetching ${RESOURCE_NAME}: ${error.message}`);
@@ -32,10 +23,7 @@ export async function PUT(req: Request, { params }: Params) {
     const data = await req.json();
 
     try {
-        const updatedItem = await model.update({
-            where: { id },
-            data,
-        });
+        const updatedItem = await model.update({ where: { id }, data });
         return NextResponse.json(updatedItem);
     } catch (error) {
         console.error(`Error updating ${RESOURCE_NAME}: ${error.message}`);
@@ -47,9 +35,7 @@ export async function DELETE(req: Request, { params }: Params) {
     const { id } = params;
 
     try {
-        await model.delete({
-            where: { id },
-        });
+        await model.delete({ where: { id } });
         return NextResponse.json({ message: `${RESOURCE_NAME.slice(0, -1)} deleted` });
     } catch (error) {
         console.error(`Error deleting ${RESOURCE_NAME}: ${error.message}`);

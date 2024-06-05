@@ -24,21 +24,34 @@ export async function GET() {
 
 export async function POST(req: Request) {
     const data = await req.json();
+    const { suppliers, ...locationData } = data;
 
     try {
-        const { suppliers, ...locationData } = data;
+        console.log('Location Data:', locationData);
+        console.log('Suppliers:', suppliers);
+
+        // Create the new location
         const newItem = await model.create({
-            data: {
-                ...locationData,
-                suppliers: {
-                    create: suppliers.map((supplierId: string) => ({
-                        supplier: {
-                            connect: { id: supplierId }
-                        }
-                    }))
-                }
-            }
+            data: locationData,
         });
+
+        console.log('New Location Created:', newItem);
+
+        // If suppliers are provided, create entries in the SupplierLocation table
+        if (suppliers && suppliers.length > 0) {
+            await Promise.all(
+                suppliers.map((supplierId: string) => {
+                    console.log(`Creating supplierLocation for supplierId: ${supplierId} and locationId: ${newItem.id}`);
+                    return prisma.supplierLocation.create({
+                        data: {
+                            supplierId,
+                            locationId: newItem.id,
+                        },
+                    });
+                })
+            );
+        }
+
         return NextResponse.json(newItem, { status: 201 });
     } catch (error) {
         console.error(`Error creating ${RESOURCE_NAME}: ${error.message}`);
