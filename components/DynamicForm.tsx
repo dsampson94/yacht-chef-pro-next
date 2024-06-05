@@ -65,13 +65,13 @@ const renderSelectField = (
 
 const renderMultiSelectField = (
     field: Field,
-    value: any,
-    handleChange: (event: React.ChangeEvent<{}>, newValue: Option[] | null, reason: AutocompleteChangeReason) => void,
+    value: Option[],
+    handleChange: (event: React.ChangeEvent<{}>, newValue: Option[], reason: AutocompleteChangeReason) => void,
     errors: { [key: string]: string }
 ) => (
     <Autocomplete
         multiple
-        options={field.options || []}
+        options={field.options as Option[] || []}
         getOptionLabel={(option) => option.name}
         value={value}
         onChange={handleChange}
@@ -93,6 +93,7 @@ const renderMultiSelectField = (
 
 const fieldRenderers: { [key: string]: any } = {
     text: renderTextField,
+    password: renderTextField,
     number: renderTextField,
     date: renderTextField,
     select: renderSelectField,
@@ -106,7 +107,9 @@ const DynamicForm: React.FC<Params> = ({ fields, item, errors, handleFieldChange
                 {fieldRenderers[field.type || 'text'](
                     field,
                     item?.[field.key] || (field.type === 'multiselect' ? [] : ''),
-                    (e: any, newValue: any) => handleFieldChange(field.key, field.type === 'multiselect' ? newValue : e.target.value, field),
+                    field.type === 'multiselect'
+                        ? (event: React.ChangeEvent<{}>, newValue: Option[], reason: AutocompleteChangeReason) => handleFieldChange(field.key, newValue, field)
+                        : (e: ChangeEvent<HTMLInputElement>) => handleFieldChange(field.key, e.target.value, field),
                     errors
                 )}
             </div>

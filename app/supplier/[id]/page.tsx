@@ -1,12 +1,11 @@
 'use client';
 
-import { useRouter } from 'next/router';
+import { useParams } from 'next/navigation';
 import ResourceEdit from '../../../components/ResourceEdit';
 import { RESOURCES } from '../../../lib/constants';
 
 const EditSupplier = () => {
-    const router = useRouter();
-    const { id } = router.query;
+    const { id } = useParams();
 
     return (
         <ResourceEdit
