@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../../lib/prisma';
-import bcrypt from 'bcryptjs';
 
-const RESOURCE_NAME = 'users';
-const model = prisma.user;
+const RESOURCE_NAME = 'ingredients';
+const model = prisma.ingredient;
 
 type Params = { params: { id: string } };
 
@@ -11,7 +10,13 @@ export async function GET(req: Request, { params }: Params) {
     const { id } = params;
 
     try {
-        const item = await model.findUnique({ where: { id } });
+        const item = await model.findUnique({
+            where: { id },
+            include: { supplierIngredients: { include: { supplier: true, location: true } } },
+        });
+        if (!item) {
+            return NextResponse.json({ error: 'Ingredient not found' }, { status: 404 });
+        }
         return NextResponse.json(item);
     } catch (error) {
         console.error(`Error fetching ${RESOURCE_NAME}: ${error.message}`);
@@ -23,20 +28,22 @@ export async function PUT(req: Request, { params }: Params) {
     const { id } = params;
     const data = await req.json();
 
-    const updateData: any = {
-        email: data.email,
-        username: data.username,
-        role: data.role,
-    };
-
-    if (data.password) {
-        updateData.password = await bcrypt.hash(data.password, 10);
-    }
-
     try {
         const updatedItem = await model.update({
             where: { id },
-            data: updateData,
+            data: {
+                name: data.name,
+                description: data.description,
+                weight: data.weight,
+                price: data.price,
+                supplierIngredients: {
+                    deleteMany: {},
+                    create: data.suppliers.map((supplier: { id: string, locationId: string }) => ({
+                        supplier: { connect: { id: supplier.id } },
+                        location: { connect: { id: supplier.locationId } }
+                    })),
+                }
+            }
         });
         return NextResponse.json(updatedItem);
     } catch (error) {

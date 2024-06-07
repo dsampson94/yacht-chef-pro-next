@@ -29,11 +29,6 @@ export type Account = $Result.DefaultSelection<Prisma.$AccountPayload>
  */
 export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
 /**
- * Model Chef
- * 
- */
-export type Chef = $Result.DefaultSelection<Prisma.$ChefPayload>
-/**
  * Model Menu
  * 
  */
@@ -58,11 +53,6 @@ export type Supplier = $Result.DefaultSelection<Prisma.$SupplierPayload>
  * 
  */
 export type Location = $Result.DefaultSelection<Prisma.$LocationPayload>
-/**
- * Model SupplierLocation
- * 
- */
-export type SupplierLocation = $Result.DefaultSelection<Prisma.$SupplierLocationPayload>
 /**
  * Model SupplierIngredient
  * 
@@ -269,16 +259,6 @@ export class PrismaClient<
   get session(): Prisma.SessionDelegate<ExtArgs>;
 
   /**
-   * `prisma.chef`: Exposes CRUD operations for the **Chef** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Chefs
-    * const chefs = await prisma.chef.findMany()
-    * ```
-    */
-  get chef(): Prisma.ChefDelegate<ExtArgs>;
-
-  /**
    * `prisma.menu`: Exposes CRUD operations for the **Menu** model.
     * Example usage:
     * ```ts
@@ -327,16 +307,6 @@ export class PrismaClient<
     * ```
     */
   get location(): Prisma.LocationDelegate<ExtArgs>;
-
-  /**
-   * `prisma.supplierLocation`: Exposes CRUD operations for the **SupplierLocation** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more SupplierLocations
-    * const supplierLocations = await prisma.supplierLocation.findMany()
-    * ```
-    */
-  get supplierLocation(): Prisma.SupplierLocationDelegate<ExtArgs>;
 
   /**
    * `prisma.supplierIngredient`: Exposes CRUD operations for the **SupplierIngredient** model.
@@ -857,13 +827,11 @@ export namespace Prisma {
     User: 'User',
     Account: 'Account',
     Session: 'Session',
-    Chef: 'Chef',
     Menu: 'Menu',
     MenuItem: 'MenuItem',
     Ingredient: 'Ingredient',
     Supplier: 'Supplier',
     Location: 'Location',
-    SupplierLocation: 'SupplierLocation',
     SupplierIngredient: 'SupplierIngredient',
     Order: 'Order',
     OrderItem: 'OrderItem',
@@ -884,7 +852,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'account' | 'session' | 'chef' | 'menu' | 'menuItem' | 'ingredient' | 'supplier' | 'location' | 'supplierLocation' | 'supplierIngredient' | 'order' | 'orderItem' | 'review'
+      modelProps: 'user' | 'account' | 'session' | 'menu' | 'menuItem' | 'ingredient' | 'supplier' | 'location' | 'supplierIngredient' | 'order' | 'orderItem' | 'review'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1095,76 +1063,6 @@ export namespace Prisma {
           count: {
             args: Prisma.SessionCountArgs<ExtArgs>,
             result: $Utils.Optional<SessionCountAggregateOutputType> | number
-          }
-        }
-      }
-      Chef: {
-        payload: Prisma.$ChefPayload<ExtArgs>
-        fields: Prisma.ChefFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ChefFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ChefPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ChefFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ChefPayload>
-          }
-          findFirst: {
-            args: Prisma.ChefFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ChefPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ChefFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ChefPayload>
-          }
-          findMany: {
-            args: Prisma.ChefFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ChefPayload>[]
-          }
-          create: {
-            args: Prisma.ChefCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ChefPayload>
-          }
-          createMany: {
-            args: Prisma.ChefCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.ChefCreateManyAndReturnArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ChefPayload>[]
-          }
-          delete: {
-            args: Prisma.ChefDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ChefPayload>
-          }
-          update: {
-            args: Prisma.ChefUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ChefPayload>
-          }
-          deleteMany: {
-            args: Prisma.ChefDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ChefUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.ChefUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ChefPayload>
-          }
-          aggregate: {
-            args: Prisma.ChefAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateChef>
-          }
-          groupBy: {
-            args: Prisma.ChefGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<ChefGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ChefCountArgs<ExtArgs>,
-            result: $Utils.Optional<ChefCountAggregateOutputType> | number
           }
         }
       }
@@ -1515,76 +1413,6 @@ export namespace Prisma {
           count: {
             args: Prisma.LocationCountArgs<ExtArgs>,
             result: $Utils.Optional<LocationCountAggregateOutputType> | number
-          }
-        }
-      }
-      SupplierLocation: {
-        payload: Prisma.$SupplierLocationPayload<ExtArgs>
-        fields: Prisma.SupplierLocationFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.SupplierLocationFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierLocationPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.SupplierLocationFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierLocationPayload>
-          }
-          findFirst: {
-            args: Prisma.SupplierLocationFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierLocationPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.SupplierLocationFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierLocationPayload>
-          }
-          findMany: {
-            args: Prisma.SupplierLocationFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierLocationPayload>[]
-          }
-          create: {
-            args: Prisma.SupplierLocationCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierLocationPayload>
-          }
-          createMany: {
-            args: Prisma.SupplierLocationCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.SupplierLocationCreateManyAndReturnArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierLocationPayload>[]
-          }
-          delete: {
-            args: Prisma.SupplierLocationDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierLocationPayload>
-          }
-          update: {
-            args: Prisma.SupplierLocationUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierLocationPayload>
-          }
-          deleteMany: {
-            args: Prisma.SupplierLocationDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.SupplierLocationUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.SupplierLocationUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SupplierLocationPayload>
-          }
-          aggregate: {
-            args: Prisma.SupplierLocationAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateSupplierLocation>
-          }
-          groupBy: {
-            args: Prisma.SupplierLocationGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<SupplierLocationGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.SupplierLocationCountArgs<ExtArgs>,
-            result: $Utils.Optional<SupplierLocationCountAggregateOutputType> | number
           }
         }
       }
@@ -2030,12 +1858,16 @@ export namespace Prisma {
   export type UserCountOutputType = {
     accounts: number
     sessions: number
+    menus: number
+    reviews: number
     orders: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+    menus?: boolean | UserCountOutputTypeCountMenusArgs
+    reviews?: boolean | UserCountOutputTypeCountReviewsArgs
     orders?: boolean | UserCountOutputTypeCountOrdersArgs
   }
 
@@ -2067,48 +1899,22 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OrderWhereInput
-  }
-
-
-  /**
-   * Count Type ChefCountOutputType
-   */
-
-  export type ChefCountOutputType = {
-    menus: number
-    reviews: number
-  }
-
-  export type ChefCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    menus?: boolean | ChefCountOutputTypeCountMenusArgs
-    reviews?: boolean | ChefCountOutputTypeCountReviewsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * ChefCountOutputType without action
-   */
-  export type ChefCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ChefCountOutputType
-     */
-    select?: ChefCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * ChefCountOutputType without action
-   */
-  export type ChefCountOutputTypeCountMenusArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountMenusArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MenuWhereInput
   }
 
   /**
-   * ChefCountOutputType without action
+   * UserCountOutputType without action
    */
-  export type ChefCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReviewWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountOrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderWhereInput
   }
 
 
@@ -2219,14 +2025,12 @@ export namespace Prisma {
    */
 
   export type SupplierCountOutputType = {
-    locations: number
     supplierIngredients: number
     reviews: number
     OrderItem: number
   }
 
   export type SupplierCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    locations?: boolean | SupplierCountOutputTypeCountLocationsArgs
     supplierIngredients?: boolean | SupplierCountOutputTypeCountSupplierIngredientsArgs
     reviews?: boolean | SupplierCountOutputTypeCountReviewsArgs
     OrderItem?: boolean | SupplierCountOutputTypeCountOrderItemArgs
@@ -2241,13 +2045,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the SupplierCountOutputType
      */
     select?: SupplierCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * SupplierCountOutputType without action
-   */
-  export type SupplierCountOutputTypeCountLocationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SupplierLocationWhereInput
   }
 
   /**
@@ -2303,7 +2100,7 @@ export namespace Prisma {
    * LocationCountOutputType without action
    */
   export type LocationCountOutputTypeCountSuppliersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SupplierLocationWhereInput
+    where?: SupplierWhereInput
   }
 
   /**
@@ -2538,7 +2335,8 @@ export namespace Prisma {
     updatedAt?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
-    chef?: boolean | User$chefArgs<ExtArgs>
+    menus?: boolean | User$menusArgs<ExtArgs>
+    reviews?: boolean | User$reviewsArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -2557,7 +2355,8 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
-    chef?: boolean | User$chefArgs<ExtArgs>
+    menus?: boolean | User$menusArgs<ExtArgs>
+    reviews?: boolean | User$reviewsArgs<ExtArgs>
     orders?: boolean | User$ordersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -2568,7 +2367,8 @@ export namespace Prisma {
     objects: {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
-      chef: Prisma.$ChefPayload<ExtArgs> | null
+      menus: Prisma.$MenuPayload<ExtArgs>[]
+      reviews: Prisma.$ReviewPayload<ExtArgs>[]
       orders: Prisma.$OrderPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2974,7 +2774,9 @@ export namespace Prisma {
 
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    chef<T extends User$chefArgs<ExtArgs> = {}>(args?: Subset<T, User$chefArgs<ExtArgs>>): Prisma__ChefClient<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+    menus<T extends User$menusArgs<ExtArgs> = {}>(args?: Subset<T, User$menusArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    reviews<T extends User$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     orders<T extends User$ordersArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -3371,18 +3173,43 @@ export namespace Prisma {
   }
 
   /**
-   * User.chef
+   * User.menus
    */
-  export type User$chefArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$menusArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Chef
+     * Select specific fields to fetch from the Menu
      */
-    select?: ChefSelect<ExtArgs> | null
+    select?: MenuSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ChefInclude<ExtArgs> | null
-    where?: ChefWhereInput
+    include?: MenuInclude<ExtArgs> | null
+    where?: MenuWhereInput
+    orderBy?: MenuOrderByWithRelationInput | MenuOrderByWithRelationInput[]
+    cursor?: MenuWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MenuScalarFieldEnum | MenuScalarFieldEnum[]
+  }
+
+  /**
+   * User.reviews
+   */
+  export type User$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    where?: ReviewWhereInput
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
+    cursor?: ReviewWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
   }
 
   /**
@@ -5421,997 +5248,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Chef
-   */
-
-  export type AggregateChef = {
-    _count: ChefCountAggregateOutputType | null
-    _min: ChefMinAggregateOutputType | null
-    _max: ChefMaxAggregateOutputType | null
-  }
-
-  export type ChefMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type ChefMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type ChefCountAggregateOutputType = {
-    id: number
-    userId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type ChefMinAggregateInputType = {
-    id?: true
-    userId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type ChefMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type ChefCountAggregateInputType = {
-    id?: true
-    userId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type ChefAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Chef to aggregate.
-     */
-    where?: ChefWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Chefs to fetch.
-     */
-    orderBy?: ChefOrderByWithRelationInput | ChefOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ChefWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Chefs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Chefs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Chefs
-    **/
-    _count?: true | ChefCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ChefMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ChefMaxAggregateInputType
-  }
-
-  export type GetChefAggregateType<T extends ChefAggregateArgs> = {
-        [P in keyof T & keyof AggregateChef]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateChef[P]>
-      : GetScalarType<T[P], AggregateChef[P]>
-  }
-
-
-
-
-  export type ChefGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ChefWhereInput
-    orderBy?: ChefOrderByWithAggregationInput | ChefOrderByWithAggregationInput[]
-    by: ChefScalarFieldEnum[] | ChefScalarFieldEnum
-    having?: ChefScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ChefCountAggregateInputType | true
-    _min?: ChefMinAggregateInputType
-    _max?: ChefMaxAggregateInputType
-  }
-
-  export type ChefGroupByOutputType = {
-    id: string
-    userId: string
-    createdAt: Date
-    updatedAt: Date
-    _count: ChefCountAggregateOutputType | null
-    _min: ChefMinAggregateOutputType | null
-    _max: ChefMaxAggregateOutputType | null
-  }
-
-  type GetChefGroupByPayload<T extends ChefGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ChefGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ChefGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ChefGroupByOutputType[P]>
-            : GetScalarType<T[P], ChefGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ChefSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    menus?: boolean | Chef$menusArgs<ExtArgs>
-    reviews?: boolean | Chef$reviewsArgs<ExtArgs>
-    _count?: boolean | ChefCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["chef"]>
-
-  export type ChefSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-
-  export type ChefInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    menus?: boolean | Chef$menusArgs<ExtArgs>
-    reviews?: boolean | Chef$reviewsArgs<ExtArgs>
-    _count?: boolean | ChefCountOutputTypeDefaultArgs<ExtArgs>
-  }
-
-
-  export type $ChefPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Chef"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      menus: Prisma.$MenuPayload<ExtArgs>[]
-      reviews: Prisma.$ReviewPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["chef"]>
-    composites: {}
-  }
-
-
-  type ChefGetPayload<S extends boolean | null | undefined | ChefDefaultArgs> = $Result.GetResult<Prisma.$ChefPayload, S>
-
-  type ChefCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<ChefFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: ChefCountAggregateInputType | true
-    }
-
-  export interface ChefDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Chef'], meta: { name: 'Chef' } }
-    /**
-     * Find zero or one Chef that matches the filter.
-     * @param {ChefFindUniqueArgs} args - Arguments to find a Chef
-     * @example
-     * // Get one Chef
-     * const chef = await prisma.chef.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends ChefFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, ChefFindUniqueArgs<ExtArgs>>
-    ): Prisma__ChefClient<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one Chef that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {ChefFindUniqueOrThrowArgs} args - Arguments to find a Chef
-     * @example
-     * // Get one Chef
-     * const chef = await prisma.chef.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends ChefFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, ChefFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__ChefClient<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first Chef that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChefFindFirstArgs} args - Arguments to find a Chef
-     * @example
-     * // Get one Chef
-     * const chef = await prisma.chef.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends ChefFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, ChefFindFirstArgs<ExtArgs>>
-    ): Prisma__ChefClient<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first Chef that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChefFindFirstOrThrowArgs} args - Arguments to find a Chef
-     * @example
-     * // Get one Chef
-     * const chef = await prisma.chef.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends ChefFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, ChefFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__ChefClient<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more Chefs that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChefFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Chefs
-     * const chefs = await prisma.chef.findMany()
-     * 
-     * // Get first 10 Chefs
-     * const chefs = await prisma.chef.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const chefWithIdOnly = await prisma.chef.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends ChefFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ChefFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a Chef.
-     * @param {ChefCreateArgs} args - Arguments to create a Chef.
-     * @example
-     * // Create one Chef
-     * const Chef = await prisma.chef.create({
-     *   data: {
-     *     // ... data to create a Chef
-     *   }
-     * })
-     * 
-    **/
-    create<T extends ChefCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, ChefCreateArgs<ExtArgs>>
-    ): Prisma__ChefClient<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many Chefs.
-     * @param {ChefCreateManyArgs} args - Arguments to create many Chefs.
-     * @example
-     * // Create many Chefs
-     * const chef = await prisma.chef.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-    **/
-    createMany<T extends ChefCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ChefCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Chefs and returns the data saved in the database.
-     * @param {ChefCreateManyAndReturnArgs} args - Arguments to create many Chefs.
-     * @example
-     * // Create many Chefs
-     * const chef = await prisma.chef.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Chefs and only return the `id`
-     * const chefWithIdOnly = await prisma.chef.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-    **/
-    createManyAndReturn<T extends ChefCreateManyAndReturnArgs<ExtArgs>>(
-      args?: SelectSubset<T, ChefCreateManyAndReturnArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'createManyAndReturn'>>
-
-    /**
-     * Delete a Chef.
-     * @param {ChefDeleteArgs} args - Arguments to delete one Chef.
-     * @example
-     * // Delete one Chef
-     * const Chef = await prisma.chef.delete({
-     *   where: {
-     *     // ... filter to delete one Chef
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends ChefDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, ChefDeleteArgs<ExtArgs>>
-    ): Prisma__ChefClient<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one Chef.
-     * @param {ChefUpdateArgs} args - Arguments to update one Chef.
-     * @example
-     * // Update one Chef
-     * const chef = await prisma.chef.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends ChefUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, ChefUpdateArgs<ExtArgs>>
-    ): Prisma__ChefClient<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more Chefs.
-     * @param {ChefDeleteManyArgs} args - Arguments to filter Chefs to delete.
-     * @example
-     * // Delete a few Chefs
-     * const { count } = await prisma.chef.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends ChefDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ChefDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Chefs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChefUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Chefs
-     * const chef = await prisma.chef.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends ChefUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, ChefUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Chef.
-     * @param {ChefUpsertArgs} args - Arguments to update or create a Chef.
-     * @example
-     * // Update or create a Chef
-     * const chef = await prisma.chef.upsert({
-     *   create: {
-     *     // ... data to create a Chef
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Chef we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends ChefUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, ChefUpsertArgs<ExtArgs>>
-    ): Prisma__ChefClient<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of Chefs.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChefCountArgs} args - Arguments to filter Chefs to count.
-     * @example
-     * // Count the number of Chefs
-     * const count = await prisma.chef.count({
-     *   where: {
-     *     // ... the filter for the Chefs we want to count
-     *   }
-     * })
-    **/
-    count<T extends ChefCountArgs>(
-      args?: Subset<T, ChefCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ChefCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Chef.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChefAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ChefAggregateArgs>(args: Subset<T, ChefAggregateArgs>): Prisma.PrismaPromise<GetChefAggregateType<T>>
-
-    /**
-     * Group by Chef.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ChefGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ChefGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ChefGroupByArgs['orderBy'] }
-        : { orderBy?: ChefGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ChefGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChefGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Chef model
-   */
-  readonly fields: ChefFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Chef.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ChefClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    menus<T extends Chef$menusArgs<ExtArgs> = {}>(args?: Subset<T, Chef$menusArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    reviews<T extends Chef$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, Chef$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the Chef model
-   */ 
-  interface ChefFieldRefs {
-    readonly id: FieldRef<"Chef", 'String'>
-    readonly userId: FieldRef<"Chef", 'String'>
-    readonly createdAt: FieldRef<"Chef", 'DateTime'>
-    readonly updatedAt: FieldRef<"Chef", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Chef findUnique
-   */
-  export type ChefFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Chef
-     */
-    select?: ChefSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ChefInclude<ExtArgs> | null
-    /**
-     * Filter, which Chef to fetch.
-     */
-    where: ChefWhereUniqueInput
-  }
-
-  /**
-   * Chef findUniqueOrThrow
-   */
-  export type ChefFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Chef
-     */
-    select?: ChefSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ChefInclude<ExtArgs> | null
-    /**
-     * Filter, which Chef to fetch.
-     */
-    where: ChefWhereUniqueInput
-  }
-
-  /**
-   * Chef findFirst
-   */
-  export type ChefFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Chef
-     */
-    select?: ChefSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ChefInclude<ExtArgs> | null
-    /**
-     * Filter, which Chef to fetch.
-     */
-    where?: ChefWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Chefs to fetch.
-     */
-    orderBy?: ChefOrderByWithRelationInput | ChefOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Chefs.
-     */
-    cursor?: ChefWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Chefs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Chefs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Chefs.
-     */
-    distinct?: ChefScalarFieldEnum | ChefScalarFieldEnum[]
-  }
-
-  /**
-   * Chef findFirstOrThrow
-   */
-  export type ChefFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Chef
-     */
-    select?: ChefSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ChefInclude<ExtArgs> | null
-    /**
-     * Filter, which Chef to fetch.
-     */
-    where?: ChefWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Chefs to fetch.
-     */
-    orderBy?: ChefOrderByWithRelationInput | ChefOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Chefs.
-     */
-    cursor?: ChefWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Chefs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Chefs.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Chefs.
-     */
-    distinct?: ChefScalarFieldEnum | ChefScalarFieldEnum[]
-  }
-
-  /**
-   * Chef findMany
-   */
-  export type ChefFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Chef
-     */
-    select?: ChefSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ChefInclude<ExtArgs> | null
-    /**
-     * Filter, which Chefs to fetch.
-     */
-    where?: ChefWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Chefs to fetch.
-     */
-    orderBy?: ChefOrderByWithRelationInput | ChefOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Chefs.
-     */
-    cursor?: ChefWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Chefs from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Chefs.
-     */
-    skip?: number
-    distinct?: ChefScalarFieldEnum | ChefScalarFieldEnum[]
-  }
-
-  /**
-   * Chef create
-   */
-  export type ChefCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Chef
-     */
-    select?: ChefSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ChefInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Chef.
-     */
-    data: XOR<ChefCreateInput, ChefUncheckedCreateInput>
-  }
-
-  /**
-   * Chef createMany
-   */
-  export type ChefCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Chefs.
-     */
-    data: ChefCreateManyInput | ChefCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Chef createManyAndReturn
-   */
-  export type ChefCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Chef
-     */
-    select?: ChefSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ChefInclude<ExtArgs> | null
-    /**
-     * The data used to create many Chefs.
-     */
-    data: ChefCreateManyInput | ChefCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Chef update
-   */
-  export type ChefUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Chef
-     */
-    select?: ChefSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ChefInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Chef.
-     */
-    data: XOR<ChefUpdateInput, ChefUncheckedUpdateInput>
-    /**
-     * Choose, which Chef to update.
-     */
-    where: ChefWhereUniqueInput
-  }
-
-  /**
-   * Chef updateMany
-   */
-  export type ChefUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Chefs.
-     */
-    data: XOR<ChefUpdateManyMutationInput, ChefUncheckedUpdateManyInput>
-    /**
-     * Filter which Chefs to update
-     */
-    where?: ChefWhereInput
-  }
-
-  /**
-   * Chef upsert
-   */
-  export type ChefUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Chef
-     */
-    select?: ChefSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ChefInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Chef to update in case it exists.
-     */
-    where: ChefWhereUniqueInput
-    /**
-     * In case the Chef found by the `where` argument doesn't exist, create a new Chef with this data.
-     */
-    create: XOR<ChefCreateInput, ChefUncheckedCreateInput>
-    /**
-     * In case the Chef was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ChefUpdateInput, ChefUncheckedUpdateInput>
-  }
-
-  /**
-   * Chef delete
-   */
-  export type ChefDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Chef
-     */
-    select?: ChefSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ChefInclude<ExtArgs> | null
-    /**
-     * Filter which Chef to delete.
-     */
-    where: ChefWhereUniqueInput
-  }
-
-  /**
-   * Chef deleteMany
-   */
-  export type ChefDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Chefs to delete
-     */
-    where?: ChefWhereInput
-  }
-
-  /**
-   * Chef.menus
-   */
-  export type Chef$menusArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Menu
-     */
-    select?: MenuSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuInclude<ExtArgs> | null
-    where?: MenuWhereInput
-    orderBy?: MenuOrderByWithRelationInput | MenuOrderByWithRelationInput[]
-    cursor?: MenuWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MenuScalarFieldEnum | MenuScalarFieldEnum[]
-  }
-
-  /**
-   * Chef.reviews
-   */
-  export type Chef$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Review
-     */
-    select?: ReviewSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReviewInclude<ExtArgs> | null
-    where?: ReviewWhereInput
-    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
-    cursor?: ReviewWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
-  }
-
-  /**
-   * Chef without action
-   */
-  export type ChefDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Chef
-     */
-    select?: ChefSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ChefInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Menu
    */
 
@@ -6433,7 +5269,7 @@ export namespace Prisma {
 
   export type MenuMinAggregateOutputType = {
     id: string | null
-    chefId: string | null
+    userId: string | null
     weekOfYear: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6441,7 +5277,7 @@ export namespace Prisma {
 
   export type MenuMaxAggregateOutputType = {
     id: string | null
-    chefId: string | null
+    userId: string | null
     weekOfYear: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -6449,7 +5285,7 @@ export namespace Prisma {
 
   export type MenuCountAggregateOutputType = {
     id: number
-    chefId: number
+    userId: number
     weekOfYear: number
     createdAt: number
     updatedAt: number
@@ -6467,7 +5303,7 @@ export namespace Prisma {
 
   export type MenuMinAggregateInputType = {
     id?: true
-    chefId?: true
+    userId?: true
     weekOfYear?: true
     createdAt?: true
     updatedAt?: true
@@ -6475,7 +5311,7 @@ export namespace Prisma {
 
   export type MenuMaxAggregateInputType = {
     id?: true
-    chefId?: true
+    userId?: true
     weekOfYear?: true
     createdAt?: true
     updatedAt?: true
@@ -6483,7 +5319,7 @@ export namespace Prisma {
 
   export type MenuCountAggregateInputType = {
     id?: true
-    chefId?: true
+    userId?: true
     weekOfYear?: true
     createdAt?: true
     updatedAt?: true
@@ -6578,7 +5414,7 @@ export namespace Prisma {
 
   export type MenuGroupByOutputType = {
     id: string
-    chefId: string
+    userId: string
     weekOfYear: number
     createdAt: Date
     updatedAt: Date
@@ -6605,18 +5441,18 @@ export namespace Prisma {
 
   export type MenuSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    chefId?: boolean
+    userId?: boolean
     weekOfYear?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    chef?: boolean | ChefDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     menuItems?: boolean | Menu$menuItemsArgs<ExtArgs>
     _count?: boolean | MenuCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["menu"]>
 
   export type MenuSelectScalar = {
     id?: boolean
-    chefId?: boolean
+    userId?: boolean
     weekOfYear?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -6624,7 +5460,7 @@ export namespace Prisma {
 
 
   export type MenuInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    chef?: boolean | ChefDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     menuItems?: boolean | Menu$menuItemsArgs<ExtArgs>
     _count?: boolean | MenuCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -6633,12 +5469,12 @@ export namespace Prisma {
   export type $MenuPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Menu"
     objects: {
-      chef: Prisma.$ChefPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
       menuItems: Prisma.$MenuItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      chefId: string
+      userId: string
       weekOfYear: number
       createdAt: Date
       updatedAt: Date
@@ -7033,7 +5869,7 @@ export namespace Prisma {
   export interface Prisma__MenuClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    chef<T extends ChefDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChefDefaultArgs<ExtArgs>>): Prisma__ChefClient<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     menuItems<T extends Menu$menuItemsArgs<ExtArgs> = {}>(args?: Subset<T, Menu$menuItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -7066,7 +5902,7 @@ export namespace Prisma {
    */ 
   interface MenuFieldRefs {
     readonly id: FieldRef<"Menu", 'String'>
-    readonly chefId: FieldRef<"Menu", 'String'>
+    readonly userId: FieldRef<"Menu", 'String'>
     readonly weekOfYear: FieldRef<"Menu", 'Int'>
     readonly createdAt: FieldRef<"Menu", 'DateTime'>
     readonly updatedAt: FieldRef<"Menu", 'DateTime'>
@@ -7434,58 +6270,58 @@ export namespace Prisma {
 
   export type MenuItemMinAggregateOutputType = {
     id: string | null
-    menuId: string | null
     name: string | null
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    menuId: string | null
   }
 
   export type MenuItemMaxAggregateOutputType = {
     id: string | null
-    menuId: string | null
     name: string | null
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    menuId: string | null
   }
 
   export type MenuItemCountAggregateOutputType = {
     id: number
-    menuId: number
     name: number
     description: number
     createdAt: number
     updatedAt: number
+    menuId: number
     _all: number
   }
 
 
   export type MenuItemMinAggregateInputType = {
     id?: true
-    menuId?: true
     name?: true
     description?: true
     createdAt?: true
     updatedAt?: true
+    menuId?: true
   }
 
   export type MenuItemMaxAggregateInputType = {
     id?: true
-    menuId?: true
     name?: true
     description?: true
     createdAt?: true
     updatedAt?: true
+    menuId?: true
   }
 
   export type MenuItemCountAggregateInputType = {
     id?: true
-    menuId?: true
     name?: true
     description?: true
     createdAt?: true
     updatedAt?: true
+    menuId?: true
     _all?: true
   }
 
@@ -7563,11 +6399,11 @@ export namespace Prisma {
 
   export type MenuItemGroupByOutputType = {
     id: string
-    menuId: string
     name: string
     description: string | null
     createdAt: Date
     updatedAt: Date
+    menuId: string | null
     _count: MenuItemCountAggregateOutputType | null
     _min: MenuItemMinAggregateOutputType | null
     _max: MenuItemMaxAggregateOutputType | null
@@ -7589,29 +6425,29 @@ export namespace Prisma {
 
   export type MenuItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    menuId?: boolean
     name?: boolean
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    menu?: boolean | MenuDefaultArgs<ExtArgs>
+    menuId?: boolean
     ingredients?: boolean | MenuItem$ingredientsArgs<ExtArgs>
+    Menu?: boolean | MenuItem$MenuArgs<ExtArgs>
     _count?: boolean | MenuItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["menuItem"]>
 
   export type MenuItemSelectScalar = {
     id?: boolean
-    menuId?: boolean
     name?: boolean
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    menuId?: boolean
   }
 
 
   export type MenuItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    menu?: boolean | MenuDefaultArgs<ExtArgs>
     ingredients?: boolean | MenuItem$ingredientsArgs<ExtArgs>
+    Menu?: boolean | MenuItem$MenuArgs<ExtArgs>
     _count?: boolean | MenuItemCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7619,16 +6455,16 @@ export namespace Prisma {
   export type $MenuItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "MenuItem"
     objects: {
-      menu: Prisma.$MenuPayload<ExtArgs>
       ingredients: Prisma.$IngredientPayload<ExtArgs>[]
+      Menu: Prisma.$MenuPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      menuId: string
       name: string
       description: string | null
       createdAt: Date
       updatedAt: Date
+      menuId: string | null
     }, ExtArgs["result"]["menuItem"]>
     composites: {}
   }
@@ -8020,9 +6856,9 @@ export namespace Prisma {
   export interface Prisma__MenuItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    menu<T extends MenuDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MenuDefaultArgs<ExtArgs>>): Prisma__MenuClient<$Result.GetResult<Prisma.$MenuPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
     ingredients<T extends MenuItem$ingredientsArgs<ExtArgs> = {}>(args?: Subset<T, MenuItem$ingredientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IngredientPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    Menu<T extends MenuItem$MenuArgs<ExtArgs> = {}>(args?: Subset<T, MenuItem$MenuArgs<ExtArgs>>): Prisma__MenuClient<$Result.GetResult<Prisma.$MenuPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8053,11 +6889,11 @@ export namespace Prisma {
    */ 
   interface MenuItemFieldRefs {
     readonly id: FieldRef<"MenuItem", 'String'>
-    readonly menuId: FieldRef<"MenuItem", 'String'>
     readonly name: FieldRef<"MenuItem", 'String'>
     readonly description: FieldRef<"MenuItem", 'String'>
     readonly createdAt: FieldRef<"MenuItem", 'DateTime'>
     readonly updatedAt: FieldRef<"MenuItem", 'DateTime'>
+    readonly menuId: FieldRef<"MenuItem", 'String'>
   }
     
 
@@ -8396,6 +7232,21 @@ export namespace Prisma {
   }
 
   /**
+   * MenuItem.Menu
+   */
+  export type MenuItem$MenuArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Menu
+     */
+    select?: MenuSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuInclude<ExtArgs> | null
+    where?: MenuWhereInput
+  }
+
+  /**
    * MenuItem without action
    */
   export type MenuItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8434,35 +7285,35 @@ export namespace Prisma {
 
   export type IngredientMinAggregateOutputType = {
     id: string | null
-    menuItemId: string | null
     name: string | null
     description: string | null
     weight: number | null
     price: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    menuItemId: string | null
   }
 
   export type IngredientMaxAggregateOutputType = {
     id: string | null
-    menuItemId: string | null
     name: string | null
     description: string | null
     weight: number | null
     price: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    menuItemId: string | null
   }
 
   export type IngredientCountAggregateOutputType = {
     id: number
-    menuItemId: number
     name: number
     description: number
     weight: number
     price: number
     createdAt: number
     updatedAt: number
+    menuItemId: number
     _all: number
   }
 
@@ -8479,35 +7330,35 @@ export namespace Prisma {
 
   export type IngredientMinAggregateInputType = {
     id?: true
-    menuItemId?: true
     name?: true
     description?: true
     weight?: true
     price?: true
     createdAt?: true
     updatedAt?: true
+    menuItemId?: true
   }
 
   export type IngredientMaxAggregateInputType = {
     id?: true
-    menuItemId?: true
     name?: true
     description?: true
     weight?: true
     price?: true
     createdAt?: true
     updatedAt?: true
+    menuItemId?: true
   }
 
   export type IngredientCountAggregateInputType = {
     id?: true
-    menuItemId?: true
     name?: true
     description?: true
     weight?: true
     price?: true
     createdAt?: true
     updatedAt?: true
+    menuItemId?: true
     _all?: true
   }
 
@@ -8599,13 +7450,13 @@ export namespace Prisma {
 
   export type IngredientGroupByOutputType = {
     id: string
-    menuItemId: string | null
     name: string
     description: string | null
     weight: number
     price: number
     createdAt: Date
     updatedAt: Date
+    menuItemId: string | null
     _count: IngredientCountAggregateOutputType | null
     _avg: IngredientAvgAggregateOutputType | null
     _sum: IngredientSumAggregateOutputType | null
@@ -8629,35 +7480,35 @@ export namespace Prisma {
 
   export type IngredientSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    menuItemId?: boolean
     name?: boolean
     description?: boolean
     weight?: boolean
     price?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    menuItem?: boolean | Ingredient$menuItemArgs<ExtArgs>
+    menuItemId?: boolean
     supplierIngredients?: boolean | Ingredient$supplierIngredientsArgs<ExtArgs>
     orderItems?: boolean | Ingredient$orderItemsArgs<ExtArgs>
+    MenuItem?: boolean | Ingredient$MenuItemArgs<ExtArgs>
     _count?: boolean | IngredientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ingredient"]>
 
   export type IngredientSelectScalar = {
     id?: boolean
-    menuItemId?: boolean
     name?: boolean
     description?: boolean
     weight?: boolean
     price?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    menuItemId?: boolean
   }
 
 
   export type IngredientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    menuItem?: boolean | Ingredient$menuItemArgs<ExtArgs>
     supplierIngredients?: boolean | Ingredient$supplierIngredientsArgs<ExtArgs>
     orderItems?: boolean | Ingredient$orderItemsArgs<ExtArgs>
+    MenuItem?: boolean | Ingredient$MenuItemArgs<ExtArgs>
     _count?: boolean | IngredientCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -8665,19 +7516,19 @@ export namespace Prisma {
   export type $IngredientPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Ingredient"
     objects: {
-      menuItem: Prisma.$MenuItemPayload<ExtArgs> | null
       supplierIngredients: Prisma.$SupplierIngredientPayload<ExtArgs>[]
       orderItems: Prisma.$OrderItemPayload<ExtArgs>[]
+      MenuItem: Prisma.$MenuItemPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      menuItemId: string | null
       name: string
       description: string | null
       weight: number
       price: number
       createdAt: Date
       updatedAt: Date
+      menuItemId: string | null
     }, ExtArgs["result"]["ingredient"]>
     composites: {}
   }
@@ -9069,11 +7920,11 @@ export namespace Prisma {
   export interface Prisma__IngredientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    menuItem<T extends Ingredient$menuItemArgs<ExtArgs> = {}>(args?: Subset<T, Ingredient$menuItemArgs<ExtArgs>>): Prisma__MenuItemClient<$Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
-
     supplierIngredients<T extends Ingredient$supplierIngredientsArgs<ExtArgs> = {}>(args?: Subset<T, Ingredient$supplierIngredientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierIngredientPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     orderItems<T extends Ingredient$orderItemsArgs<ExtArgs> = {}>(args?: Subset<T, Ingredient$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    MenuItem<T extends Ingredient$MenuItemArgs<ExtArgs> = {}>(args?: Subset<T, Ingredient$MenuItemArgs<ExtArgs>>): Prisma__MenuItemClient<$Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -9104,13 +7955,13 @@ export namespace Prisma {
    */ 
   interface IngredientFieldRefs {
     readonly id: FieldRef<"Ingredient", 'String'>
-    readonly menuItemId: FieldRef<"Ingredient", 'String'>
     readonly name: FieldRef<"Ingredient", 'String'>
     readonly description: FieldRef<"Ingredient", 'String'>
     readonly weight: FieldRef<"Ingredient", 'Float'>
     readonly price: FieldRef<"Ingredient", 'Float'>
     readonly createdAt: FieldRef<"Ingredient", 'DateTime'>
     readonly updatedAt: FieldRef<"Ingredient", 'DateTime'>
+    readonly menuItemId: FieldRef<"Ingredient", 'String'>
   }
     
 
@@ -9429,21 +8280,6 @@ export namespace Prisma {
   }
 
   /**
-   * Ingredient.menuItem
-   */
-  export type Ingredient$menuItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the MenuItem
-     */
-    select?: MenuItemSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MenuItemInclude<ExtArgs> | null
-    where?: MenuItemWhereInput
-  }
-
-  /**
    * Ingredient.supplierIngredients
    */
   export type Ingredient$supplierIngredientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9484,6 +8320,21 @@ export namespace Prisma {
   }
 
   /**
+   * Ingredient.MenuItem
+   */
+  export type Ingredient$MenuItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItem
+     */
+    select?: MenuItemSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemInclude<ExtArgs> | null
+    where?: MenuItemWhereInput
+  }
+
+  /**
    * Ingredient without action
    */
   export type IngredientDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9513,6 +8364,7 @@ export namespace Prisma {
     name: string | null
     email: string | null
     phone: string | null
+    locationId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9522,6 +8374,7 @@ export namespace Prisma {
     name: string | null
     email: string | null
     phone: string | null
+    locationId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9531,6 +8384,7 @@ export namespace Prisma {
     name: number
     email: number
     phone: number
+    locationId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -9542,6 +8396,7 @@ export namespace Prisma {
     name?: true
     email?: true
     phone?: true
+    locationId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -9551,6 +8406,7 @@ export namespace Prisma {
     name?: true
     email?: true
     phone?: true
+    locationId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -9560,6 +8416,7 @@ export namespace Prisma {
     name?: true
     email?: true
     phone?: true
+    locationId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -9642,6 +8499,7 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    locationId: string
     createdAt: Date
     updatedAt: Date
     _count: SupplierCountAggregateOutputType | null
@@ -9668,9 +8526,10 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     phone?: boolean
+    locationId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    locations?: boolean | Supplier$locationsArgs<ExtArgs>
+    location?: boolean | LocationDefaultArgs<ExtArgs>
     supplierIngredients?: boolean | Supplier$supplierIngredientsArgs<ExtArgs>
     reviews?: boolean | Supplier$reviewsArgs<ExtArgs>
     OrderItem?: boolean | Supplier$OrderItemArgs<ExtArgs>
@@ -9682,13 +8541,14 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     phone?: boolean
+    locationId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
 
   export type SupplierInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    locations?: boolean | Supplier$locationsArgs<ExtArgs>
+    location?: boolean | LocationDefaultArgs<ExtArgs>
     supplierIngredients?: boolean | Supplier$supplierIngredientsArgs<ExtArgs>
     reviews?: boolean | Supplier$reviewsArgs<ExtArgs>
     OrderItem?: boolean | Supplier$OrderItemArgs<ExtArgs>
@@ -9699,7 +8559,7 @@ export namespace Prisma {
   export type $SupplierPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Supplier"
     objects: {
-      locations: Prisma.$SupplierLocationPayload<ExtArgs>[]
+      location: Prisma.$LocationPayload<ExtArgs>
       supplierIngredients: Prisma.$SupplierIngredientPayload<ExtArgs>[]
       reviews: Prisma.$ReviewPayload<ExtArgs>[]
       OrderItem: Prisma.$OrderItemPayload<ExtArgs>[]
@@ -9709,6 +8569,7 @@ export namespace Prisma {
       name: string
       email: string
       phone: string
+      locationId: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["supplier"]>
@@ -10102,7 +8963,7 @@ export namespace Prisma {
   export interface Prisma__SupplierClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    locations<T extends Supplier$locationsArgs<ExtArgs> = {}>(args?: Subset<T, Supplier$locationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'findMany'> | Null>;
+    location<T extends LocationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LocationDefaultArgs<ExtArgs>>): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     supplierIngredients<T extends Supplier$supplierIngredientsArgs<ExtArgs> = {}>(args?: Subset<T, Supplier$supplierIngredientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierIngredientPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -10142,6 +9003,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Supplier", 'String'>
     readonly email: FieldRef<"Supplier", 'String'>
     readonly phone: FieldRef<"Supplier", 'String'>
+    readonly locationId: FieldRef<"Supplier", 'String'>
     readonly createdAt: FieldRef<"Supplier", 'DateTime'>
     readonly updatedAt: FieldRef<"Supplier", 'DateTime'>
   }
@@ -10462,26 +9324,6 @@ export namespace Prisma {
   }
 
   /**
-   * Supplier.locations
-   */
-  export type Supplier$locationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierLocation
-     */
-    select?: SupplierLocationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SupplierLocationInclude<ExtArgs> | null
-    where?: SupplierLocationWhereInput
-    orderBy?: SupplierLocationOrderByWithRelationInput | SupplierLocationOrderByWithRelationInput[]
-    cursor?: SupplierLocationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SupplierLocationScalarFieldEnum | SupplierLocationScalarFieldEnum[]
-  }
-
-  /**
    * Supplier.supplierIngredients
    */
   export type Supplier$supplierIngredientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10746,7 +9588,7 @@ export namespace Prisma {
   export type $LocationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Location"
     objects: {
-      suppliers: Prisma.$SupplierLocationPayload<ExtArgs>[]
+      suppliers: Prisma.$SupplierPayload<ExtArgs>[]
       SupplierIngredient: Prisma.$SupplierIngredientPayload<ExtArgs>[]
       OrderItem: Prisma.$OrderItemPayload<ExtArgs>[]
     }
@@ -11147,7 +9989,7 @@ export namespace Prisma {
   export interface Prisma__LocationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    suppliers<T extends Location$suppliersArgs<ExtArgs> = {}>(args?: Subset<T, Location$suppliersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'findMany'> | Null>;
+    suppliers<T extends Location$suppliersArgs<ExtArgs> = {}>(args?: Subset<T, Location$suppliersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     SupplierIngredient<T extends Location$SupplierIngredientArgs<ExtArgs> = {}>(args?: Subset<T, Location$SupplierIngredientArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierIngredientPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -11508,19 +10350,19 @@ export namespace Prisma {
    */
   export type Location$suppliersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SupplierLocation
+     * Select specific fields to fetch from the Supplier
      */
-    select?: SupplierLocationSelect<ExtArgs> | null
+    select?: SupplierSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SupplierLocationInclude<ExtArgs> | null
-    where?: SupplierLocationWhereInput
-    orderBy?: SupplierLocationOrderByWithRelationInput | SupplierLocationOrderByWithRelationInput[]
-    cursor?: SupplierLocationWhereUniqueInput
+    include?: SupplierInclude<ExtArgs> | null
+    where?: SupplierWhereInput
+    orderBy?: SupplierOrderByWithRelationInput | SupplierOrderByWithRelationInput[]
+    cursor?: SupplierWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SupplierLocationScalarFieldEnum | SupplierLocationScalarFieldEnum[]
+    distinct?: SupplierScalarFieldEnum | SupplierScalarFieldEnum[]
   }
 
   /**
@@ -11575,939 +10417,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: LocationInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model SupplierLocation
-   */
-
-  export type AggregateSupplierLocation = {
-    _count: SupplierLocationCountAggregateOutputType | null
-    _min: SupplierLocationMinAggregateOutputType | null
-    _max: SupplierLocationMaxAggregateOutputType | null
-  }
-
-  export type SupplierLocationMinAggregateOutputType = {
-    id: string | null
-    supplierId: string | null
-    locationId: string | null
-  }
-
-  export type SupplierLocationMaxAggregateOutputType = {
-    id: string | null
-    supplierId: string | null
-    locationId: string | null
-  }
-
-  export type SupplierLocationCountAggregateOutputType = {
-    id: number
-    supplierId: number
-    locationId: number
-    _all: number
-  }
-
-
-  export type SupplierLocationMinAggregateInputType = {
-    id?: true
-    supplierId?: true
-    locationId?: true
-  }
-
-  export type SupplierLocationMaxAggregateInputType = {
-    id?: true
-    supplierId?: true
-    locationId?: true
-  }
-
-  export type SupplierLocationCountAggregateInputType = {
-    id?: true
-    supplierId?: true
-    locationId?: true
-    _all?: true
-  }
-
-  export type SupplierLocationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which SupplierLocation to aggregate.
-     */
-    where?: SupplierLocationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SupplierLocations to fetch.
-     */
-    orderBy?: SupplierLocationOrderByWithRelationInput | SupplierLocationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: SupplierLocationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SupplierLocations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SupplierLocations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned SupplierLocations
-    **/
-    _count?: true | SupplierLocationCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: SupplierLocationMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: SupplierLocationMaxAggregateInputType
-  }
-
-  export type GetSupplierLocationAggregateType<T extends SupplierLocationAggregateArgs> = {
-        [P in keyof T & keyof AggregateSupplierLocation]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateSupplierLocation[P]>
-      : GetScalarType<T[P], AggregateSupplierLocation[P]>
-  }
-
-
-
-
-  export type SupplierLocationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SupplierLocationWhereInput
-    orderBy?: SupplierLocationOrderByWithAggregationInput | SupplierLocationOrderByWithAggregationInput[]
-    by: SupplierLocationScalarFieldEnum[] | SupplierLocationScalarFieldEnum
-    having?: SupplierLocationScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: SupplierLocationCountAggregateInputType | true
-    _min?: SupplierLocationMinAggregateInputType
-    _max?: SupplierLocationMaxAggregateInputType
-  }
-
-  export type SupplierLocationGroupByOutputType = {
-    id: string
-    supplierId: string
-    locationId: string
-    _count: SupplierLocationCountAggregateOutputType | null
-    _min: SupplierLocationMinAggregateOutputType | null
-    _max: SupplierLocationMaxAggregateOutputType | null
-  }
-
-  type GetSupplierLocationGroupByPayload<T extends SupplierLocationGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<SupplierLocationGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof SupplierLocationGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], SupplierLocationGroupByOutputType[P]>
-            : GetScalarType<T[P], SupplierLocationGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type SupplierLocationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    supplierId?: boolean
-    locationId?: boolean
-    supplier?: boolean | SupplierDefaultArgs<ExtArgs>
-    location?: boolean | LocationDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["supplierLocation"]>
-
-  export type SupplierLocationSelectScalar = {
-    id?: boolean
-    supplierId?: boolean
-    locationId?: boolean
-  }
-
-
-  export type SupplierLocationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    supplier?: boolean | SupplierDefaultArgs<ExtArgs>
-    location?: boolean | LocationDefaultArgs<ExtArgs>
-  }
-
-
-  export type $SupplierLocationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "SupplierLocation"
-    objects: {
-      supplier: Prisma.$SupplierPayload<ExtArgs>
-      location: Prisma.$LocationPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      supplierId: string
-      locationId: string
-    }, ExtArgs["result"]["supplierLocation"]>
-    composites: {}
-  }
-
-
-  type SupplierLocationGetPayload<S extends boolean | null | undefined | SupplierLocationDefaultArgs> = $Result.GetResult<Prisma.$SupplierLocationPayload, S>
-
-  type SupplierLocationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<SupplierLocationFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: SupplierLocationCountAggregateInputType | true
-    }
-
-  export interface SupplierLocationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SupplierLocation'], meta: { name: 'SupplierLocation' } }
-    /**
-     * Find zero or one SupplierLocation that matches the filter.
-     * @param {SupplierLocationFindUniqueArgs} args - Arguments to find a SupplierLocation
-     * @example
-     * // Get one SupplierLocation
-     * const supplierLocation = await prisma.supplierLocation.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends SupplierLocationFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, SupplierLocationFindUniqueArgs<ExtArgs>>
-    ): Prisma__SupplierLocationClient<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one SupplierLocation that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {SupplierLocationFindUniqueOrThrowArgs} args - Arguments to find a SupplierLocation
-     * @example
-     * // Get one SupplierLocation
-     * const supplierLocation = await prisma.supplierLocation.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends SupplierLocationFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, SupplierLocationFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__SupplierLocationClient<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first SupplierLocation that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierLocationFindFirstArgs} args - Arguments to find a SupplierLocation
-     * @example
-     * // Get one SupplierLocation
-     * const supplierLocation = await prisma.supplierLocation.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends SupplierLocationFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, SupplierLocationFindFirstArgs<ExtArgs>>
-    ): Prisma__SupplierLocationClient<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first SupplierLocation that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierLocationFindFirstOrThrowArgs} args - Arguments to find a SupplierLocation
-     * @example
-     * // Get one SupplierLocation
-     * const supplierLocation = await prisma.supplierLocation.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends SupplierLocationFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, SupplierLocationFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__SupplierLocationClient<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more SupplierLocations that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierLocationFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all SupplierLocations
-     * const supplierLocations = await prisma.supplierLocation.findMany()
-     * 
-     * // Get first 10 SupplierLocations
-     * const supplierLocations = await prisma.supplierLocation.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const supplierLocationWithIdOnly = await prisma.supplierLocation.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends SupplierLocationFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, SupplierLocationFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a SupplierLocation.
-     * @param {SupplierLocationCreateArgs} args - Arguments to create a SupplierLocation.
-     * @example
-     * // Create one SupplierLocation
-     * const SupplierLocation = await prisma.supplierLocation.create({
-     *   data: {
-     *     // ... data to create a SupplierLocation
-     *   }
-     * })
-     * 
-    **/
-    create<T extends SupplierLocationCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, SupplierLocationCreateArgs<ExtArgs>>
-    ): Prisma__SupplierLocationClient<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many SupplierLocations.
-     * @param {SupplierLocationCreateManyArgs} args - Arguments to create many SupplierLocations.
-     * @example
-     * // Create many SupplierLocations
-     * const supplierLocation = await prisma.supplierLocation.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-    **/
-    createMany<T extends SupplierLocationCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, SupplierLocationCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many SupplierLocations and returns the data saved in the database.
-     * @param {SupplierLocationCreateManyAndReturnArgs} args - Arguments to create many SupplierLocations.
-     * @example
-     * // Create many SupplierLocations
-     * const supplierLocation = await prisma.supplierLocation.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many SupplierLocations and only return the `id`
-     * const supplierLocationWithIdOnly = await prisma.supplierLocation.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-    **/
-    createManyAndReturn<T extends SupplierLocationCreateManyAndReturnArgs<ExtArgs>>(
-      args?: SelectSubset<T, SupplierLocationCreateManyAndReturnArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'createManyAndReturn'>>
-
-    /**
-     * Delete a SupplierLocation.
-     * @param {SupplierLocationDeleteArgs} args - Arguments to delete one SupplierLocation.
-     * @example
-     * // Delete one SupplierLocation
-     * const SupplierLocation = await prisma.supplierLocation.delete({
-     *   where: {
-     *     // ... filter to delete one SupplierLocation
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends SupplierLocationDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, SupplierLocationDeleteArgs<ExtArgs>>
-    ): Prisma__SupplierLocationClient<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one SupplierLocation.
-     * @param {SupplierLocationUpdateArgs} args - Arguments to update one SupplierLocation.
-     * @example
-     * // Update one SupplierLocation
-     * const supplierLocation = await prisma.supplierLocation.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends SupplierLocationUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, SupplierLocationUpdateArgs<ExtArgs>>
-    ): Prisma__SupplierLocationClient<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more SupplierLocations.
-     * @param {SupplierLocationDeleteManyArgs} args - Arguments to filter SupplierLocations to delete.
-     * @example
-     * // Delete a few SupplierLocations
-     * const { count } = await prisma.supplierLocation.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends SupplierLocationDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, SupplierLocationDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more SupplierLocations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierLocationUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many SupplierLocations
-     * const supplierLocation = await prisma.supplierLocation.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends SupplierLocationUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, SupplierLocationUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one SupplierLocation.
-     * @param {SupplierLocationUpsertArgs} args - Arguments to update or create a SupplierLocation.
-     * @example
-     * // Update or create a SupplierLocation
-     * const supplierLocation = await prisma.supplierLocation.upsert({
-     *   create: {
-     *     // ... data to create a SupplierLocation
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the SupplierLocation we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends SupplierLocationUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, SupplierLocationUpsertArgs<ExtArgs>>
-    ): Prisma__SupplierLocationClient<$Result.GetResult<Prisma.$SupplierLocationPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of SupplierLocations.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierLocationCountArgs} args - Arguments to filter SupplierLocations to count.
-     * @example
-     * // Count the number of SupplierLocations
-     * const count = await prisma.supplierLocation.count({
-     *   where: {
-     *     // ... the filter for the SupplierLocations we want to count
-     *   }
-     * })
-    **/
-    count<T extends SupplierLocationCountArgs>(
-      args?: Subset<T, SupplierLocationCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], SupplierLocationCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a SupplierLocation.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierLocationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends SupplierLocationAggregateArgs>(args: Subset<T, SupplierLocationAggregateArgs>): Prisma.PrismaPromise<GetSupplierLocationAggregateType<T>>
-
-    /**
-     * Group by SupplierLocation.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SupplierLocationGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends SupplierLocationGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SupplierLocationGroupByArgs['orderBy'] }
-        : { orderBy?: SupplierLocationGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, SupplierLocationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSupplierLocationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the SupplierLocation model
-   */
-  readonly fields: SupplierLocationFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for SupplierLocation.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__SupplierLocationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-    supplier<T extends SupplierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SupplierDefaultArgs<ExtArgs>>): Prisma__SupplierClient<$Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    location<T extends LocationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LocationDefaultArgs<ExtArgs>>): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the SupplierLocation model
-   */ 
-  interface SupplierLocationFieldRefs {
-    readonly id: FieldRef<"SupplierLocation", 'String'>
-    readonly supplierId: FieldRef<"SupplierLocation", 'String'>
-    readonly locationId: FieldRef<"SupplierLocation", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * SupplierLocation findUnique
-   */
-  export type SupplierLocationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierLocation
-     */
-    select?: SupplierLocationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SupplierLocationInclude<ExtArgs> | null
-    /**
-     * Filter, which SupplierLocation to fetch.
-     */
-    where: SupplierLocationWhereUniqueInput
-  }
-
-  /**
-   * SupplierLocation findUniqueOrThrow
-   */
-  export type SupplierLocationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierLocation
-     */
-    select?: SupplierLocationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SupplierLocationInclude<ExtArgs> | null
-    /**
-     * Filter, which SupplierLocation to fetch.
-     */
-    where: SupplierLocationWhereUniqueInput
-  }
-
-  /**
-   * SupplierLocation findFirst
-   */
-  export type SupplierLocationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierLocation
-     */
-    select?: SupplierLocationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SupplierLocationInclude<ExtArgs> | null
-    /**
-     * Filter, which SupplierLocation to fetch.
-     */
-    where?: SupplierLocationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SupplierLocations to fetch.
-     */
-    orderBy?: SupplierLocationOrderByWithRelationInput | SupplierLocationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for SupplierLocations.
-     */
-    cursor?: SupplierLocationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SupplierLocations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SupplierLocations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of SupplierLocations.
-     */
-    distinct?: SupplierLocationScalarFieldEnum | SupplierLocationScalarFieldEnum[]
-  }
-
-  /**
-   * SupplierLocation findFirstOrThrow
-   */
-  export type SupplierLocationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierLocation
-     */
-    select?: SupplierLocationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SupplierLocationInclude<ExtArgs> | null
-    /**
-     * Filter, which SupplierLocation to fetch.
-     */
-    where?: SupplierLocationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SupplierLocations to fetch.
-     */
-    orderBy?: SupplierLocationOrderByWithRelationInput | SupplierLocationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for SupplierLocations.
-     */
-    cursor?: SupplierLocationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SupplierLocations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SupplierLocations.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of SupplierLocations.
-     */
-    distinct?: SupplierLocationScalarFieldEnum | SupplierLocationScalarFieldEnum[]
-  }
-
-  /**
-   * SupplierLocation findMany
-   */
-  export type SupplierLocationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierLocation
-     */
-    select?: SupplierLocationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SupplierLocationInclude<ExtArgs> | null
-    /**
-     * Filter, which SupplierLocations to fetch.
-     */
-    where?: SupplierLocationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SupplierLocations to fetch.
-     */
-    orderBy?: SupplierLocationOrderByWithRelationInput | SupplierLocationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing SupplierLocations.
-     */
-    cursor?: SupplierLocationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SupplierLocations from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SupplierLocations.
-     */
-    skip?: number
-    distinct?: SupplierLocationScalarFieldEnum | SupplierLocationScalarFieldEnum[]
-  }
-
-  /**
-   * SupplierLocation create
-   */
-  export type SupplierLocationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierLocation
-     */
-    select?: SupplierLocationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SupplierLocationInclude<ExtArgs> | null
-    /**
-     * The data needed to create a SupplierLocation.
-     */
-    data: XOR<SupplierLocationCreateInput, SupplierLocationUncheckedCreateInput>
-  }
-
-  /**
-   * SupplierLocation createMany
-   */
-  export type SupplierLocationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many SupplierLocations.
-     */
-    data: SupplierLocationCreateManyInput | SupplierLocationCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * SupplierLocation createManyAndReturn
-   */
-  export type SupplierLocationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierLocation
-     */
-    select?: SupplierLocationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SupplierLocationInclude<ExtArgs> | null
-    /**
-     * The data used to create many SupplierLocations.
-     */
-    data: SupplierLocationCreateManyInput | SupplierLocationCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * SupplierLocation update
-   */
-  export type SupplierLocationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierLocation
-     */
-    select?: SupplierLocationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SupplierLocationInclude<ExtArgs> | null
-    /**
-     * The data needed to update a SupplierLocation.
-     */
-    data: XOR<SupplierLocationUpdateInput, SupplierLocationUncheckedUpdateInput>
-    /**
-     * Choose, which SupplierLocation to update.
-     */
-    where: SupplierLocationWhereUniqueInput
-  }
-
-  /**
-   * SupplierLocation updateMany
-   */
-  export type SupplierLocationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update SupplierLocations.
-     */
-    data: XOR<SupplierLocationUpdateManyMutationInput, SupplierLocationUncheckedUpdateManyInput>
-    /**
-     * Filter which SupplierLocations to update
-     */
-    where?: SupplierLocationWhereInput
-  }
-
-  /**
-   * SupplierLocation upsert
-   */
-  export type SupplierLocationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierLocation
-     */
-    select?: SupplierLocationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SupplierLocationInclude<ExtArgs> | null
-    /**
-     * The filter to search for the SupplierLocation to update in case it exists.
-     */
-    where: SupplierLocationWhereUniqueInput
-    /**
-     * In case the SupplierLocation found by the `where` argument doesn't exist, create a new SupplierLocation with this data.
-     */
-    create: XOR<SupplierLocationCreateInput, SupplierLocationUncheckedCreateInput>
-    /**
-     * In case the SupplierLocation was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<SupplierLocationUpdateInput, SupplierLocationUncheckedUpdateInput>
-  }
-
-  /**
-   * SupplierLocation delete
-   */
-  export type SupplierLocationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierLocation
-     */
-    select?: SupplierLocationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SupplierLocationInclude<ExtArgs> | null
-    /**
-     * Filter which SupplierLocation to delete.
-     */
-    where: SupplierLocationWhereUniqueInput
-  }
-
-  /**
-   * SupplierLocation deleteMany
-   */
-  export type SupplierLocationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which SupplierLocations to delete
-     */
-    where?: SupplierLocationWhereInput
-  }
-
-  /**
-   * SupplierLocation without action
-   */
-  export type SupplierLocationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupplierLocation
-     */
-    select?: SupplierLocationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SupplierLocationInclude<ExtArgs> | null
   }
 
 
@@ -15502,7 +13411,7 @@ export namespace Prisma {
 
   export type ReviewMinAggregateOutputType = {
     id: string | null
-    chefId: string | null
+    userId: string | null
     supplierId: string | null
     rating: number | null
     comment: string | null
@@ -15512,7 +13421,7 @@ export namespace Prisma {
 
   export type ReviewMaxAggregateOutputType = {
     id: string | null
-    chefId: string | null
+    userId: string | null
     supplierId: string | null
     rating: number | null
     comment: string | null
@@ -15522,7 +13431,7 @@ export namespace Prisma {
 
   export type ReviewCountAggregateOutputType = {
     id: number
-    chefId: number
+    userId: number
     supplierId: number
     rating: number
     comment: number
@@ -15542,7 +13451,7 @@ export namespace Prisma {
 
   export type ReviewMinAggregateInputType = {
     id?: true
-    chefId?: true
+    userId?: true
     supplierId?: true
     rating?: true
     comment?: true
@@ -15552,7 +13461,7 @@ export namespace Prisma {
 
   export type ReviewMaxAggregateInputType = {
     id?: true
-    chefId?: true
+    userId?: true
     supplierId?: true
     rating?: true
     comment?: true
@@ -15562,7 +13471,7 @@ export namespace Prisma {
 
   export type ReviewCountAggregateInputType = {
     id?: true
-    chefId?: true
+    userId?: true
     supplierId?: true
     rating?: true
     comment?: true
@@ -15659,7 +13568,7 @@ export namespace Prisma {
 
   export type ReviewGroupByOutputType = {
     id: string
-    chefId: string
+    userId: string
     supplierId: string
     rating: number
     comment: string | null
@@ -15688,19 +13597,19 @@ export namespace Prisma {
 
   export type ReviewSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    chefId?: boolean
+    userId?: boolean
     supplierId?: boolean
     rating?: boolean
     comment?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    chef?: boolean | ChefDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     supplier?: boolean | SupplierDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["review"]>
 
   export type ReviewSelectScalar = {
     id?: boolean
-    chefId?: boolean
+    userId?: boolean
     supplierId?: boolean
     rating?: boolean
     comment?: boolean
@@ -15710,7 +13619,7 @@ export namespace Prisma {
 
 
   export type ReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    chef?: boolean | ChefDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     supplier?: boolean | SupplierDefaultArgs<ExtArgs>
   }
 
@@ -15718,12 +13627,12 @@ export namespace Prisma {
   export type $ReviewPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Review"
     objects: {
-      chef: Prisma.$ChefPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
       supplier: Prisma.$SupplierPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      chefId: string
+      userId: string
       supplierId: string
       rating: number
       comment: string | null
@@ -16120,7 +14029,7 @@ export namespace Prisma {
   export interface Prisma__ReviewClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    chef<T extends ChefDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChefDefaultArgs<ExtArgs>>): Prisma__ChefClient<$Result.GetResult<Prisma.$ChefPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     supplier<T extends SupplierDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SupplierDefaultArgs<ExtArgs>>): Prisma__SupplierClient<$Result.GetResult<Prisma.$SupplierPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
@@ -16153,7 +14062,7 @@ export namespace Prisma {
    */ 
   interface ReviewFieldRefs {
     readonly id: FieldRef<"Review", 'String'>
-    readonly chefId: FieldRef<"Review", 'String'>
+    readonly userId: FieldRef<"Review", 'String'>
     readonly supplierId: FieldRef<"Review", 'String'>
     readonly rating: FieldRef<"Review", 'Int'>
     readonly comment: FieldRef<"Review", 'String'>
@@ -16546,19 +14455,9 @@ export namespace Prisma {
   export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
-  export const ChefScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type ChefScalarFieldEnum = (typeof ChefScalarFieldEnum)[keyof typeof ChefScalarFieldEnum]
-
-
   export const MenuScalarFieldEnum: {
     id: 'id',
-    chefId: 'chefId',
+    userId: 'userId',
     weekOfYear: 'weekOfYear',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -16569,11 +14468,11 @@ export namespace Prisma {
 
   export const MenuItemScalarFieldEnum: {
     id: 'id',
-    menuId: 'menuId',
     name: 'name',
     description: 'description',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    menuId: 'menuId'
   };
 
   export type MenuItemScalarFieldEnum = (typeof MenuItemScalarFieldEnum)[keyof typeof MenuItemScalarFieldEnum]
@@ -16581,13 +14480,13 @@ export namespace Prisma {
 
   export const IngredientScalarFieldEnum: {
     id: 'id',
-    menuItemId: 'menuItemId',
     name: 'name',
     description: 'description',
     weight: 'weight',
     price: 'price',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    menuItemId: 'menuItemId'
   };
 
   export type IngredientScalarFieldEnum = (typeof IngredientScalarFieldEnum)[keyof typeof IngredientScalarFieldEnum]
@@ -16598,6 +14497,7 @@ export namespace Prisma {
     name: 'name',
     email: 'email',
     phone: 'phone',
+    locationId: 'locationId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -16614,15 +14514,6 @@ export namespace Prisma {
   };
 
   export type LocationScalarFieldEnum = (typeof LocationScalarFieldEnum)[keyof typeof LocationScalarFieldEnum]
-
-
-  export const SupplierLocationScalarFieldEnum: {
-    id: 'id',
-    supplierId: 'supplierId',
-    locationId: 'locationId'
-  };
-
-  export type SupplierLocationScalarFieldEnum = (typeof SupplierLocationScalarFieldEnum)[keyof typeof SupplierLocationScalarFieldEnum]
 
 
   export const SupplierIngredientScalarFieldEnum: {
@@ -16663,7 +14554,7 @@ export namespace Prisma {
 
   export const ReviewScalarFieldEnum: {
     id: 'id',
-    chefId: 'chefId',
+    userId: 'userId',
     supplierId: 'supplierId',
     rating: 'rating',
     comment: 'comment',
@@ -16803,7 +14694,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
-    chef?: XOR<ChefNullableRelationFilter, ChefWhereInput> | null
+    menus?: MenuListRelationFilter
+    reviews?: ReviewListRelationFilter
     orders?: OrderListRelationFilter
   }
 
@@ -16817,7 +14709,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
-    chef?: ChefOrderByWithRelationInput
+    menus?: MenuOrderByRelationAggregateInput
+    reviews?: ReviewOrderByRelationAggregateInput
     orders?: OrderOrderByRelationAggregateInput
   }
 
@@ -16834,7 +14727,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
-    chef?: XOR<ChefNullableRelationFilter, ChefWhereInput> | null
+    menus?: MenuListRelationFilter
+    reviews?: ReviewListRelationFilter
     orders?: OrderListRelationFilter
   }, "id" | "email" | "username">
 
@@ -17007,82 +14901,26 @@ export namespace Prisma {
     expires?: DateTimeWithAggregatesFilter<"Session"> | Date | string
   }
 
-  export type ChefWhereInput = {
-    AND?: ChefWhereInput | ChefWhereInput[]
-    OR?: ChefWhereInput[]
-    NOT?: ChefWhereInput | ChefWhereInput[]
-    id?: StringFilter<"Chef"> | string
-    userId?: StringFilter<"Chef"> | string
-    createdAt?: DateTimeFilter<"Chef"> | Date | string
-    updatedAt?: DateTimeFilter<"Chef"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-    menus?: MenuListRelationFilter
-    reviews?: ReviewListRelationFilter
-  }
-
-  export type ChefOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-    menus?: MenuOrderByRelationAggregateInput
-    reviews?: ReviewOrderByRelationAggregateInput
-  }
-
-  export type ChefWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    userId?: string
-    AND?: ChefWhereInput | ChefWhereInput[]
-    OR?: ChefWhereInput[]
-    NOT?: ChefWhereInput | ChefWhereInput[]
-    createdAt?: DateTimeFilter<"Chef"> | Date | string
-    updatedAt?: DateTimeFilter<"Chef"> | Date | string
-    user?: XOR<UserRelationFilter, UserWhereInput>
-    menus?: MenuListRelationFilter
-    reviews?: ReviewListRelationFilter
-  }, "id" | "userId">
-
-  export type ChefOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: ChefCountOrderByAggregateInput
-    _max?: ChefMaxOrderByAggregateInput
-    _min?: ChefMinOrderByAggregateInput
-  }
-
-  export type ChefScalarWhereWithAggregatesInput = {
-    AND?: ChefScalarWhereWithAggregatesInput | ChefScalarWhereWithAggregatesInput[]
-    OR?: ChefScalarWhereWithAggregatesInput[]
-    NOT?: ChefScalarWhereWithAggregatesInput | ChefScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Chef"> | string
-    userId?: StringWithAggregatesFilter<"Chef"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Chef"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Chef"> | Date | string
-  }
-
   export type MenuWhereInput = {
     AND?: MenuWhereInput | MenuWhereInput[]
     OR?: MenuWhereInput[]
     NOT?: MenuWhereInput | MenuWhereInput[]
     id?: StringFilter<"Menu"> | string
-    chefId?: StringFilter<"Menu"> | string
+    userId?: StringFilter<"Menu"> | string
     weekOfYear?: IntFilter<"Menu"> | number
     createdAt?: DateTimeFilter<"Menu"> | Date | string
     updatedAt?: DateTimeFilter<"Menu"> | Date | string
-    chef?: XOR<ChefRelationFilter, ChefWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
     menuItems?: MenuItemListRelationFilter
   }
 
   export type MenuOrderByWithRelationInput = {
     id?: SortOrder
-    chefId?: SortOrder
+    userId?: SortOrder
     weekOfYear?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    chef?: ChefOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
     menuItems?: MenuItemOrderByRelationAggregateInput
   }
 
@@ -17091,17 +14929,17 @@ export namespace Prisma {
     AND?: MenuWhereInput | MenuWhereInput[]
     OR?: MenuWhereInput[]
     NOT?: MenuWhereInput | MenuWhereInput[]
-    chefId?: StringFilter<"Menu"> | string
+    userId?: StringFilter<"Menu"> | string
     weekOfYear?: IntFilter<"Menu"> | number
     createdAt?: DateTimeFilter<"Menu"> | Date | string
     updatedAt?: DateTimeFilter<"Menu"> | Date | string
-    chef?: XOR<ChefRelationFilter, ChefWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
     menuItems?: MenuItemListRelationFilter
   }, "id">
 
   export type MenuOrderByWithAggregationInput = {
     id?: SortOrder
-    chefId?: SortOrder
+    userId?: SortOrder
     weekOfYear?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -17117,7 +14955,7 @@ export namespace Prisma {
     OR?: MenuScalarWhereWithAggregatesInput[]
     NOT?: MenuScalarWhereWithAggregatesInput | MenuScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Menu"> | string
-    chefId?: StringWithAggregatesFilter<"Menu"> | string
+    userId?: StringWithAggregatesFilter<"Menu"> | string
     weekOfYear?: IntWithAggregatesFilter<"Menu"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Menu"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Menu"> | Date | string
@@ -17128,24 +14966,24 @@ export namespace Prisma {
     OR?: MenuItemWhereInput[]
     NOT?: MenuItemWhereInput | MenuItemWhereInput[]
     id?: StringFilter<"MenuItem"> | string
-    menuId?: StringFilter<"MenuItem"> | string
     name?: StringFilter<"MenuItem"> | string
     description?: StringNullableFilter<"MenuItem"> | string | null
     createdAt?: DateTimeFilter<"MenuItem"> | Date | string
     updatedAt?: DateTimeFilter<"MenuItem"> | Date | string
-    menu?: XOR<MenuRelationFilter, MenuWhereInput>
+    menuId?: StringNullableFilter<"MenuItem"> | string | null
     ingredients?: IngredientListRelationFilter
+    Menu?: XOR<MenuNullableRelationFilter, MenuWhereInput> | null
   }
 
   export type MenuItemOrderByWithRelationInput = {
     id?: SortOrder
-    menuId?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    menu?: MenuOrderByWithRelationInput
+    menuId?: SortOrderInput | SortOrder
     ingredients?: IngredientOrderByRelationAggregateInput
+    Menu?: MenuOrderByWithRelationInput
   }
 
   export type MenuItemWhereUniqueInput = Prisma.AtLeast<{
@@ -17153,22 +14991,22 @@ export namespace Prisma {
     AND?: MenuItemWhereInput | MenuItemWhereInput[]
     OR?: MenuItemWhereInput[]
     NOT?: MenuItemWhereInput | MenuItemWhereInput[]
-    menuId?: StringFilter<"MenuItem"> | string
     name?: StringFilter<"MenuItem"> | string
     description?: StringNullableFilter<"MenuItem"> | string | null
     createdAt?: DateTimeFilter<"MenuItem"> | Date | string
     updatedAt?: DateTimeFilter<"MenuItem"> | Date | string
-    menu?: XOR<MenuRelationFilter, MenuWhereInput>
+    menuId?: StringNullableFilter<"MenuItem"> | string | null
     ingredients?: IngredientListRelationFilter
+    Menu?: XOR<MenuNullableRelationFilter, MenuWhereInput> | null
   }, "id">
 
   export type MenuItemOrderByWithAggregationInput = {
     id?: SortOrder
-    menuId?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    menuId?: SortOrderInput | SortOrder
     _count?: MenuItemCountOrderByAggregateInput
     _max?: MenuItemMaxOrderByAggregateInput
     _min?: MenuItemMinOrderByAggregateInput
@@ -17179,11 +15017,11 @@ export namespace Prisma {
     OR?: MenuItemScalarWhereWithAggregatesInput[]
     NOT?: MenuItemScalarWhereWithAggregatesInput | MenuItemScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MenuItem"> | string
-    menuId?: StringWithAggregatesFilter<"MenuItem"> | string
     name?: StringWithAggregatesFilter<"MenuItem"> | string
     description?: StringNullableWithAggregatesFilter<"MenuItem"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"MenuItem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"MenuItem"> | Date | string
+    menuId?: StringNullableWithAggregatesFilter<"MenuItem"> | string | null
   }
 
   export type IngredientWhereInput = {
@@ -17191,30 +15029,30 @@ export namespace Prisma {
     OR?: IngredientWhereInput[]
     NOT?: IngredientWhereInput | IngredientWhereInput[]
     id?: StringFilter<"Ingredient"> | string
-    menuItemId?: StringNullableFilter<"Ingredient"> | string | null
     name?: StringFilter<"Ingredient"> | string
     description?: StringNullableFilter<"Ingredient"> | string | null
     weight?: FloatFilter<"Ingredient"> | number
     price?: FloatFilter<"Ingredient"> | number
     createdAt?: DateTimeFilter<"Ingredient"> | Date | string
     updatedAt?: DateTimeFilter<"Ingredient"> | Date | string
-    menuItem?: XOR<MenuItemNullableRelationFilter, MenuItemWhereInput> | null
+    menuItemId?: StringNullableFilter<"Ingredient"> | string | null
     supplierIngredients?: SupplierIngredientListRelationFilter
     orderItems?: OrderItemListRelationFilter
+    MenuItem?: XOR<MenuItemNullableRelationFilter, MenuItemWhereInput> | null
   }
 
   export type IngredientOrderByWithRelationInput = {
     id?: SortOrder
-    menuItemId?: SortOrderInput | SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     weight?: SortOrder
     price?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    menuItem?: MenuItemOrderByWithRelationInput
+    menuItemId?: SortOrderInput | SortOrder
     supplierIngredients?: SupplierIngredientOrderByRelationAggregateInput
     orderItems?: OrderItemOrderByRelationAggregateInput
+    MenuItem?: MenuItemOrderByWithRelationInput
   }
 
   export type IngredientWhereUniqueInput = Prisma.AtLeast<{
@@ -17223,27 +15061,27 @@ export namespace Prisma {
     AND?: IngredientWhereInput | IngredientWhereInput[]
     OR?: IngredientWhereInput[]
     NOT?: IngredientWhereInput | IngredientWhereInput[]
-    menuItemId?: StringNullableFilter<"Ingredient"> | string | null
     name?: StringFilter<"Ingredient"> | string
     description?: StringNullableFilter<"Ingredient"> | string | null
     weight?: FloatFilter<"Ingredient"> | number
     price?: FloatFilter<"Ingredient"> | number
     createdAt?: DateTimeFilter<"Ingredient"> | Date | string
     updatedAt?: DateTimeFilter<"Ingredient"> | Date | string
-    menuItem?: XOR<MenuItemNullableRelationFilter, MenuItemWhereInput> | null
+    menuItemId?: StringNullableFilter<"Ingredient"> | string | null
     supplierIngredients?: SupplierIngredientListRelationFilter
     orderItems?: OrderItemListRelationFilter
+    MenuItem?: XOR<MenuItemNullableRelationFilter, MenuItemWhereInput> | null
   }, "id" | "name_weight_price">
 
   export type IngredientOrderByWithAggregationInput = {
     id?: SortOrder
-    menuItemId?: SortOrderInput | SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     weight?: SortOrder
     price?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    menuItemId?: SortOrderInput | SortOrder
     _count?: IngredientCountOrderByAggregateInput
     _avg?: IngredientAvgOrderByAggregateInput
     _max?: IngredientMaxOrderByAggregateInput
@@ -17256,13 +15094,13 @@ export namespace Prisma {
     OR?: IngredientScalarWhereWithAggregatesInput[]
     NOT?: IngredientScalarWhereWithAggregatesInput | IngredientScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Ingredient"> | string
-    menuItemId?: StringNullableWithAggregatesFilter<"Ingredient"> | string | null
     name?: StringWithAggregatesFilter<"Ingredient"> | string
     description?: StringNullableWithAggregatesFilter<"Ingredient"> | string | null
     weight?: FloatWithAggregatesFilter<"Ingredient"> | number
     price?: FloatWithAggregatesFilter<"Ingredient"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Ingredient"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Ingredient"> | Date | string
+    menuItemId?: StringNullableWithAggregatesFilter<"Ingredient"> | string | null
   }
 
   export type SupplierWhereInput = {
@@ -17273,9 +15111,10 @@ export namespace Prisma {
     name?: StringFilter<"Supplier"> | string
     email?: StringFilter<"Supplier"> | string
     phone?: StringFilter<"Supplier"> | string
+    locationId?: StringFilter<"Supplier"> | string
     createdAt?: DateTimeFilter<"Supplier"> | Date | string
     updatedAt?: DateTimeFilter<"Supplier"> | Date | string
-    locations?: SupplierLocationListRelationFilter
+    location?: XOR<LocationRelationFilter, LocationWhereInput>
     supplierIngredients?: SupplierIngredientListRelationFilter
     reviews?: ReviewListRelationFilter
     OrderItem?: OrderItemListRelationFilter
@@ -17286,9 +15125,10 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    locationId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    locations?: SupplierLocationOrderByRelationAggregateInput
+    location?: LocationOrderByWithRelationInput
     supplierIngredients?: SupplierIngredientOrderByRelationAggregateInput
     reviews?: ReviewOrderByRelationAggregateInput
     OrderItem?: OrderItemOrderByRelationAggregateInput
@@ -17302,9 +15142,10 @@ export namespace Prisma {
     OR?: SupplierWhereInput[]
     NOT?: SupplierWhereInput | SupplierWhereInput[]
     phone?: StringFilter<"Supplier"> | string
+    locationId?: StringFilter<"Supplier"> | string
     createdAt?: DateTimeFilter<"Supplier"> | Date | string
     updatedAt?: DateTimeFilter<"Supplier"> | Date | string
-    locations?: SupplierLocationListRelationFilter
+    location?: XOR<LocationRelationFilter, LocationWhereInput>
     supplierIngredients?: SupplierIngredientListRelationFilter
     reviews?: ReviewListRelationFilter
     OrderItem?: OrderItemListRelationFilter
@@ -17315,6 +15156,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    locationId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SupplierCountOrderByAggregateInput
@@ -17330,6 +15172,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Supplier"> | string
     email?: StringWithAggregatesFilter<"Supplier"> | string
     phone?: StringWithAggregatesFilter<"Supplier"> | string
+    locationId?: StringWithAggregatesFilter<"Supplier"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Supplier"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Supplier"> | Date | string
   }
@@ -17343,7 +15186,7 @@ export namespace Prisma {
     country?: StringFilter<"Location"> | string
     createdAt?: DateTimeFilter<"Location"> | Date | string
     updatedAt?: DateTimeFilter<"Location"> | Date | string
-    suppliers?: SupplierLocationListRelationFilter
+    suppliers?: SupplierListRelationFilter
     SupplierIngredient?: SupplierIngredientListRelationFilter
     OrderItem?: OrderItemListRelationFilter
   }
@@ -17354,7 +15197,7 @@ export namespace Prisma {
     country?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    suppliers?: SupplierLocationOrderByRelationAggregateInput
+    suppliers?: SupplierOrderByRelationAggregateInput
     SupplierIngredient?: SupplierIngredientOrderByRelationAggregateInput
     OrderItem?: OrderItemOrderByRelationAggregateInput
   }
@@ -17369,7 +15212,7 @@ export namespace Prisma {
     country?: StringFilter<"Location"> | string
     createdAt?: DateTimeFilter<"Location"> | Date | string
     updatedAt?: DateTimeFilter<"Location"> | Date | string
-    suppliers?: SupplierLocationListRelationFilter
+    suppliers?: SupplierListRelationFilter
     SupplierIngredient?: SupplierIngredientListRelationFilter
     OrderItem?: OrderItemListRelationFilter
   }, "id" | "city_country">
@@ -17394,55 +15237,6 @@ export namespace Prisma {
     country?: StringWithAggregatesFilter<"Location"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Location"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Location"> | Date | string
-  }
-
-  export type SupplierLocationWhereInput = {
-    AND?: SupplierLocationWhereInput | SupplierLocationWhereInput[]
-    OR?: SupplierLocationWhereInput[]
-    NOT?: SupplierLocationWhereInput | SupplierLocationWhereInput[]
-    id?: StringFilter<"SupplierLocation"> | string
-    supplierId?: StringFilter<"SupplierLocation"> | string
-    locationId?: StringFilter<"SupplierLocation"> | string
-    supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
-    location?: XOR<LocationRelationFilter, LocationWhereInput>
-  }
-
-  export type SupplierLocationOrderByWithRelationInput = {
-    id?: SortOrder
-    supplierId?: SortOrder
-    locationId?: SortOrder
-    supplier?: SupplierOrderByWithRelationInput
-    location?: LocationOrderByWithRelationInput
-  }
-
-  export type SupplierLocationWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    supplierId_locationId?: SupplierLocationSupplierIdLocationIdCompoundUniqueInput
-    AND?: SupplierLocationWhereInput | SupplierLocationWhereInput[]
-    OR?: SupplierLocationWhereInput[]
-    NOT?: SupplierLocationWhereInput | SupplierLocationWhereInput[]
-    supplierId?: StringFilter<"SupplierLocation"> | string
-    locationId?: StringFilter<"SupplierLocation"> | string
-    supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
-    location?: XOR<LocationRelationFilter, LocationWhereInput>
-  }, "id" | "supplierId_locationId">
-
-  export type SupplierLocationOrderByWithAggregationInput = {
-    id?: SortOrder
-    supplierId?: SortOrder
-    locationId?: SortOrder
-    _count?: SupplierLocationCountOrderByAggregateInput
-    _max?: SupplierLocationMaxOrderByAggregateInput
-    _min?: SupplierLocationMinOrderByAggregateInput
-  }
-
-  export type SupplierLocationScalarWhereWithAggregatesInput = {
-    AND?: SupplierLocationScalarWhereWithAggregatesInput | SupplierLocationScalarWhereWithAggregatesInput[]
-    OR?: SupplierLocationScalarWhereWithAggregatesInput[]
-    NOT?: SupplierLocationScalarWhereWithAggregatesInput | SupplierLocationScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"SupplierLocation"> | string
-    supplierId?: StringWithAggregatesFilter<"SupplierLocation"> | string
-    locationId?: StringWithAggregatesFilter<"SupplierLocation"> | string
   }
 
   export type SupplierIngredientWhereInput = {
@@ -17652,25 +15446,25 @@ export namespace Prisma {
     OR?: ReviewWhereInput[]
     NOT?: ReviewWhereInput | ReviewWhereInput[]
     id?: StringFilter<"Review"> | string
-    chefId?: StringFilter<"Review"> | string
+    userId?: StringFilter<"Review"> | string
     supplierId?: StringFilter<"Review"> | string
     rating?: IntFilter<"Review"> | number
     comment?: StringNullableFilter<"Review"> | string | null
     createdAt?: DateTimeFilter<"Review"> | Date | string
     updatedAt?: DateTimeFilter<"Review"> | Date | string
-    chef?: XOR<ChefRelationFilter, ChefWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
     supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
   }
 
   export type ReviewOrderByWithRelationInput = {
     id?: SortOrder
-    chefId?: SortOrder
+    userId?: SortOrder
     supplierId?: SortOrder
     rating?: SortOrder
     comment?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    chef?: ChefOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
     supplier?: SupplierOrderByWithRelationInput
   }
 
@@ -17679,19 +15473,19 @@ export namespace Prisma {
     AND?: ReviewWhereInput | ReviewWhereInput[]
     OR?: ReviewWhereInput[]
     NOT?: ReviewWhereInput | ReviewWhereInput[]
-    chefId?: StringFilter<"Review"> | string
+    userId?: StringFilter<"Review"> | string
     supplierId?: StringFilter<"Review"> | string
     rating?: IntFilter<"Review"> | number
     comment?: StringNullableFilter<"Review"> | string | null
     createdAt?: DateTimeFilter<"Review"> | Date | string
     updatedAt?: DateTimeFilter<"Review"> | Date | string
-    chef?: XOR<ChefRelationFilter, ChefWhereInput>
+    user?: XOR<UserRelationFilter, UserWhereInput>
     supplier?: XOR<SupplierRelationFilter, SupplierWhereInput>
   }, "id">
 
   export type ReviewOrderByWithAggregationInput = {
     id?: SortOrder
-    chefId?: SortOrder
+    userId?: SortOrder
     supplierId?: SortOrder
     rating?: SortOrder
     comment?: SortOrderInput | SortOrder
@@ -17709,7 +15503,7 @@ export namespace Prisma {
     OR?: ReviewScalarWhereWithAggregatesInput[]
     NOT?: ReviewScalarWhereWithAggregatesInput | ReviewScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Review"> | string
-    chefId?: StringWithAggregatesFilter<"Review"> | string
+    userId?: StringWithAggregatesFilter<"Review"> | string
     supplierId?: StringWithAggregatesFilter<"Review"> | string
     rating?: IntWithAggregatesFilter<"Review"> | number
     comment?: StringNullableWithAggregatesFilter<"Review"> | string | null
@@ -17727,7 +15521,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
-    chef?: ChefCreateNestedOneWithoutUserInput
+    menus?: MenuCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
   }
 
@@ -17741,7 +15536,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    chef?: ChefUncheckedCreateNestedOneWithoutUserInput
+    menus?: MenuUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -17755,7 +15551,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    chef?: ChefUpdateOneWithoutUserNestedInput
+    menus?: MenuUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
   }
 
@@ -17769,7 +15566,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    chef?: ChefUncheckedUpdateOneWithoutUserNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -17955,74 +15753,18 @@ export namespace Prisma {
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type ChefCreateInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutChefInput
-    menus?: MenuCreateNestedManyWithoutChefInput
-    reviews?: ReviewCreateNestedManyWithoutChefInput
-  }
-
-  export type ChefUncheckedCreateInput = {
-    id?: string
-    userId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    menus?: MenuUncheckedCreateNestedManyWithoutChefInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutChefInput
-  }
-
-  export type ChefUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutChefNestedInput
-    menus?: MenuUpdateManyWithoutChefNestedInput
-    reviews?: ReviewUpdateManyWithoutChefNestedInput
-  }
-
-  export type ChefUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    menus?: MenuUncheckedUpdateManyWithoutChefNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutChefNestedInput
-  }
-
-  export type ChefCreateManyInput = {
-    id?: string
-    userId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ChefUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ChefUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type MenuCreateInput = {
     id?: string
     weekOfYear: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    chef: ChefCreateNestedOneWithoutMenusInput
+    user: UserCreateNestedOneWithoutMenusInput
     menuItems?: MenuItemCreateNestedManyWithoutMenuInput
   }
 
   export type MenuUncheckedCreateInput = {
     id?: string
-    chefId: string
+    userId: string
     weekOfYear: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18034,13 +15776,13 @@ export namespace Prisma {
     weekOfYear?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    chef?: ChefUpdateOneRequiredWithoutMenusNestedInput
+    user?: UserUpdateOneRequiredWithoutMenusNestedInput
     menuItems?: MenuItemUpdateManyWithoutMenuNestedInput
   }
 
   export type MenuUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    chefId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     weekOfYear?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18049,7 +15791,7 @@ export namespace Prisma {
 
   export type MenuCreateManyInput = {
     id?: string
-    chefId: string
+    userId: string
     weekOfYear: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -18064,7 +15806,7 @@ export namespace Prisma {
 
   export type MenuUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    chefId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     weekOfYear?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18076,17 +15818,17 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    menu: MenuCreateNestedOneWithoutMenuItemsInput
     ingredients?: IngredientCreateNestedManyWithoutMenuItemInput
+    Menu?: MenuCreateNestedOneWithoutMenuItemsInput
   }
 
   export type MenuItemUncheckedCreateInput = {
     id?: string
-    menuId: string
     name: string
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    menuId?: string | null
     ingredients?: IngredientUncheckedCreateNestedManyWithoutMenuItemInput
   }
 
@@ -18096,27 +15838,27 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    menu?: MenuUpdateOneRequiredWithoutMenuItemsNestedInput
     ingredients?: IngredientUpdateManyWithoutMenuItemNestedInput
+    Menu?: MenuUpdateOneWithoutMenuItemsNestedInput
   }
 
   export type MenuItemUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    menuId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuId?: NullableStringFieldUpdateOperationsInput | string | null
     ingredients?: IngredientUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemCreateManyInput = {
     id?: string
-    menuId: string
     name: string
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    menuId?: string | null
   }
 
   export type MenuItemUpdateManyMutationInput = {
@@ -18129,11 +15871,11 @@ export namespace Prisma {
 
   export type MenuItemUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    menuId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IngredientCreateInput = {
@@ -18144,20 +15886,20 @@ export namespace Prisma {
     price: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    menuItem?: MenuItemCreateNestedOneWithoutIngredientsInput
     supplierIngredients?: SupplierIngredientCreateNestedManyWithoutIngredientInput
     orderItems?: OrderItemCreateNestedManyWithoutIngredientInput
+    MenuItem?: MenuItemCreateNestedOneWithoutIngredientsInput
   }
 
   export type IngredientUncheckedCreateInput = {
     id?: string
-    menuItemId?: string | null
     name: string
     description?: string | null
     weight: number
     price: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    menuItemId?: string | null
     supplierIngredients?: SupplierIngredientUncheckedCreateNestedManyWithoutIngredientInput
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutIngredientInput
   }
@@ -18170,33 +15912,33 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    menuItem?: MenuItemUpdateOneWithoutIngredientsNestedInput
     supplierIngredients?: SupplierIngredientUpdateManyWithoutIngredientNestedInput
     orderItems?: OrderItemUpdateManyWithoutIngredientNestedInput
+    MenuItem?: MenuItemUpdateOneWithoutIngredientsNestedInput
   }
 
   export type IngredientUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    menuItemId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuItemId?: NullableStringFieldUpdateOperationsInput | string | null
     supplierIngredients?: SupplierIngredientUncheckedUpdateManyWithoutIngredientNestedInput
     orderItems?: OrderItemUncheckedUpdateManyWithoutIngredientNestedInput
   }
 
   export type IngredientCreateManyInput = {
     id?: string
-    menuItemId?: string | null
     name: string
     description?: string | null
     weight: number
     price: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    menuItemId?: string | null
   }
 
   export type IngredientUpdateManyMutationInput = {
@@ -18211,13 +15953,13 @@ export namespace Prisma {
 
   export type IngredientUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    menuItemId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuItemId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SupplierCreateInput = {
@@ -18227,7 +15969,7 @@ export namespace Prisma {
     phone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    locations?: SupplierLocationCreateNestedManyWithoutSupplierInput
+    location: LocationCreateNestedOneWithoutSuppliersInput
     supplierIngredients?: SupplierIngredientCreateNestedManyWithoutSupplierInput
     reviews?: ReviewCreateNestedManyWithoutSupplierInput
     OrderItem?: OrderItemCreateNestedManyWithoutSupplierInput
@@ -18238,9 +15980,9 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    locationId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    locations?: SupplierLocationUncheckedCreateNestedManyWithoutSupplierInput
     supplierIngredients?: SupplierIngredientUncheckedCreateNestedManyWithoutSupplierInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutSupplierInput
     OrderItem?: OrderItemUncheckedCreateNestedManyWithoutSupplierInput
@@ -18253,7 +15995,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    locations?: SupplierLocationUpdateManyWithoutSupplierNestedInput
+    location?: LocationUpdateOneRequiredWithoutSuppliersNestedInput
     supplierIngredients?: SupplierIngredientUpdateManyWithoutSupplierNestedInput
     reviews?: ReviewUpdateManyWithoutSupplierNestedInput
     OrderItem?: OrderItemUpdateManyWithoutSupplierNestedInput
@@ -18264,9 +16006,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    locationId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    locations?: SupplierLocationUncheckedUpdateManyWithoutSupplierNestedInput
     supplierIngredients?: SupplierIngredientUncheckedUpdateManyWithoutSupplierNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutSupplierNestedInput
     OrderItem?: OrderItemUncheckedUpdateManyWithoutSupplierNestedInput
@@ -18277,6 +16019,7 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    locationId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -18295,6 +16038,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    locationId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18305,7 +16049,7 @@ export namespace Prisma {
     country: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    suppliers?: SupplierLocationCreateNestedManyWithoutLocationInput
+    suppliers?: SupplierCreateNestedManyWithoutLocationInput
     SupplierIngredient?: SupplierIngredientCreateNestedManyWithoutLocationInput
     OrderItem?: OrderItemCreateNestedManyWithoutLocationInput
   }
@@ -18316,7 +16060,7 @@ export namespace Prisma {
     country: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    suppliers?: SupplierLocationUncheckedCreateNestedManyWithoutLocationInput
+    suppliers?: SupplierUncheckedCreateNestedManyWithoutLocationInput
     SupplierIngredient?: SupplierIngredientUncheckedCreateNestedManyWithoutLocationInput
     OrderItem?: OrderItemUncheckedCreateNestedManyWithoutLocationInput
   }
@@ -18327,7 +16071,7 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    suppliers?: SupplierLocationUpdateManyWithoutLocationNestedInput
+    suppliers?: SupplierUpdateManyWithoutLocationNestedInput
     SupplierIngredient?: SupplierIngredientUpdateManyWithoutLocationNestedInput
     OrderItem?: OrderItemUpdateManyWithoutLocationNestedInput
   }
@@ -18338,7 +16082,7 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    suppliers?: SupplierLocationUncheckedUpdateManyWithoutLocationNestedInput
+    suppliers?: SupplierUncheckedUpdateManyWithoutLocationNestedInput
     SupplierIngredient?: SupplierIngredientUncheckedUpdateManyWithoutLocationNestedInput
     OrderItem?: OrderItemUncheckedUpdateManyWithoutLocationNestedInput
   }
@@ -18365,46 +16109,6 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SupplierLocationCreateInput = {
-    id?: string
-    supplier: SupplierCreateNestedOneWithoutLocationsInput
-    location: LocationCreateNestedOneWithoutSuppliersInput
-  }
-
-  export type SupplierLocationUncheckedCreateInput = {
-    id?: string
-    supplierId: string
-    locationId: string
-  }
-
-  export type SupplierLocationUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supplier?: SupplierUpdateOneRequiredWithoutLocationsNestedInput
-    location?: LocationUpdateOneRequiredWithoutSuppliersNestedInput
-  }
-
-  export type SupplierLocationUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supplierId?: StringFieldUpdateOperationsInput | string
-    locationId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type SupplierLocationCreateManyInput = {
-    id?: string
-    supplierId: string
-    locationId: string
-  }
-
-  export type SupplierLocationUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type SupplierLocationUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supplierId?: StringFieldUpdateOperationsInput | string
-    locationId?: StringFieldUpdateOperationsInput | string
   }
 
   export type SupplierIngredientCreateInput = {
@@ -18598,13 +16302,13 @@ export namespace Prisma {
     comment?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    chef: ChefCreateNestedOneWithoutReviewsInput
+    user: UserCreateNestedOneWithoutReviewsInput
     supplier: SupplierCreateNestedOneWithoutReviewsInput
   }
 
   export type ReviewUncheckedCreateInput = {
     id?: string
-    chefId: string
+    userId: string
     supplierId: string
     rating: number
     comment?: string | null
@@ -18618,13 +16322,13 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    chef?: ChefUpdateOneRequiredWithoutReviewsNestedInput
+    user?: UserUpdateOneRequiredWithoutReviewsNestedInput
     supplier?: SupplierUpdateOneRequiredWithoutReviewsNestedInput
   }
 
   export type ReviewUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    chefId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     supplierId?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     comment?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18634,7 +16338,7 @@ export namespace Prisma {
 
   export type ReviewCreateManyInput = {
     id?: string
-    chefId: string
+    userId: string
     supplierId: string
     rating: number
     comment?: string | null
@@ -18652,7 +16356,7 @@ export namespace Prisma {
 
   export type ReviewUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    chefId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     supplierId?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     comment?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18705,9 +16409,16 @@ export namespace Prisma {
     none?: SessionWhereInput
   }
 
-  export type ChefNullableRelationFilter = {
-    is?: ChefWhereInput | null
-    isNot?: ChefWhereInput | null
+  export type MenuListRelationFilter = {
+    every?: MenuWhereInput
+    some?: MenuWhereInput
+    none?: MenuWhereInput
+  }
+
+  export type ReviewListRelationFilter = {
+    every?: ReviewWhereInput
+    some?: ReviewWhereInput
+    none?: ReviewWhereInput
   }
 
   export type OrderListRelationFilter = {
@@ -18721,6 +16432,14 @@ export namespace Prisma {
   }
 
   export type SessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MenuOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ReviewOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18949,47 +16668,6 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
-  export type MenuListRelationFilter = {
-    every?: MenuWhereInput
-    some?: MenuWhereInput
-    none?: MenuWhereInput
-  }
-
-  export type ReviewListRelationFilter = {
-    every?: ReviewWhereInput
-    some?: ReviewWhereInput
-    none?: ReviewWhereInput
-  }
-
-  export type MenuOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ReviewOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ChefCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ChefMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ChefMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -18999,11 +16677,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type ChefRelationFilter = {
-    is?: ChefWhereInput
-    isNot?: ChefWhereInput
   }
 
   export type MenuItemListRelationFilter = {
@@ -19018,7 +16691,7 @@ export namespace Prisma {
 
   export type MenuCountOrderByAggregateInput = {
     id?: SortOrder
-    chefId?: SortOrder
+    userId?: SortOrder
     weekOfYear?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -19030,7 +16703,7 @@ export namespace Prisma {
 
   export type MenuMaxOrderByAggregateInput = {
     id?: SortOrder
-    chefId?: SortOrder
+    userId?: SortOrder
     weekOfYear?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -19038,7 +16711,7 @@ export namespace Prisma {
 
   export type MenuMinOrderByAggregateInput = {
     id?: SortOrder
-    chefId?: SortOrder
+    userId?: SortOrder
     weekOfYear?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -19064,15 +16737,15 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type MenuRelationFilter = {
-    is?: MenuWhereInput
-    isNot?: MenuWhereInput
-  }
-
   export type IngredientListRelationFilter = {
     every?: IngredientWhereInput
     some?: IngredientWhereInput
     none?: IngredientWhereInput
+  }
+
+  export type MenuNullableRelationFilter = {
+    is?: MenuWhereInput | null
+    isNot?: MenuWhereInput | null
   }
 
   export type IngredientOrderByRelationAggregateInput = {
@@ -19081,29 +16754,29 @@ export namespace Prisma {
 
   export type MenuItemCountOrderByAggregateInput = {
     id?: SortOrder
-    menuId?: SortOrder
     name?: SortOrder
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    menuId?: SortOrder
   }
 
   export type MenuItemMaxOrderByAggregateInput = {
     id?: SortOrder
-    menuId?: SortOrder
     name?: SortOrder
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    menuId?: SortOrder
   }
 
   export type MenuItemMinOrderByAggregateInput = {
     id?: SortOrder
-    menuId?: SortOrder
     name?: SortOrder
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    menuId?: SortOrder
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -19117,11 +16790,6 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type MenuItemNullableRelationFilter = {
-    is?: MenuItemWhereInput | null
-    isNot?: MenuItemWhereInput | null
-  }
-
   export type SupplierIngredientListRelationFilter = {
     every?: SupplierIngredientWhereInput
     some?: SupplierIngredientWhereInput
@@ -19132,6 +16800,11 @@ export namespace Prisma {
     every?: OrderItemWhereInput
     some?: OrderItemWhereInput
     none?: OrderItemWhereInput
+  }
+
+  export type MenuItemNullableRelationFilter = {
+    is?: MenuItemWhereInput | null
+    isNot?: MenuItemWhereInput | null
   }
 
   export type SupplierIngredientOrderByRelationAggregateInput = {
@@ -19150,13 +16823,13 @@ export namespace Prisma {
 
   export type IngredientCountOrderByAggregateInput = {
     id?: SortOrder
-    menuItemId?: SortOrder
     name?: SortOrder
     description?: SortOrder
     weight?: SortOrder
     price?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    menuItemId?: SortOrder
   }
 
   export type IngredientAvgOrderByAggregateInput = {
@@ -19166,24 +16839,24 @@ export namespace Prisma {
 
   export type IngredientMaxOrderByAggregateInput = {
     id?: SortOrder
-    menuItemId?: SortOrder
     name?: SortOrder
     description?: SortOrder
     weight?: SortOrder
     price?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    menuItemId?: SortOrder
   }
 
   export type IngredientMinOrderByAggregateInput = {
     id?: SortOrder
-    menuItemId?: SortOrder
     name?: SortOrder
     description?: SortOrder
     weight?: SortOrder
     price?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    menuItemId?: SortOrder
   }
 
   export type IngredientSumOrderByAggregateInput = {
@@ -19207,14 +16880,9 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type SupplierLocationListRelationFilter = {
-    every?: SupplierLocationWhereInput
-    some?: SupplierLocationWhereInput
-    none?: SupplierLocationWhereInput
-  }
-
-  export type SupplierLocationOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type LocationRelationFilter = {
+    is?: LocationWhereInput
+    isNot?: LocationWhereInput
   }
 
   export type SupplierCountOrderByAggregateInput = {
@@ -19222,6 +16890,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    locationId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -19231,6 +16900,7 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    locationId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -19240,8 +16910,19 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    locationId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type SupplierListRelationFilter = {
+    every?: SupplierWhereInput
+    some?: SupplierWhereInput
+    none?: SupplierWhereInput
+  }
+
+  export type SupplierOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type LocationCityCountryCompoundUniqueInput = {
@@ -19276,34 +16957,6 @@ export namespace Prisma {
   export type SupplierRelationFilter = {
     is?: SupplierWhereInput
     isNot?: SupplierWhereInput
-  }
-
-  export type LocationRelationFilter = {
-    is?: LocationWhereInput
-    isNot?: LocationWhereInput
-  }
-
-  export type SupplierLocationSupplierIdLocationIdCompoundUniqueInput = {
-    supplierId: string
-    locationId: string
-  }
-
-  export type SupplierLocationCountOrderByAggregateInput = {
-    id?: SortOrder
-    supplierId?: SortOrder
-    locationId?: SortOrder
-  }
-
-  export type SupplierLocationMaxOrderByAggregateInput = {
-    id?: SortOrder
-    supplierId?: SortOrder
-    locationId?: SortOrder
-  }
-
-  export type SupplierLocationMinOrderByAggregateInput = {
-    id?: SortOrder
-    supplierId?: SortOrder
-    locationId?: SortOrder
   }
 
   export type IngredientRelationFilter = {
@@ -19437,7 +17090,7 @@ export namespace Prisma {
 
   export type ReviewCountOrderByAggregateInput = {
     id?: SortOrder
-    chefId?: SortOrder
+    userId?: SortOrder
     supplierId?: SortOrder
     rating?: SortOrder
     comment?: SortOrder
@@ -19451,7 +17104,7 @@ export namespace Prisma {
 
   export type ReviewMaxOrderByAggregateInput = {
     id?: SortOrder
-    chefId?: SortOrder
+    userId?: SortOrder
     supplierId?: SortOrder
     rating?: SortOrder
     comment?: SortOrder
@@ -19461,7 +17114,7 @@ export namespace Prisma {
 
   export type ReviewMinOrderByAggregateInput = {
     id?: SortOrder
-    chefId?: SortOrder
+    userId?: SortOrder
     supplierId?: SortOrder
     rating?: SortOrder
     comment?: SortOrder
@@ -19487,10 +17140,18 @@ export namespace Prisma {
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
-  export type ChefCreateNestedOneWithoutUserInput = {
-    create?: XOR<ChefCreateWithoutUserInput, ChefUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ChefCreateOrConnectWithoutUserInput
-    connect?: ChefWhereUniqueInput
+  export type MenuCreateNestedManyWithoutUserInput = {
+    create?: XOR<MenuCreateWithoutUserInput, MenuUncheckedCreateWithoutUserInput> | MenuCreateWithoutUserInput[] | MenuUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MenuCreateOrConnectWithoutUserInput | MenuCreateOrConnectWithoutUserInput[]
+    createMany?: MenuCreateManyUserInputEnvelope
+    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+  }
+
+  export type ReviewCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput> | ReviewCreateWithoutUserInput[] | ReviewUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[]
+    createMany?: ReviewCreateManyUserInputEnvelope
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
   }
 
   export type OrderCreateNestedManyWithoutUserInput = {
@@ -19514,10 +17175,18 @@ export namespace Prisma {
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
-  export type ChefUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<ChefCreateWithoutUserInput, ChefUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ChefCreateOrConnectWithoutUserInput
-    connect?: ChefWhereUniqueInput
+  export type MenuUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<MenuCreateWithoutUserInput, MenuUncheckedCreateWithoutUserInput> | MenuCreateWithoutUserInput[] | MenuUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MenuCreateOrConnectWithoutUserInput | MenuCreateOrConnectWithoutUserInput[]
+    createMany?: MenuCreateManyUserInputEnvelope
+    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+  }
+
+  export type ReviewUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput> | ReviewCreateWithoutUserInput[] | ReviewUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[]
+    createMany?: ReviewCreateManyUserInputEnvelope
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
   }
 
   export type OrderUncheckedCreateNestedManyWithoutUserInput = {
@@ -19567,14 +17236,32 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
-  export type ChefUpdateOneWithoutUserNestedInput = {
-    create?: XOR<ChefCreateWithoutUserInput, ChefUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ChefCreateOrConnectWithoutUserInput
-    upsert?: ChefUpsertWithoutUserInput
-    disconnect?: ChefWhereInput | boolean
-    delete?: ChefWhereInput | boolean
-    connect?: ChefWhereUniqueInput
-    update?: XOR<XOR<ChefUpdateToOneWithWhereWithoutUserInput, ChefUpdateWithoutUserInput>, ChefUncheckedUpdateWithoutUserInput>
+  export type MenuUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MenuCreateWithoutUserInput, MenuUncheckedCreateWithoutUserInput> | MenuCreateWithoutUserInput[] | MenuUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MenuCreateOrConnectWithoutUserInput | MenuCreateOrConnectWithoutUserInput[]
+    upsert?: MenuUpsertWithWhereUniqueWithoutUserInput | MenuUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MenuCreateManyUserInputEnvelope
+    set?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    disconnect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    delete?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    update?: MenuUpdateWithWhereUniqueWithoutUserInput | MenuUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MenuUpdateManyWithWhereWithoutUserInput | MenuUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MenuScalarWhereInput | MenuScalarWhereInput[]
+  }
+
+  export type ReviewUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput> | ReviewCreateWithoutUserInput[] | ReviewUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[]
+    upsert?: ReviewUpsertWithWhereUniqueWithoutUserInput | ReviewUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReviewCreateManyUserInputEnvelope
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    update?: ReviewUpdateWithWhereUniqueWithoutUserInput | ReviewUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReviewUpdateManyWithWhereWithoutUserInput | ReviewUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
   }
 
   export type OrderUpdateManyWithoutUserNestedInput = {
@@ -19619,14 +17306,32 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
-  export type ChefUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<ChefCreateWithoutUserInput, ChefUncheckedCreateWithoutUserInput>
-    connectOrCreate?: ChefCreateOrConnectWithoutUserInput
-    upsert?: ChefUpsertWithoutUserInput
-    disconnect?: ChefWhereInput | boolean
-    delete?: ChefWhereInput | boolean
-    connect?: ChefWhereUniqueInput
-    update?: XOR<XOR<ChefUpdateToOneWithWhereWithoutUserInput, ChefUpdateWithoutUserInput>, ChefUncheckedUpdateWithoutUserInput>
+  export type MenuUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<MenuCreateWithoutUserInput, MenuUncheckedCreateWithoutUserInput> | MenuCreateWithoutUserInput[] | MenuUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: MenuCreateOrConnectWithoutUserInput | MenuCreateOrConnectWithoutUserInput[]
+    upsert?: MenuUpsertWithWhereUniqueWithoutUserInput | MenuUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: MenuCreateManyUserInputEnvelope
+    set?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    disconnect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    delete?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
+    update?: MenuUpdateWithWhereUniqueWithoutUserInput | MenuUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: MenuUpdateManyWithWhereWithoutUserInput | MenuUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: MenuScalarWhereInput | MenuScalarWhereInput[]
+  }
+
+  export type ReviewUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput> | ReviewCreateWithoutUserInput[] | ReviewUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[]
+    upsert?: ReviewUpsertWithWhereUniqueWithoutUserInput | ReviewUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ReviewCreateManyUserInputEnvelope
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    update?: ReviewUpdateWithWhereUniqueWithoutUserInput | ReviewUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ReviewUpdateManyWithWhereWithoutUserInput | ReviewUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
   }
 
   export type OrderUncheckedUpdateManyWithoutUserNestedInput = {
@@ -19683,108 +17388,10 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSessionsInput, UserUpdateWithoutSessionsInput>, UserUncheckedUpdateWithoutSessionsInput>
   }
 
-  export type UserCreateNestedOneWithoutChefInput = {
-    create?: XOR<UserCreateWithoutChefInput, UserUncheckedCreateWithoutChefInput>
-    connectOrCreate?: UserCreateOrConnectWithoutChefInput
+  export type UserCreateNestedOneWithoutMenusInput = {
+    create?: XOR<UserCreateWithoutMenusInput, UserUncheckedCreateWithoutMenusInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMenusInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type MenuCreateNestedManyWithoutChefInput = {
-    create?: XOR<MenuCreateWithoutChefInput, MenuUncheckedCreateWithoutChefInput> | MenuCreateWithoutChefInput[] | MenuUncheckedCreateWithoutChefInput[]
-    connectOrCreate?: MenuCreateOrConnectWithoutChefInput | MenuCreateOrConnectWithoutChefInput[]
-    createMany?: MenuCreateManyChefInputEnvelope
-    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
-  }
-
-  export type ReviewCreateNestedManyWithoutChefInput = {
-    create?: XOR<ReviewCreateWithoutChefInput, ReviewUncheckedCreateWithoutChefInput> | ReviewCreateWithoutChefInput[] | ReviewUncheckedCreateWithoutChefInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutChefInput | ReviewCreateOrConnectWithoutChefInput[]
-    createMany?: ReviewCreateManyChefInputEnvelope
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-  }
-
-  export type MenuUncheckedCreateNestedManyWithoutChefInput = {
-    create?: XOR<MenuCreateWithoutChefInput, MenuUncheckedCreateWithoutChefInput> | MenuCreateWithoutChefInput[] | MenuUncheckedCreateWithoutChefInput[]
-    connectOrCreate?: MenuCreateOrConnectWithoutChefInput | MenuCreateOrConnectWithoutChefInput[]
-    createMany?: MenuCreateManyChefInputEnvelope
-    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
-  }
-
-  export type ReviewUncheckedCreateNestedManyWithoutChefInput = {
-    create?: XOR<ReviewCreateWithoutChefInput, ReviewUncheckedCreateWithoutChefInput> | ReviewCreateWithoutChefInput[] | ReviewUncheckedCreateWithoutChefInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutChefInput | ReviewCreateOrConnectWithoutChefInput[]
-    createMany?: ReviewCreateManyChefInputEnvelope
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-  }
-
-  export type UserUpdateOneRequiredWithoutChefNestedInput = {
-    create?: XOR<UserCreateWithoutChefInput, UserUncheckedCreateWithoutChefInput>
-    connectOrCreate?: UserCreateOrConnectWithoutChefInput
-    upsert?: UserUpsertWithoutChefInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutChefInput, UserUpdateWithoutChefInput>, UserUncheckedUpdateWithoutChefInput>
-  }
-
-  export type MenuUpdateManyWithoutChefNestedInput = {
-    create?: XOR<MenuCreateWithoutChefInput, MenuUncheckedCreateWithoutChefInput> | MenuCreateWithoutChefInput[] | MenuUncheckedCreateWithoutChefInput[]
-    connectOrCreate?: MenuCreateOrConnectWithoutChefInput | MenuCreateOrConnectWithoutChefInput[]
-    upsert?: MenuUpsertWithWhereUniqueWithoutChefInput | MenuUpsertWithWhereUniqueWithoutChefInput[]
-    createMany?: MenuCreateManyChefInputEnvelope
-    set?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
-    disconnect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
-    delete?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
-    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
-    update?: MenuUpdateWithWhereUniqueWithoutChefInput | MenuUpdateWithWhereUniqueWithoutChefInput[]
-    updateMany?: MenuUpdateManyWithWhereWithoutChefInput | MenuUpdateManyWithWhereWithoutChefInput[]
-    deleteMany?: MenuScalarWhereInput | MenuScalarWhereInput[]
-  }
-
-  export type ReviewUpdateManyWithoutChefNestedInput = {
-    create?: XOR<ReviewCreateWithoutChefInput, ReviewUncheckedCreateWithoutChefInput> | ReviewCreateWithoutChefInput[] | ReviewUncheckedCreateWithoutChefInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutChefInput | ReviewCreateOrConnectWithoutChefInput[]
-    upsert?: ReviewUpsertWithWhereUniqueWithoutChefInput | ReviewUpsertWithWhereUniqueWithoutChefInput[]
-    createMany?: ReviewCreateManyChefInputEnvelope
-    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    update?: ReviewUpdateWithWhereUniqueWithoutChefInput | ReviewUpdateWithWhereUniqueWithoutChefInput[]
-    updateMany?: ReviewUpdateManyWithWhereWithoutChefInput | ReviewUpdateManyWithWhereWithoutChefInput[]
-    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
-  }
-
-  export type MenuUncheckedUpdateManyWithoutChefNestedInput = {
-    create?: XOR<MenuCreateWithoutChefInput, MenuUncheckedCreateWithoutChefInput> | MenuCreateWithoutChefInput[] | MenuUncheckedCreateWithoutChefInput[]
-    connectOrCreate?: MenuCreateOrConnectWithoutChefInput | MenuCreateOrConnectWithoutChefInput[]
-    upsert?: MenuUpsertWithWhereUniqueWithoutChefInput | MenuUpsertWithWhereUniqueWithoutChefInput[]
-    createMany?: MenuCreateManyChefInputEnvelope
-    set?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
-    disconnect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
-    delete?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
-    connect?: MenuWhereUniqueInput | MenuWhereUniqueInput[]
-    update?: MenuUpdateWithWhereUniqueWithoutChefInput | MenuUpdateWithWhereUniqueWithoutChefInput[]
-    updateMany?: MenuUpdateManyWithWhereWithoutChefInput | MenuUpdateManyWithWhereWithoutChefInput[]
-    deleteMany?: MenuScalarWhereInput | MenuScalarWhereInput[]
-  }
-
-  export type ReviewUncheckedUpdateManyWithoutChefNestedInput = {
-    create?: XOR<ReviewCreateWithoutChefInput, ReviewUncheckedCreateWithoutChefInput> | ReviewCreateWithoutChefInput[] | ReviewUncheckedCreateWithoutChefInput[]
-    connectOrCreate?: ReviewCreateOrConnectWithoutChefInput | ReviewCreateOrConnectWithoutChefInput[]
-    upsert?: ReviewUpsertWithWhereUniqueWithoutChefInput | ReviewUpsertWithWhereUniqueWithoutChefInput[]
-    createMany?: ReviewCreateManyChefInputEnvelope
-    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
-    update?: ReviewUpdateWithWhereUniqueWithoutChefInput | ReviewUpdateWithWhereUniqueWithoutChefInput[]
-    updateMany?: ReviewUpdateManyWithWhereWithoutChefInput | ReviewUpdateManyWithWhereWithoutChefInput[]
-    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
-  }
-
-  export type ChefCreateNestedOneWithoutMenusInput = {
-    create?: XOR<ChefCreateWithoutMenusInput, ChefUncheckedCreateWithoutMenusInput>
-    connectOrCreate?: ChefCreateOrConnectWithoutMenusInput
-    connect?: ChefWhereUniqueInput
   }
 
   export type MenuItemCreateNestedManyWithoutMenuInput = {
@@ -19809,12 +17416,12 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type ChefUpdateOneRequiredWithoutMenusNestedInput = {
-    create?: XOR<ChefCreateWithoutMenusInput, ChefUncheckedCreateWithoutMenusInput>
-    connectOrCreate?: ChefCreateOrConnectWithoutMenusInput
-    upsert?: ChefUpsertWithoutMenusInput
-    connect?: ChefWhereUniqueInput
-    update?: XOR<XOR<ChefUpdateToOneWithWhereWithoutMenusInput, ChefUpdateWithoutMenusInput>, ChefUncheckedUpdateWithoutMenusInput>
+  export type UserUpdateOneRequiredWithoutMenusNestedInput = {
+    create?: XOR<UserCreateWithoutMenusInput, UserUncheckedCreateWithoutMenusInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMenusInput
+    upsert?: UserUpsertWithoutMenusInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMenusInput, UserUpdateWithoutMenusInput>, UserUncheckedUpdateWithoutMenusInput>
   }
 
   export type MenuItemUpdateManyWithoutMenuNestedInput = {
@@ -19845,12 +17452,6 @@ export namespace Prisma {
     deleteMany?: MenuItemScalarWhereInput | MenuItemScalarWhereInput[]
   }
 
-  export type MenuCreateNestedOneWithoutMenuItemsInput = {
-    create?: XOR<MenuCreateWithoutMenuItemsInput, MenuUncheckedCreateWithoutMenuItemsInput>
-    connectOrCreate?: MenuCreateOrConnectWithoutMenuItemsInput
-    connect?: MenuWhereUniqueInput
-  }
-
   export type IngredientCreateNestedManyWithoutMenuItemInput = {
     create?: XOR<IngredientCreateWithoutMenuItemInput, IngredientUncheckedCreateWithoutMenuItemInput> | IngredientCreateWithoutMenuItemInput[] | IngredientUncheckedCreateWithoutMenuItemInput[]
     connectOrCreate?: IngredientCreateOrConnectWithoutMenuItemInput | IngredientCreateOrConnectWithoutMenuItemInput[]
@@ -19858,19 +17459,17 @@ export namespace Prisma {
     connect?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
   }
 
+  export type MenuCreateNestedOneWithoutMenuItemsInput = {
+    create?: XOR<MenuCreateWithoutMenuItemsInput, MenuUncheckedCreateWithoutMenuItemsInput>
+    connectOrCreate?: MenuCreateOrConnectWithoutMenuItemsInput
+    connect?: MenuWhereUniqueInput
+  }
+
   export type IngredientUncheckedCreateNestedManyWithoutMenuItemInput = {
     create?: XOR<IngredientCreateWithoutMenuItemInput, IngredientUncheckedCreateWithoutMenuItemInput> | IngredientCreateWithoutMenuItemInput[] | IngredientUncheckedCreateWithoutMenuItemInput[]
     connectOrCreate?: IngredientCreateOrConnectWithoutMenuItemInput | IngredientCreateOrConnectWithoutMenuItemInput[]
     createMany?: IngredientCreateManyMenuItemInputEnvelope
     connect?: IngredientWhereUniqueInput | IngredientWhereUniqueInput[]
-  }
-
-  export type MenuUpdateOneRequiredWithoutMenuItemsNestedInput = {
-    create?: XOR<MenuCreateWithoutMenuItemsInput, MenuUncheckedCreateWithoutMenuItemsInput>
-    connectOrCreate?: MenuCreateOrConnectWithoutMenuItemsInput
-    upsert?: MenuUpsertWithoutMenuItemsInput
-    connect?: MenuWhereUniqueInput
-    update?: XOR<XOR<MenuUpdateToOneWithWhereWithoutMenuItemsInput, MenuUpdateWithoutMenuItemsInput>, MenuUncheckedUpdateWithoutMenuItemsInput>
   }
 
   export type IngredientUpdateManyWithoutMenuItemNestedInput = {
@@ -19887,6 +17486,16 @@ export namespace Prisma {
     deleteMany?: IngredientScalarWhereInput | IngredientScalarWhereInput[]
   }
 
+  export type MenuUpdateOneWithoutMenuItemsNestedInput = {
+    create?: XOR<MenuCreateWithoutMenuItemsInput, MenuUncheckedCreateWithoutMenuItemsInput>
+    connectOrCreate?: MenuCreateOrConnectWithoutMenuItemsInput
+    upsert?: MenuUpsertWithoutMenuItemsInput
+    disconnect?: MenuWhereInput | boolean
+    delete?: MenuWhereInput | boolean
+    connect?: MenuWhereUniqueInput
+    update?: XOR<XOR<MenuUpdateToOneWithWhereWithoutMenuItemsInput, MenuUpdateWithoutMenuItemsInput>, MenuUncheckedUpdateWithoutMenuItemsInput>
+  }
+
   export type IngredientUncheckedUpdateManyWithoutMenuItemNestedInput = {
     create?: XOR<IngredientCreateWithoutMenuItemInput, IngredientUncheckedCreateWithoutMenuItemInput> | IngredientCreateWithoutMenuItemInput[] | IngredientUncheckedCreateWithoutMenuItemInput[]
     connectOrCreate?: IngredientCreateOrConnectWithoutMenuItemInput | IngredientCreateOrConnectWithoutMenuItemInput[]
@@ -19901,12 +17510,6 @@ export namespace Prisma {
     deleteMany?: IngredientScalarWhereInput | IngredientScalarWhereInput[]
   }
 
-  export type MenuItemCreateNestedOneWithoutIngredientsInput = {
-    create?: XOR<MenuItemCreateWithoutIngredientsInput, MenuItemUncheckedCreateWithoutIngredientsInput>
-    connectOrCreate?: MenuItemCreateOrConnectWithoutIngredientsInput
-    connect?: MenuItemWhereUniqueInput
-  }
-
   export type SupplierIngredientCreateNestedManyWithoutIngredientInput = {
     create?: XOR<SupplierIngredientCreateWithoutIngredientInput, SupplierIngredientUncheckedCreateWithoutIngredientInput> | SupplierIngredientCreateWithoutIngredientInput[] | SupplierIngredientUncheckedCreateWithoutIngredientInput[]
     connectOrCreate?: SupplierIngredientCreateOrConnectWithoutIngredientInput | SupplierIngredientCreateOrConnectWithoutIngredientInput[]
@@ -19919,6 +17522,12 @@ export namespace Prisma {
     connectOrCreate?: OrderItemCreateOrConnectWithoutIngredientInput | OrderItemCreateOrConnectWithoutIngredientInput[]
     createMany?: OrderItemCreateManyIngredientInputEnvelope
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[]
+  }
+
+  export type MenuItemCreateNestedOneWithoutIngredientsInput = {
+    create?: XOR<MenuItemCreateWithoutIngredientsInput, MenuItemUncheckedCreateWithoutIngredientsInput>
+    connectOrCreate?: MenuItemCreateOrConnectWithoutIngredientsInput
+    connect?: MenuItemWhereUniqueInput
   }
 
   export type SupplierIngredientUncheckedCreateNestedManyWithoutIngredientInput = {
@@ -19941,16 +17550,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type MenuItemUpdateOneWithoutIngredientsNestedInput = {
-    create?: XOR<MenuItemCreateWithoutIngredientsInput, MenuItemUncheckedCreateWithoutIngredientsInput>
-    connectOrCreate?: MenuItemCreateOrConnectWithoutIngredientsInput
-    upsert?: MenuItemUpsertWithoutIngredientsInput
-    disconnect?: MenuItemWhereInput | boolean
-    delete?: MenuItemWhereInput | boolean
-    connect?: MenuItemWhereUniqueInput
-    update?: XOR<XOR<MenuItemUpdateToOneWithWhereWithoutIngredientsInput, MenuItemUpdateWithoutIngredientsInput>, MenuItemUncheckedUpdateWithoutIngredientsInput>
   }
 
   export type SupplierIngredientUpdateManyWithoutIngredientNestedInput = {
@@ -19981,6 +17580,16 @@ export namespace Prisma {
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[]
   }
 
+  export type MenuItemUpdateOneWithoutIngredientsNestedInput = {
+    create?: XOR<MenuItemCreateWithoutIngredientsInput, MenuItemUncheckedCreateWithoutIngredientsInput>
+    connectOrCreate?: MenuItemCreateOrConnectWithoutIngredientsInput
+    upsert?: MenuItemUpsertWithoutIngredientsInput
+    disconnect?: MenuItemWhereInput | boolean
+    delete?: MenuItemWhereInput | boolean
+    connect?: MenuItemWhereUniqueInput
+    update?: XOR<XOR<MenuItemUpdateToOneWithWhereWithoutIngredientsInput, MenuItemUpdateWithoutIngredientsInput>, MenuItemUncheckedUpdateWithoutIngredientsInput>
+  }
+
   export type SupplierIngredientUncheckedUpdateManyWithoutIngredientNestedInput = {
     create?: XOR<SupplierIngredientCreateWithoutIngredientInput, SupplierIngredientUncheckedCreateWithoutIngredientInput> | SupplierIngredientCreateWithoutIngredientInput[] | SupplierIngredientUncheckedCreateWithoutIngredientInput[]
     connectOrCreate?: SupplierIngredientCreateOrConnectWithoutIngredientInput | SupplierIngredientCreateOrConnectWithoutIngredientInput[]
@@ -20009,11 +17618,10 @@ export namespace Prisma {
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[]
   }
 
-  export type SupplierLocationCreateNestedManyWithoutSupplierInput = {
-    create?: XOR<SupplierLocationCreateWithoutSupplierInput, SupplierLocationUncheckedCreateWithoutSupplierInput> | SupplierLocationCreateWithoutSupplierInput[] | SupplierLocationUncheckedCreateWithoutSupplierInput[]
-    connectOrCreate?: SupplierLocationCreateOrConnectWithoutSupplierInput | SupplierLocationCreateOrConnectWithoutSupplierInput[]
-    createMany?: SupplierLocationCreateManySupplierInputEnvelope
-    connect?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
+  export type LocationCreateNestedOneWithoutSuppliersInput = {
+    create?: XOR<LocationCreateWithoutSuppliersInput, LocationUncheckedCreateWithoutSuppliersInput>
+    connectOrCreate?: LocationCreateOrConnectWithoutSuppliersInput
+    connect?: LocationWhereUniqueInput
   }
 
   export type SupplierIngredientCreateNestedManyWithoutSupplierInput = {
@@ -20037,13 +17645,6 @@ export namespace Prisma {
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[]
   }
 
-  export type SupplierLocationUncheckedCreateNestedManyWithoutSupplierInput = {
-    create?: XOR<SupplierLocationCreateWithoutSupplierInput, SupplierLocationUncheckedCreateWithoutSupplierInput> | SupplierLocationCreateWithoutSupplierInput[] | SupplierLocationUncheckedCreateWithoutSupplierInput[]
-    connectOrCreate?: SupplierLocationCreateOrConnectWithoutSupplierInput | SupplierLocationCreateOrConnectWithoutSupplierInput[]
-    createMany?: SupplierLocationCreateManySupplierInputEnvelope
-    connect?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-  }
-
   export type SupplierIngredientUncheckedCreateNestedManyWithoutSupplierInput = {
     create?: XOR<SupplierIngredientCreateWithoutSupplierInput, SupplierIngredientUncheckedCreateWithoutSupplierInput> | SupplierIngredientCreateWithoutSupplierInput[] | SupplierIngredientUncheckedCreateWithoutSupplierInput[]
     connectOrCreate?: SupplierIngredientCreateOrConnectWithoutSupplierInput | SupplierIngredientCreateOrConnectWithoutSupplierInput[]
@@ -20065,18 +17666,12 @@ export namespace Prisma {
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[]
   }
 
-  export type SupplierLocationUpdateManyWithoutSupplierNestedInput = {
-    create?: XOR<SupplierLocationCreateWithoutSupplierInput, SupplierLocationUncheckedCreateWithoutSupplierInput> | SupplierLocationCreateWithoutSupplierInput[] | SupplierLocationUncheckedCreateWithoutSupplierInput[]
-    connectOrCreate?: SupplierLocationCreateOrConnectWithoutSupplierInput | SupplierLocationCreateOrConnectWithoutSupplierInput[]
-    upsert?: SupplierLocationUpsertWithWhereUniqueWithoutSupplierInput | SupplierLocationUpsertWithWhereUniqueWithoutSupplierInput[]
-    createMany?: SupplierLocationCreateManySupplierInputEnvelope
-    set?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    disconnect?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    delete?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    connect?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    update?: SupplierLocationUpdateWithWhereUniqueWithoutSupplierInput | SupplierLocationUpdateWithWhereUniqueWithoutSupplierInput[]
-    updateMany?: SupplierLocationUpdateManyWithWhereWithoutSupplierInput | SupplierLocationUpdateManyWithWhereWithoutSupplierInput[]
-    deleteMany?: SupplierLocationScalarWhereInput | SupplierLocationScalarWhereInput[]
+  export type LocationUpdateOneRequiredWithoutSuppliersNestedInput = {
+    create?: XOR<LocationCreateWithoutSuppliersInput, LocationUncheckedCreateWithoutSuppliersInput>
+    connectOrCreate?: LocationCreateOrConnectWithoutSuppliersInput
+    upsert?: LocationUpsertWithoutSuppliersInput
+    connect?: LocationWhereUniqueInput
+    update?: XOR<XOR<LocationUpdateToOneWithWhereWithoutSuppliersInput, LocationUpdateWithoutSuppliersInput>, LocationUncheckedUpdateWithoutSuppliersInput>
   }
 
   export type SupplierIngredientUpdateManyWithoutSupplierNestedInput = {
@@ -20121,20 +17716,6 @@ export namespace Prisma {
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[]
   }
 
-  export type SupplierLocationUncheckedUpdateManyWithoutSupplierNestedInput = {
-    create?: XOR<SupplierLocationCreateWithoutSupplierInput, SupplierLocationUncheckedCreateWithoutSupplierInput> | SupplierLocationCreateWithoutSupplierInput[] | SupplierLocationUncheckedCreateWithoutSupplierInput[]
-    connectOrCreate?: SupplierLocationCreateOrConnectWithoutSupplierInput | SupplierLocationCreateOrConnectWithoutSupplierInput[]
-    upsert?: SupplierLocationUpsertWithWhereUniqueWithoutSupplierInput | SupplierLocationUpsertWithWhereUniqueWithoutSupplierInput[]
-    createMany?: SupplierLocationCreateManySupplierInputEnvelope
-    set?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    disconnect?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    delete?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    connect?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    update?: SupplierLocationUpdateWithWhereUniqueWithoutSupplierInput | SupplierLocationUpdateWithWhereUniqueWithoutSupplierInput[]
-    updateMany?: SupplierLocationUpdateManyWithWhereWithoutSupplierInput | SupplierLocationUpdateManyWithWhereWithoutSupplierInput[]
-    deleteMany?: SupplierLocationScalarWhereInput | SupplierLocationScalarWhereInput[]
-  }
-
   export type SupplierIngredientUncheckedUpdateManyWithoutSupplierNestedInput = {
     create?: XOR<SupplierIngredientCreateWithoutSupplierInput, SupplierIngredientUncheckedCreateWithoutSupplierInput> | SupplierIngredientCreateWithoutSupplierInput[] | SupplierIngredientUncheckedCreateWithoutSupplierInput[]
     connectOrCreate?: SupplierIngredientCreateOrConnectWithoutSupplierInput | SupplierIngredientCreateOrConnectWithoutSupplierInput[]
@@ -20177,11 +17758,11 @@ export namespace Prisma {
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[]
   }
 
-  export type SupplierLocationCreateNestedManyWithoutLocationInput = {
-    create?: XOR<SupplierLocationCreateWithoutLocationInput, SupplierLocationUncheckedCreateWithoutLocationInput> | SupplierLocationCreateWithoutLocationInput[] | SupplierLocationUncheckedCreateWithoutLocationInput[]
-    connectOrCreate?: SupplierLocationCreateOrConnectWithoutLocationInput | SupplierLocationCreateOrConnectWithoutLocationInput[]
-    createMany?: SupplierLocationCreateManyLocationInputEnvelope
-    connect?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
+  export type SupplierCreateNestedManyWithoutLocationInput = {
+    create?: XOR<SupplierCreateWithoutLocationInput, SupplierUncheckedCreateWithoutLocationInput> | SupplierCreateWithoutLocationInput[] | SupplierUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: SupplierCreateOrConnectWithoutLocationInput | SupplierCreateOrConnectWithoutLocationInput[]
+    createMany?: SupplierCreateManyLocationInputEnvelope
+    connect?: SupplierWhereUniqueInput | SupplierWhereUniqueInput[]
   }
 
   export type SupplierIngredientCreateNestedManyWithoutLocationInput = {
@@ -20198,11 +17779,11 @@ export namespace Prisma {
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[]
   }
 
-  export type SupplierLocationUncheckedCreateNestedManyWithoutLocationInput = {
-    create?: XOR<SupplierLocationCreateWithoutLocationInput, SupplierLocationUncheckedCreateWithoutLocationInput> | SupplierLocationCreateWithoutLocationInput[] | SupplierLocationUncheckedCreateWithoutLocationInput[]
-    connectOrCreate?: SupplierLocationCreateOrConnectWithoutLocationInput | SupplierLocationCreateOrConnectWithoutLocationInput[]
-    createMany?: SupplierLocationCreateManyLocationInputEnvelope
-    connect?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
+  export type SupplierUncheckedCreateNestedManyWithoutLocationInput = {
+    create?: XOR<SupplierCreateWithoutLocationInput, SupplierUncheckedCreateWithoutLocationInput> | SupplierCreateWithoutLocationInput[] | SupplierUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: SupplierCreateOrConnectWithoutLocationInput | SupplierCreateOrConnectWithoutLocationInput[]
+    createMany?: SupplierCreateManyLocationInputEnvelope
+    connect?: SupplierWhereUniqueInput | SupplierWhereUniqueInput[]
   }
 
   export type SupplierIngredientUncheckedCreateNestedManyWithoutLocationInput = {
@@ -20219,18 +17800,18 @@ export namespace Prisma {
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[]
   }
 
-  export type SupplierLocationUpdateManyWithoutLocationNestedInput = {
-    create?: XOR<SupplierLocationCreateWithoutLocationInput, SupplierLocationUncheckedCreateWithoutLocationInput> | SupplierLocationCreateWithoutLocationInput[] | SupplierLocationUncheckedCreateWithoutLocationInput[]
-    connectOrCreate?: SupplierLocationCreateOrConnectWithoutLocationInput | SupplierLocationCreateOrConnectWithoutLocationInput[]
-    upsert?: SupplierLocationUpsertWithWhereUniqueWithoutLocationInput | SupplierLocationUpsertWithWhereUniqueWithoutLocationInput[]
-    createMany?: SupplierLocationCreateManyLocationInputEnvelope
-    set?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    disconnect?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    delete?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    connect?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    update?: SupplierLocationUpdateWithWhereUniqueWithoutLocationInput | SupplierLocationUpdateWithWhereUniqueWithoutLocationInput[]
-    updateMany?: SupplierLocationUpdateManyWithWhereWithoutLocationInput | SupplierLocationUpdateManyWithWhereWithoutLocationInput[]
-    deleteMany?: SupplierLocationScalarWhereInput | SupplierLocationScalarWhereInput[]
+  export type SupplierUpdateManyWithoutLocationNestedInput = {
+    create?: XOR<SupplierCreateWithoutLocationInput, SupplierUncheckedCreateWithoutLocationInput> | SupplierCreateWithoutLocationInput[] | SupplierUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: SupplierCreateOrConnectWithoutLocationInput | SupplierCreateOrConnectWithoutLocationInput[]
+    upsert?: SupplierUpsertWithWhereUniqueWithoutLocationInput | SupplierUpsertWithWhereUniqueWithoutLocationInput[]
+    createMany?: SupplierCreateManyLocationInputEnvelope
+    set?: SupplierWhereUniqueInput | SupplierWhereUniqueInput[]
+    disconnect?: SupplierWhereUniqueInput | SupplierWhereUniqueInput[]
+    delete?: SupplierWhereUniqueInput | SupplierWhereUniqueInput[]
+    connect?: SupplierWhereUniqueInput | SupplierWhereUniqueInput[]
+    update?: SupplierUpdateWithWhereUniqueWithoutLocationInput | SupplierUpdateWithWhereUniqueWithoutLocationInput[]
+    updateMany?: SupplierUpdateManyWithWhereWithoutLocationInput | SupplierUpdateManyWithWhereWithoutLocationInput[]
+    deleteMany?: SupplierScalarWhereInput | SupplierScalarWhereInput[]
   }
 
   export type SupplierIngredientUpdateManyWithoutLocationNestedInput = {
@@ -20261,18 +17842,18 @@ export namespace Prisma {
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[]
   }
 
-  export type SupplierLocationUncheckedUpdateManyWithoutLocationNestedInput = {
-    create?: XOR<SupplierLocationCreateWithoutLocationInput, SupplierLocationUncheckedCreateWithoutLocationInput> | SupplierLocationCreateWithoutLocationInput[] | SupplierLocationUncheckedCreateWithoutLocationInput[]
-    connectOrCreate?: SupplierLocationCreateOrConnectWithoutLocationInput | SupplierLocationCreateOrConnectWithoutLocationInput[]
-    upsert?: SupplierLocationUpsertWithWhereUniqueWithoutLocationInput | SupplierLocationUpsertWithWhereUniqueWithoutLocationInput[]
-    createMany?: SupplierLocationCreateManyLocationInputEnvelope
-    set?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    disconnect?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    delete?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    connect?: SupplierLocationWhereUniqueInput | SupplierLocationWhereUniqueInput[]
-    update?: SupplierLocationUpdateWithWhereUniqueWithoutLocationInput | SupplierLocationUpdateWithWhereUniqueWithoutLocationInput[]
-    updateMany?: SupplierLocationUpdateManyWithWhereWithoutLocationInput | SupplierLocationUpdateManyWithWhereWithoutLocationInput[]
-    deleteMany?: SupplierLocationScalarWhereInput | SupplierLocationScalarWhereInput[]
+  export type SupplierUncheckedUpdateManyWithoutLocationNestedInput = {
+    create?: XOR<SupplierCreateWithoutLocationInput, SupplierUncheckedCreateWithoutLocationInput> | SupplierCreateWithoutLocationInput[] | SupplierUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: SupplierCreateOrConnectWithoutLocationInput | SupplierCreateOrConnectWithoutLocationInput[]
+    upsert?: SupplierUpsertWithWhereUniqueWithoutLocationInput | SupplierUpsertWithWhereUniqueWithoutLocationInput[]
+    createMany?: SupplierCreateManyLocationInputEnvelope
+    set?: SupplierWhereUniqueInput | SupplierWhereUniqueInput[]
+    disconnect?: SupplierWhereUniqueInput | SupplierWhereUniqueInput[]
+    delete?: SupplierWhereUniqueInput | SupplierWhereUniqueInput[]
+    connect?: SupplierWhereUniqueInput | SupplierWhereUniqueInput[]
+    update?: SupplierUpdateWithWhereUniqueWithoutLocationInput | SupplierUpdateWithWhereUniqueWithoutLocationInput[]
+    updateMany?: SupplierUpdateManyWithWhereWithoutLocationInput | SupplierUpdateManyWithWhereWithoutLocationInput[]
+    deleteMany?: SupplierScalarWhereInput | SupplierScalarWhereInput[]
   }
 
   export type SupplierIngredientUncheckedUpdateManyWithoutLocationNestedInput = {
@@ -20301,34 +17882,6 @@ export namespace Prisma {
     update?: OrderItemUpdateWithWhereUniqueWithoutLocationInput | OrderItemUpdateWithWhereUniqueWithoutLocationInput[]
     updateMany?: OrderItemUpdateManyWithWhereWithoutLocationInput | OrderItemUpdateManyWithWhereWithoutLocationInput[]
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[]
-  }
-
-  export type SupplierCreateNestedOneWithoutLocationsInput = {
-    create?: XOR<SupplierCreateWithoutLocationsInput, SupplierUncheckedCreateWithoutLocationsInput>
-    connectOrCreate?: SupplierCreateOrConnectWithoutLocationsInput
-    connect?: SupplierWhereUniqueInput
-  }
-
-  export type LocationCreateNestedOneWithoutSuppliersInput = {
-    create?: XOR<LocationCreateWithoutSuppliersInput, LocationUncheckedCreateWithoutSuppliersInput>
-    connectOrCreate?: LocationCreateOrConnectWithoutSuppliersInput
-    connect?: LocationWhereUniqueInput
-  }
-
-  export type SupplierUpdateOneRequiredWithoutLocationsNestedInput = {
-    create?: XOR<SupplierCreateWithoutLocationsInput, SupplierUncheckedCreateWithoutLocationsInput>
-    connectOrCreate?: SupplierCreateOrConnectWithoutLocationsInput
-    upsert?: SupplierUpsertWithoutLocationsInput
-    connect?: SupplierWhereUniqueInput
-    update?: XOR<XOR<SupplierUpdateToOneWithWhereWithoutLocationsInput, SupplierUpdateWithoutLocationsInput>, SupplierUncheckedUpdateWithoutLocationsInput>
-  }
-
-  export type LocationUpdateOneRequiredWithoutSuppliersNestedInput = {
-    create?: XOR<LocationCreateWithoutSuppliersInput, LocationUncheckedCreateWithoutSuppliersInput>
-    connectOrCreate?: LocationCreateOrConnectWithoutSuppliersInput
-    upsert?: LocationUpsertWithoutSuppliersInput
-    connect?: LocationWhereUniqueInput
-    update?: XOR<XOR<LocationUpdateToOneWithWhereWithoutSuppliersInput, LocationUpdateWithoutSuppliersInput>, LocationUncheckedUpdateWithoutSuppliersInput>
   }
 
   export type SupplierCreateNestedOneWithoutSupplierIngredientsInput = {
@@ -20489,10 +18042,10 @@ export namespace Prisma {
     update?: XOR<XOR<LocationUpdateToOneWithWhereWithoutOrderItemInput, LocationUpdateWithoutOrderItemInput>, LocationUncheckedUpdateWithoutOrderItemInput>
   }
 
-  export type ChefCreateNestedOneWithoutReviewsInput = {
-    create?: XOR<ChefCreateWithoutReviewsInput, ChefUncheckedCreateWithoutReviewsInput>
-    connectOrCreate?: ChefCreateOrConnectWithoutReviewsInput
-    connect?: ChefWhereUniqueInput
+  export type UserCreateNestedOneWithoutReviewsInput = {
+    create?: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type SupplierCreateNestedOneWithoutReviewsInput = {
@@ -20501,12 +18054,12 @@ export namespace Prisma {
     connect?: SupplierWhereUniqueInput
   }
 
-  export type ChefUpdateOneRequiredWithoutReviewsNestedInput = {
-    create?: XOR<ChefCreateWithoutReviewsInput, ChefUncheckedCreateWithoutReviewsInput>
-    connectOrCreate?: ChefCreateOrConnectWithoutReviewsInput
-    upsert?: ChefUpsertWithoutReviewsInput
-    connect?: ChefWhereUniqueInput
-    update?: XOR<XOR<ChefUpdateToOneWithWhereWithoutReviewsInput, ChefUpdateWithoutReviewsInput>, ChefUncheckedUpdateWithoutReviewsInput>
+  export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
+    create?: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewsInput
+    upsert?: UserUpsertWithoutReviewsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewsInput, UserUpdateWithoutReviewsInput>, UserUncheckedUpdateWithoutReviewsInput>
   }
 
   export type SupplierUpdateOneRequiredWithoutReviewsNestedInput = {
@@ -20790,25 +18343,58 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ChefCreateWithoutUserInput = {
+  export type MenuCreateWithoutUserInput = {
     id?: string
+    weekOfYear: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    menus?: MenuCreateNestedManyWithoutChefInput
-    reviews?: ReviewCreateNestedManyWithoutChefInput
+    menuItems?: MenuItemCreateNestedManyWithoutMenuInput
   }
 
-  export type ChefUncheckedCreateWithoutUserInput = {
+  export type MenuUncheckedCreateWithoutUserInput = {
     id?: string
+    weekOfYear: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    menus?: MenuUncheckedCreateNestedManyWithoutChefInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutChefInput
+    menuItems?: MenuItemUncheckedCreateNestedManyWithoutMenuInput
   }
 
-  export type ChefCreateOrConnectWithoutUserInput = {
-    where: ChefWhereUniqueInput
-    create: XOR<ChefCreateWithoutUserInput, ChefUncheckedCreateWithoutUserInput>
+  export type MenuCreateOrConnectWithoutUserInput = {
+    where: MenuWhereUniqueInput
+    create: XOR<MenuCreateWithoutUserInput, MenuUncheckedCreateWithoutUserInput>
+  }
+
+  export type MenuCreateManyUserInputEnvelope = {
+    data: MenuCreateManyUserInput | MenuCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ReviewCreateWithoutUserInput = {
+    id?: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    supplier: SupplierCreateNestedOneWithoutReviewsInput
+  }
+
+  export type ReviewUncheckedCreateWithoutUserInput = {
+    id?: string
+    supplierId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReviewCreateOrConnectWithoutUserInput = {
+    where: ReviewWhereUniqueInput
+    create: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReviewCreateManyUserInputEnvelope = {
+    data: ReviewCreateManyUserInput | ReviewCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type OrderCreateWithoutUserInput = {
@@ -20899,31 +18485,60 @@ export namespace Prisma {
     expires?: DateTimeFilter<"Session"> | Date | string
   }
 
-  export type ChefUpsertWithoutUserInput = {
-    update: XOR<ChefUpdateWithoutUserInput, ChefUncheckedUpdateWithoutUserInput>
-    create: XOR<ChefCreateWithoutUserInput, ChefUncheckedCreateWithoutUserInput>
-    where?: ChefWhereInput
+  export type MenuUpsertWithWhereUniqueWithoutUserInput = {
+    where: MenuWhereUniqueInput
+    update: XOR<MenuUpdateWithoutUserInput, MenuUncheckedUpdateWithoutUserInput>
+    create: XOR<MenuCreateWithoutUserInput, MenuUncheckedCreateWithoutUserInput>
   }
 
-  export type ChefUpdateToOneWithWhereWithoutUserInput = {
-    where?: ChefWhereInput
-    data: XOR<ChefUpdateWithoutUserInput, ChefUncheckedUpdateWithoutUserInput>
+  export type MenuUpdateWithWhereUniqueWithoutUserInput = {
+    where: MenuWhereUniqueInput
+    data: XOR<MenuUpdateWithoutUserInput, MenuUncheckedUpdateWithoutUserInput>
   }
 
-  export type ChefUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    menus?: MenuUpdateManyWithoutChefNestedInput
-    reviews?: ReviewUpdateManyWithoutChefNestedInput
+  export type MenuUpdateManyWithWhereWithoutUserInput = {
+    where: MenuScalarWhereInput
+    data: XOR<MenuUpdateManyMutationInput, MenuUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type ChefUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    menus?: MenuUncheckedUpdateManyWithoutChefNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutChefNestedInput
+  export type MenuScalarWhereInput = {
+    AND?: MenuScalarWhereInput | MenuScalarWhereInput[]
+    OR?: MenuScalarWhereInput[]
+    NOT?: MenuScalarWhereInput | MenuScalarWhereInput[]
+    id?: StringFilter<"Menu"> | string
+    userId?: StringFilter<"Menu"> | string
+    weekOfYear?: IntFilter<"Menu"> | number
+    createdAt?: DateTimeFilter<"Menu"> | Date | string
+    updatedAt?: DateTimeFilter<"Menu"> | Date | string
+  }
+
+  export type ReviewUpsertWithWhereUniqueWithoutUserInput = {
+    where: ReviewWhereUniqueInput
+    update: XOR<ReviewUpdateWithoutUserInput, ReviewUncheckedUpdateWithoutUserInput>
+    create: XOR<ReviewCreateWithoutUserInput, ReviewUncheckedCreateWithoutUserInput>
+  }
+
+  export type ReviewUpdateWithWhereUniqueWithoutUserInput = {
+    where: ReviewWhereUniqueInput
+    data: XOR<ReviewUpdateWithoutUserInput, ReviewUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ReviewUpdateManyWithWhereWithoutUserInput = {
+    where: ReviewScalarWhereInput
+    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ReviewScalarWhereInput = {
+    AND?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
+    OR?: ReviewScalarWhereInput[]
+    NOT?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
+    id?: StringFilter<"Review"> | string
+    userId?: StringFilter<"Review"> | string
+    supplierId?: StringFilter<"Review"> | string
+    rating?: IntFilter<"Review"> | number
+    comment?: StringNullableFilter<"Review"> | string | null
+    createdAt?: DateTimeFilter<"Review"> | Date | string
+    updatedAt?: DateTimeFilter<"Review"> | Date | string
   }
 
   export type OrderUpsertWithWhereUniqueWithoutUserInput = {
@@ -20963,7 +18578,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
-    chef?: ChefCreateNestedOneWithoutUserInput
+    menus?: MenuCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
   }
 
@@ -20976,7 +18592,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    chef?: ChefUncheckedCreateNestedOneWithoutUserInput
+    menus?: MenuUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -21005,7 +18622,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    chef?: ChefUpdateOneWithoutUserNestedInput
+    menus?: MenuUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
   }
 
@@ -21018,7 +18636,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    chef?: ChefUncheckedUpdateOneWithoutUserNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -21031,7 +18650,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
-    chef?: ChefCreateNestedOneWithoutUserInput
+    menus?: MenuCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
   }
 
@@ -21044,7 +18664,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    chef?: ChefUncheckedCreateNestedOneWithoutUserInput
+    menus?: MenuUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -21073,7 +18694,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
-    chef?: ChefUpdateOneWithoutUserNestedInput
+    menus?: MenuUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
     orders?: OrderUpdateManyWithoutUserNestedInput
   }
 
@@ -21086,11 +18708,12 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    chef?: ChefUncheckedUpdateOneWithoutUserNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutChefInput = {
+  export type UserCreateWithoutMenusInput = {
     id?: string
     email: string
     username: string
@@ -21100,10 +18723,11 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
     orders?: OrderCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutChefInput = {
+  export type UserUncheckedCreateWithoutMenusInput = {
     id?: string
     email: string
     username: string
@@ -21113,180 +18737,13 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutChefInput = {
+  export type UserCreateOrConnectWithoutMenusInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutChefInput, UserUncheckedCreateWithoutChefInput>
-  }
-
-  export type MenuCreateWithoutChefInput = {
-    id?: string
-    weekOfYear: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    menuItems?: MenuItemCreateNestedManyWithoutMenuInput
-  }
-
-  export type MenuUncheckedCreateWithoutChefInput = {
-    id?: string
-    weekOfYear: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    menuItems?: MenuItemUncheckedCreateNestedManyWithoutMenuInput
-  }
-
-  export type MenuCreateOrConnectWithoutChefInput = {
-    where: MenuWhereUniqueInput
-    create: XOR<MenuCreateWithoutChefInput, MenuUncheckedCreateWithoutChefInput>
-  }
-
-  export type MenuCreateManyChefInputEnvelope = {
-    data: MenuCreateManyChefInput | MenuCreateManyChefInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ReviewCreateWithoutChefInput = {
-    id?: string
-    rating: number
-    comment?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    supplier: SupplierCreateNestedOneWithoutReviewsInput
-  }
-
-  export type ReviewUncheckedCreateWithoutChefInput = {
-    id?: string
-    supplierId: string
-    rating: number
-    comment?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ReviewCreateOrConnectWithoutChefInput = {
-    where: ReviewWhereUniqueInput
-    create: XOR<ReviewCreateWithoutChefInput, ReviewUncheckedCreateWithoutChefInput>
-  }
-
-  export type ReviewCreateManyChefInputEnvelope = {
-    data: ReviewCreateManyChefInput | ReviewCreateManyChefInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type UserUpsertWithoutChefInput = {
-    update: XOR<UserUpdateWithoutChefInput, UserUncheckedUpdateWithoutChefInput>
-    create: XOR<UserCreateWithoutChefInput, UserUncheckedCreateWithoutChefInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutChefInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutChefInput, UserUncheckedUpdateWithoutChefInput>
-  }
-
-  export type UserUpdateWithoutChefInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    orders?: OrderUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutChefInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    username?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type MenuUpsertWithWhereUniqueWithoutChefInput = {
-    where: MenuWhereUniqueInput
-    update: XOR<MenuUpdateWithoutChefInput, MenuUncheckedUpdateWithoutChefInput>
-    create: XOR<MenuCreateWithoutChefInput, MenuUncheckedCreateWithoutChefInput>
-  }
-
-  export type MenuUpdateWithWhereUniqueWithoutChefInput = {
-    where: MenuWhereUniqueInput
-    data: XOR<MenuUpdateWithoutChefInput, MenuUncheckedUpdateWithoutChefInput>
-  }
-
-  export type MenuUpdateManyWithWhereWithoutChefInput = {
-    where: MenuScalarWhereInput
-    data: XOR<MenuUpdateManyMutationInput, MenuUncheckedUpdateManyWithoutChefInput>
-  }
-
-  export type MenuScalarWhereInput = {
-    AND?: MenuScalarWhereInput | MenuScalarWhereInput[]
-    OR?: MenuScalarWhereInput[]
-    NOT?: MenuScalarWhereInput | MenuScalarWhereInput[]
-    id?: StringFilter<"Menu"> | string
-    chefId?: StringFilter<"Menu"> | string
-    weekOfYear?: IntFilter<"Menu"> | number
-    createdAt?: DateTimeFilter<"Menu"> | Date | string
-    updatedAt?: DateTimeFilter<"Menu"> | Date | string
-  }
-
-  export type ReviewUpsertWithWhereUniqueWithoutChefInput = {
-    where: ReviewWhereUniqueInput
-    update: XOR<ReviewUpdateWithoutChefInput, ReviewUncheckedUpdateWithoutChefInput>
-    create: XOR<ReviewCreateWithoutChefInput, ReviewUncheckedCreateWithoutChefInput>
-  }
-
-  export type ReviewUpdateWithWhereUniqueWithoutChefInput = {
-    where: ReviewWhereUniqueInput
-    data: XOR<ReviewUpdateWithoutChefInput, ReviewUncheckedUpdateWithoutChefInput>
-  }
-
-  export type ReviewUpdateManyWithWhereWithoutChefInput = {
-    where: ReviewScalarWhereInput
-    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyWithoutChefInput>
-  }
-
-  export type ReviewScalarWhereInput = {
-    AND?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
-    OR?: ReviewScalarWhereInput[]
-    NOT?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
-    id?: StringFilter<"Review"> | string
-    chefId?: StringFilter<"Review"> | string
-    supplierId?: StringFilter<"Review"> | string
-    rating?: IntFilter<"Review"> | number
-    comment?: StringNullableFilter<"Review"> | string | null
-    createdAt?: DateTimeFilter<"Review"> | Date | string
-    updatedAt?: DateTimeFilter<"Review"> | Date | string
-  }
-
-  export type ChefCreateWithoutMenusInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutChefInput
-    reviews?: ReviewCreateNestedManyWithoutChefInput
-  }
-
-  export type ChefUncheckedCreateWithoutMenusInput = {
-    id?: string
-    userId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    reviews?: ReviewUncheckedCreateNestedManyWithoutChefInput
-  }
-
-  export type ChefCreateOrConnectWithoutMenusInput = {
-    where: ChefWhereUniqueInput
-    create: XOR<ChefCreateWithoutMenusInput, ChefUncheckedCreateWithoutMenusInput>
+    create: XOR<UserCreateWithoutMenusInput, UserUncheckedCreateWithoutMenusInput>
   }
 
   export type MenuItemCreateWithoutMenuInput = {
@@ -21317,31 +18774,43 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ChefUpsertWithoutMenusInput = {
-    update: XOR<ChefUpdateWithoutMenusInput, ChefUncheckedUpdateWithoutMenusInput>
-    create: XOR<ChefCreateWithoutMenusInput, ChefUncheckedCreateWithoutMenusInput>
-    where?: ChefWhereInput
+  export type UserUpsertWithoutMenusInput = {
+    update: XOR<UserUpdateWithoutMenusInput, UserUncheckedUpdateWithoutMenusInput>
+    create: XOR<UserCreateWithoutMenusInput, UserUncheckedCreateWithoutMenusInput>
+    where?: UserWhereInput
   }
 
-  export type ChefUpdateToOneWithWhereWithoutMenusInput = {
-    where?: ChefWhereInput
-    data: XOR<ChefUpdateWithoutMenusInput, ChefUncheckedUpdateWithoutMenusInput>
+  export type UserUpdateToOneWithWhereWithoutMenusInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMenusInput, UserUncheckedUpdateWithoutMenusInput>
   }
 
-  export type ChefUpdateWithoutMenusInput = {
+  export type UserUpdateWithoutMenusInput = {
     id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutChefNestedInput
-    reviews?: ReviewUpdateManyWithoutChefNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
   }
 
-  export type ChefUncheckedUpdateWithoutMenusInput = {
+  export type UserUncheckedUpdateWithoutMenusInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reviews?: ReviewUncheckedUpdateManyWithoutChefNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MenuItemUpsertWithWhereUniqueWithoutMenuInput = {
@@ -21365,32 +18834,11 @@ export namespace Prisma {
     OR?: MenuItemScalarWhereInput[]
     NOT?: MenuItemScalarWhereInput | MenuItemScalarWhereInput[]
     id?: StringFilter<"MenuItem"> | string
-    menuId?: StringFilter<"MenuItem"> | string
     name?: StringFilter<"MenuItem"> | string
     description?: StringNullableFilter<"MenuItem"> | string | null
     createdAt?: DateTimeFilter<"MenuItem"> | Date | string
     updatedAt?: DateTimeFilter<"MenuItem"> | Date | string
-  }
-
-  export type MenuCreateWithoutMenuItemsInput = {
-    id?: string
-    weekOfYear: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    chef: ChefCreateNestedOneWithoutMenusInput
-  }
-
-  export type MenuUncheckedCreateWithoutMenuItemsInput = {
-    id?: string
-    chefId: string
-    weekOfYear: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type MenuCreateOrConnectWithoutMenuItemsInput = {
-    where: MenuWhereUniqueInput
-    create: XOR<MenuCreateWithoutMenuItemsInput, MenuUncheckedCreateWithoutMenuItemsInput>
+    menuId?: StringNullableFilter<"MenuItem"> | string | null
   }
 
   export type IngredientCreateWithoutMenuItemInput = {
@@ -21427,31 +18875,25 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type MenuUpsertWithoutMenuItemsInput = {
-    update: XOR<MenuUpdateWithoutMenuItemsInput, MenuUncheckedUpdateWithoutMenuItemsInput>
+  export type MenuCreateWithoutMenuItemsInput = {
+    id?: string
+    weekOfYear: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutMenusInput
+  }
+
+  export type MenuUncheckedCreateWithoutMenuItemsInput = {
+    id?: string
+    userId: string
+    weekOfYear: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type MenuCreateOrConnectWithoutMenuItemsInput = {
+    where: MenuWhereUniqueInput
     create: XOR<MenuCreateWithoutMenuItemsInput, MenuUncheckedCreateWithoutMenuItemsInput>
-    where?: MenuWhereInput
-  }
-
-  export type MenuUpdateToOneWithWhereWithoutMenuItemsInput = {
-    where?: MenuWhereInput
-    data: XOR<MenuUpdateWithoutMenuItemsInput, MenuUncheckedUpdateWithoutMenuItemsInput>
-  }
-
-  export type MenuUpdateWithoutMenuItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    weekOfYear?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    chef?: ChefUpdateOneRequiredWithoutMenusNestedInput
-  }
-
-  export type MenuUncheckedUpdateWithoutMenuItemsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    chefId?: StringFieldUpdateOperationsInput | string
-    weekOfYear?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IngredientUpsertWithWhereUniqueWithoutMenuItemInput = {
@@ -21475,36 +18917,40 @@ export namespace Prisma {
     OR?: IngredientScalarWhereInput[]
     NOT?: IngredientScalarWhereInput | IngredientScalarWhereInput[]
     id?: StringFilter<"Ingredient"> | string
-    menuItemId?: StringNullableFilter<"Ingredient"> | string | null
     name?: StringFilter<"Ingredient"> | string
     description?: StringNullableFilter<"Ingredient"> | string | null
     weight?: FloatFilter<"Ingredient"> | number
     price?: FloatFilter<"Ingredient"> | number
     createdAt?: DateTimeFilter<"Ingredient"> | Date | string
     updatedAt?: DateTimeFilter<"Ingredient"> | Date | string
+    menuItemId?: StringNullableFilter<"Ingredient"> | string | null
   }
 
-  export type MenuItemCreateWithoutIngredientsInput = {
-    id?: string
-    name: string
-    description?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    menu: MenuCreateNestedOneWithoutMenuItemsInput
+  export type MenuUpsertWithoutMenuItemsInput = {
+    update: XOR<MenuUpdateWithoutMenuItemsInput, MenuUncheckedUpdateWithoutMenuItemsInput>
+    create: XOR<MenuCreateWithoutMenuItemsInput, MenuUncheckedCreateWithoutMenuItemsInput>
+    where?: MenuWhereInput
   }
 
-  export type MenuItemUncheckedCreateWithoutIngredientsInput = {
-    id?: string
-    menuId: string
-    name: string
-    description?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
+  export type MenuUpdateToOneWithWhereWithoutMenuItemsInput = {
+    where?: MenuWhereInput
+    data: XOR<MenuUpdateWithoutMenuItemsInput, MenuUncheckedUpdateWithoutMenuItemsInput>
   }
 
-  export type MenuItemCreateOrConnectWithoutIngredientsInput = {
-    where: MenuItemWhereUniqueInput
-    create: XOR<MenuItemCreateWithoutIngredientsInput, MenuItemUncheckedCreateWithoutIngredientsInput>
+  export type MenuUpdateWithoutMenuItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weekOfYear?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutMenusNestedInput
+  }
+
+  export type MenuUncheckedUpdateWithoutMenuItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    weekOfYear?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SupplierIngredientCreateWithoutIngredientInput = {
@@ -21559,33 +19005,27 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type MenuItemUpsertWithoutIngredientsInput = {
-    update: XOR<MenuItemUpdateWithoutIngredientsInput, MenuItemUncheckedUpdateWithoutIngredientsInput>
+  export type MenuItemCreateWithoutIngredientsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Menu?: MenuCreateNestedOneWithoutMenuItemsInput
+  }
+
+  export type MenuItemUncheckedCreateWithoutIngredientsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    menuId?: string | null
+  }
+
+  export type MenuItemCreateOrConnectWithoutIngredientsInput = {
+    where: MenuItemWhereUniqueInput
     create: XOR<MenuItemCreateWithoutIngredientsInput, MenuItemUncheckedCreateWithoutIngredientsInput>
-    where?: MenuItemWhereInput
-  }
-
-  export type MenuItemUpdateToOneWithWhereWithoutIngredientsInput = {
-    where?: MenuItemWhereInput
-    data: XOR<MenuItemUpdateWithoutIngredientsInput, MenuItemUncheckedUpdateWithoutIngredientsInput>
-  }
-
-  export type MenuItemUpdateWithoutIngredientsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    menu?: MenuUpdateOneRequiredWithoutMenuItemsNestedInput
-  }
-
-  export type MenuItemUncheckedUpdateWithoutIngredientsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    menuId?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SupplierIngredientUpsertWithWhereUniqueWithoutIngredientInput = {
@@ -21644,24 +19084,58 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"OrderItem"> | Date | string
   }
 
-  export type SupplierLocationCreateWithoutSupplierInput = {
+  export type MenuItemUpsertWithoutIngredientsInput = {
+    update: XOR<MenuItemUpdateWithoutIngredientsInput, MenuItemUncheckedUpdateWithoutIngredientsInput>
+    create: XOR<MenuItemCreateWithoutIngredientsInput, MenuItemUncheckedCreateWithoutIngredientsInput>
+    where?: MenuItemWhereInput
+  }
+
+  export type MenuItemUpdateToOneWithWhereWithoutIngredientsInput = {
+    where?: MenuItemWhereInput
+    data: XOR<MenuItemUpdateWithoutIngredientsInput, MenuItemUncheckedUpdateWithoutIngredientsInput>
+  }
+
+  export type MenuItemUpdateWithoutIngredientsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Menu?: MenuUpdateOneWithoutMenuItemsNestedInput
+  }
+
+  export type MenuItemUncheckedUpdateWithoutIngredientsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type LocationCreateWithoutSuppliersInput = {
     id?: string
-    location: LocationCreateNestedOneWithoutSuppliersInput
+    city: string
+    country: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    SupplierIngredient?: SupplierIngredientCreateNestedManyWithoutLocationInput
+    OrderItem?: OrderItemCreateNestedManyWithoutLocationInput
   }
 
-  export type SupplierLocationUncheckedCreateWithoutSupplierInput = {
+  export type LocationUncheckedCreateWithoutSuppliersInput = {
     id?: string
-    locationId: string
+    city: string
+    country: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    SupplierIngredient?: SupplierIngredientUncheckedCreateNestedManyWithoutLocationInput
+    OrderItem?: OrderItemUncheckedCreateNestedManyWithoutLocationInput
   }
 
-  export type SupplierLocationCreateOrConnectWithoutSupplierInput = {
-    where: SupplierLocationWhereUniqueInput
-    create: XOR<SupplierLocationCreateWithoutSupplierInput, SupplierLocationUncheckedCreateWithoutSupplierInput>
-  }
-
-  export type SupplierLocationCreateManySupplierInputEnvelope = {
-    data: SupplierLocationCreateManySupplierInput | SupplierLocationCreateManySupplierInput[]
-    skipDuplicates?: boolean
+  export type LocationCreateOrConnectWithoutSuppliersInput = {
+    where: LocationWhereUniqueInput
+    create: XOR<LocationCreateWithoutSuppliersInput, LocationUncheckedCreateWithoutSuppliersInput>
   }
 
   export type SupplierIngredientCreateWithoutSupplierInput = {
@@ -21692,12 +19166,12 @@ export namespace Prisma {
     comment?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    chef: ChefCreateNestedOneWithoutReviewsInput
+    user: UserCreateNestedOneWithoutReviewsInput
   }
 
   export type ReviewUncheckedCreateWithoutSupplierInput = {
     id?: string
-    chefId: string
+    userId: string
     rating: number
     comment?: string | null
     createdAt?: Date | string
@@ -21744,29 +19218,35 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SupplierLocationUpsertWithWhereUniqueWithoutSupplierInput = {
-    where: SupplierLocationWhereUniqueInput
-    update: XOR<SupplierLocationUpdateWithoutSupplierInput, SupplierLocationUncheckedUpdateWithoutSupplierInput>
-    create: XOR<SupplierLocationCreateWithoutSupplierInput, SupplierLocationUncheckedCreateWithoutSupplierInput>
+  export type LocationUpsertWithoutSuppliersInput = {
+    update: XOR<LocationUpdateWithoutSuppliersInput, LocationUncheckedUpdateWithoutSuppliersInput>
+    create: XOR<LocationCreateWithoutSuppliersInput, LocationUncheckedCreateWithoutSuppliersInput>
+    where?: LocationWhereInput
   }
 
-  export type SupplierLocationUpdateWithWhereUniqueWithoutSupplierInput = {
-    where: SupplierLocationWhereUniqueInput
-    data: XOR<SupplierLocationUpdateWithoutSupplierInput, SupplierLocationUncheckedUpdateWithoutSupplierInput>
+  export type LocationUpdateToOneWithWhereWithoutSuppliersInput = {
+    where?: LocationWhereInput
+    data: XOR<LocationUpdateWithoutSuppliersInput, LocationUncheckedUpdateWithoutSuppliersInput>
   }
 
-  export type SupplierLocationUpdateManyWithWhereWithoutSupplierInput = {
-    where: SupplierLocationScalarWhereInput
-    data: XOR<SupplierLocationUpdateManyMutationInput, SupplierLocationUncheckedUpdateManyWithoutSupplierInput>
+  export type LocationUpdateWithoutSuppliersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    SupplierIngredient?: SupplierIngredientUpdateManyWithoutLocationNestedInput
+    OrderItem?: OrderItemUpdateManyWithoutLocationNestedInput
   }
 
-  export type SupplierLocationScalarWhereInput = {
-    AND?: SupplierLocationScalarWhereInput | SupplierLocationScalarWhereInput[]
-    OR?: SupplierLocationScalarWhereInput[]
-    NOT?: SupplierLocationScalarWhereInput | SupplierLocationScalarWhereInput[]
-    id?: StringFilter<"SupplierLocation"> | string
-    supplierId?: StringFilter<"SupplierLocation"> | string
-    locationId?: StringFilter<"SupplierLocation"> | string
+  export type LocationUncheckedUpdateWithoutSuppliersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    SupplierIngredient?: SupplierIngredientUncheckedUpdateManyWithoutLocationNestedInput
+    OrderItem?: OrderItemUncheckedUpdateManyWithoutLocationNestedInput
   }
 
   export type SupplierIngredientUpsertWithWhereUniqueWithoutSupplierInput = {
@@ -21817,23 +19297,37 @@ export namespace Prisma {
     data: XOR<OrderItemUpdateManyMutationInput, OrderItemUncheckedUpdateManyWithoutSupplierInput>
   }
 
-  export type SupplierLocationCreateWithoutLocationInput = {
+  export type SupplierCreateWithoutLocationInput = {
     id?: string
-    supplier: SupplierCreateNestedOneWithoutLocationsInput
+    name: string
+    email: string
+    phone: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    supplierIngredients?: SupplierIngredientCreateNestedManyWithoutSupplierInput
+    reviews?: ReviewCreateNestedManyWithoutSupplierInput
+    OrderItem?: OrderItemCreateNestedManyWithoutSupplierInput
   }
 
-  export type SupplierLocationUncheckedCreateWithoutLocationInput = {
+  export type SupplierUncheckedCreateWithoutLocationInput = {
     id?: string
-    supplierId: string
+    name: string
+    email: string
+    phone: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    supplierIngredients?: SupplierIngredientUncheckedCreateNestedManyWithoutSupplierInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutSupplierInput
+    OrderItem?: OrderItemUncheckedCreateNestedManyWithoutSupplierInput
   }
 
-  export type SupplierLocationCreateOrConnectWithoutLocationInput = {
-    where: SupplierLocationWhereUniqueInput
-    create: XOR<SupplierLocationCreateWithoutLocationInput, SupplierLocationUncheckedCreateWithoutLocationInput>
+  export type SupplierCreateOrConnectWithoutLocationInput = {
+    where: SupplierWhereUniqueInput
+    create: XOR<SupplierCreateWithoutLocationInput, SupplierUncheckedCreateWithoutLocationInput>
   }
 
-  export type SupplierLocationCreateManyLocationInputEnvelope = {
-    data: SupplierLocationCreateManyLocationInput | SupplierLocationCreateManyLocationInput[]
+  export type SupplierCreateManyLocationInputEnvelope = {
+    data: SupplierCreateManyLocationInput | SupplierCreateManyLocationInput[]
     skipDuplicates?: boolean
   }
 
@@ -21889,20 +19383,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SupplierLocationUpsertWithWhereUniqueWithoutLocationInput = {
-    where: SupplierLocationWhereUniqueInput
-    update: XOR<SupplierLocationUpdateWithoutLocationInput, SupplierLocationUncheckedUpdateWithoutLocationInput>
-    create: XOR<SupplierLocationCreateWithoutLocationInput, SupplierLocationUncheckedCreateWithoutLocationInput>
+  export type SupplierUpsertWithWhereUniqueWithoutLocationInput = {
+    where: SupplierWhereUniqueInput
+    update: XOR<SupplierUpdateWithoutLocationInput, SupplierUncheckedUpdateWithoutLocationInput>
+    create: XOR<SupplierCreateWithoutLocationInput, SupplierUncheckedCreateWithoutLocationInput>
   }
 
-  export type SupplierLocationUpdateWithWhereUniqueWithoutLocationInput = {
-    where: SupplierLocationWhereUniqueInput
-    data: XOR<SupplierLocationUpdateWithoutLocationInput, SupplierLocationUncheckedUpdateWithoutLocationInput>
+  export type SupplierUpdateWithWhereUniqueWithoutLocationInput = {
+    where: SupplierWhereUniqueInput
+    data: XOR<SupplierUpdateWithoutLocationInput, SupplierUncheckedUpdateWithoutLocationInput>
   }
 
-  export type SupplierLocationUpdateManyWithWhereWithoutLocationInput = {
-    where: SupplierLocationScalarWhereInput
-    data: XOR<SupplierLocationUpdateManyMutationInput, SupplierLocationUncheckedUpdateManyWithoutLocationInput>
+  export type SupplierUpdateManyWithWhereWithoutLocationInput = {
+    where: SupplierScalarWhereInput
+    data: XOR<SupplierUpdateManyMutationInput, SupplierUncheckedUpdateManyWithoutLocationInput>
+  }
+
+  export type SupplierScalarWhereInput = {
+    AND?: SupplierScalarWhereInput | SupplierScalarWhereInput[]
+    OR?: SupplierScalarWhereInput[]
+    NOT?: SupplierScalarWhereInput | SupplierScalarWhereInput[]
+    id?: StringFilter<"Supplier"> | string
+    name?: StringFilter<"Supplier"> | string
+    email?: StringFilter<"Supplier"> | string
+    phone?: StringFilter<"Supplier"> | string
+    locationId?: StringFilter<"Supplier"> | string
+    createdAt?: DateTimeFilter<"Supplier"> | Date | string
+    updatedAt?: DateTimeFilter<"Supplier"> | Date | string
   }
 
   export type SupplierIngredientUpsertWithWhereUniqueWithoutLocationInput = {
@@ -21937,126 +19444,6 @@ export namespace Prisma {
     data: XOR<OrderItemUpdateManyMutationInput, OrderItemUncheckedUpdateManyWithoutLocationInput>
   }
 
-  export type SupplierCreateWithoutLocationsInput = {
-    id?: string
-    name: string
-    email: string
-    phone: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    supplierIngredients?: SupplierIngredientCreateNestedManyWithoutSupplierInput
-    reviews?: ReviewCreateNestedManyWithoutSupplierInput
-    OrderItem?: OrderItemCreateNestedManyWithoutSupplierInput
-  }
-
-  export type SupplierUncheckedCreateWithoutLocationsInput = {
-    id?: string
-    name: string
-    email: string
-    phone: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    supplierIngredients?: SupplierIngredientUncheckedCreateNestedManyWithoutSupplierInput
-    reviews?: ReviewUncheckedCreateNestedManyWithoutSupplierInput
-    OrderItem?: OrderItemUncheckedCreateNestedManyWithoutSupplierInput
-  }
-
-  export type SupplierCreateOrConnectWithoutLocationsInput = {
-    where: SupplierWhereUniqueInput
-    create: XOR<SupplierCreateWithoutLocationsInput, SupplierUncheckedCreateWithoutLocationsInput>
-  }
-
-  export type LocationCreateWithoutSuppliersInput = {
-    id?: string
-    city: string
-    country: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    SupplierIngredient?: SupplierIngredientCreateNestedManyWithoutLocationInput
-    OrderItem?: OrderItemCreateNestedManyWithoutLocationInput
-  }
-
-  export type LocationUncheckedCreateWithoutSuppliersInput = {
-    id?: string
-    city: string
-    country: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    SupplierIngredient?: SupplierIngredientUncheckedCreateNestedManyWithoutLocationInput
-    OrderItem?: OrderItemUncheckedCreateNestedManyWithoutLocationInput
-  }
-
-  export type LocationCreateOrConnectWithoutSuppliersInput = {
-    where: LocationWhereUniqueInput
-    create: XOR<LocationCreateWithoutSuppliersInput, LocationUncheckedCreateWithoutSuppliersInput>
-  }
-
-  export type SupplierUpsertWithoutLocationsInput = {
-    update: XOR<SupplierUpdateWithoutLocationsInput, SupplierUncheckedUpdateWithoutLocationsInput>
-    create: XOR<SupplierCreateWithoutLocationsInput, SupplierUncheckedCreateWithoutLocationsInput>
-    where?: SupplierWhereInput
-  }
-
-  export type SupplierUpdateToOneWithWhereWithoutLocationsInput = {
-    where?: SupplierWhereInput
-    data: XOR<SupplierUpdateWithoutLocationsInput, SupplierUncheckedUpdateWithoutLocationsInput>
-  }
-
-  export type SupplierUpdateWithoutLocationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supplierIngredients?: SupplierIngredientUpdateManyWithoutSupplierNestedInput
-    reviews?: ReviewUpdateManyWithoutSupplierNestedInput
-    OrderItem?: OrderItemUpdateManyWithoutSupplierNestedInput
-  }
-
-  export type SupplierUncheckedUpdateWithoutLocationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supplierIngredients?: SupplierIngredientUncheckedUpdateManyWithoutSupplierNestedInput
-    reviews?: ReviewUncheckedUpdateManyWithoutSupplierNestedInput
-    OrderItem?: OrderItemUncheckedUpdateManyWithoutSupplierNestedInput
-  }
-
-  export type LocationUpsertWithoutSuppliersInput = {
-    update: XOR<LocationUpdateWithoutSuppliersInput, LocationUncheckedUpdateWithoutSuppliersInput>
-    create: XOR<LocationCreateWithoutSuppliersInput, LocationUncheckedCreateWithoutSuppliersInput>
-    where?: LocationWhereInput
-  }
-
-  export type LocationUpdateToOneWithWhereWithoutSuppliersInput = {
-    where?: LocationWhereInput
-    data: XOR<LocationUpdateWithoutSuppliersInput, LocationUncheckedUpdateWithoutSuppliersInput>
-  }
-
-  export type LocationUpdateWithoutSuppliersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    SupplierIngredient?: SupplierIngredientUpdateManyWithoutLocationNestedInput
-    OrderItem?: OrderItemUpdateManyWithoutLocationNestedInput
-  }
-
-  export type LocationUncheckedUpdateWithoutSuppliersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    city?: StringFieldUpdateOperationsInput | string
-    country?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    SupplierIngredient?: SupplierIngredientUncheckedUpdateManyWithoutLocationNestedInput
-    OrderItem?: OrderItemUncheckedUpdateManyWithoutLocationNestedInput
-  }
-
   export type SupplierCreateWithoutSupplierIngredientsInput = {
     id?: string
     name: string
@@ -22064,7 +19451,7 @@ export namespace Prisma {
     phone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    locations?: SupplierLocationCreateNestedManyWithoutSupplierInput
+    location: LocationCreateNestedOneWithoutSuppliersInput
     reviews?: ReviewCreateNestedManyWithoutSupplierInput
     OrderItem?: OrderItemCreateNestedManyWithoutSupplierInput
   }
@@ -22074,9 +19461,9 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    locationId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    locations?: SupplierLocationUncheckedCreateNestedManyWithoutSupplierInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutSupplierInput
     OrderItem?: OrderItemUncheckedCreateNestedManyWithoutSupplierInput
   }
@@ -22094,19 +19481,19 @@ export namespace Prisma {
     price: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    menuItem?: MenuItemCreateNestedOneWithoutIngredientsInput
     orderItems?: OrderItemCreateNestedManyWithoutIngredientInput
+    MenuItem?: MenuItemCreateNestedOneWithoutIngredientsInput
   }
 
   export type IngredientUncheckedCreateWithoutSupplierIngredientsInput = {
     id?: string
-    menuItemId?: string | null
     name: string
     description?: string | null
     weight: number
     price: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    menuItemId?: string | null
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutIngredientInput
   }
 
@@ -22121,7 +19508,7 @@ export namespace Prisma {
     country: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    suppliers?: SupplierLocationCreateNestedManyWithoutLocationInput
+    suppliers?: SupplierCreateNestedManyWithoutLocationInput
     OrderItem?: OrderItemCreateNestedManyWithoutLocationInput
   }
 
@@ -22131,7 +19518,7 @@ export namespace Prisma {
     country: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    suppliers?: SupplierLocationUncheckedCreateNestedManyWithoutLocationInput
+    suppliers?: SupplierUncheckedCreateNestedManyWithoutLocationInput
     OrderItem?: OrderItemUncheckedCreateNestedManyWithoutLocationInput
   }
 
@@ -22158,7 +19545,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    locations?: SupplierLocationUpdateManyWithoutSupplierNestedInput
+    location?: LocationUpdateOneRequiredWithoutSuppliersNestedInput
     reviews?: ReviewUpdateManyWithoutSupplierNestedInput
     OrderItem?: OrderItemUpdateManyWithoutSupplierNestedInput
   }
@@ -22168,9 +19555,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    locationId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    locations?: SupplierLocationUncheckedUpdateManyWithoutSupplierNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutSupplierNestedInput
     OrderItem?: OrderItemUncheckedUpdateManyWithoutSupplierNestedInput
   }
@@ -22194,19 +19581,19 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    menuItem?: MenuItemUpdateOneWithoutIngredientsNestedInput
     orderItems?: OrderItemUpdateManyWithoutIngredientNestedInput
+    MenuItem?: MenuItemUpdateOneWithoutIngredientsNestedInput
   }
 
   export type IngredientUncheckedUpdateWithoutSupplierIngredientsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    menuItemId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuItemId?: NullableStringFieldUpdateOperationsInput | string | null
     orderItems?: OrderItemUncheckedUpdateManyWithoutIngredientNestedInput
   }
 
@@ -22227,7 +19614,7 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    suppliers?: SupplierLocationUpdateManyWithoutLocationNestedInput
+    suppliers?: SupplierUpdateManyWithoutLocationNestedInput
     OrderItem?: OrderItemUpdateManyWithoutLocationNestedInput
   }
 
@@ -22237,7 +19624,7 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    suppliers?: SupplierLocationUncheckedUpdateManyWithoutLocationNestedInput
+    suppliers?: SupplierUncheckedUpdateManyWithoutLocationNestedInput
     OrderItem?: OrderItemUncheckedUpdateManyWithoutLocationNestedInput
   }
 
@@ -22251,7 +19638,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
-    chef?: ChefCreateNestedOneWithoutUserInput
+    menus?: MenuCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOrdersInput = {
@@ -22264,7 +19652,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    chef?: ChefUncheckedCreateNestedOneWithoutUserInput
+    menus?: MenuUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOrdersInput = {
@@ -22323,7 +19712,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    chef?: ChefUpdateOneWithoutUserNestedInput
+    menus?: MenuUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -22336,7 +19726,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    chef?: ChefUncheckedUpdateOneWithoutUserNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type OrderItemUpsertWithWhereUniqueWithoutOrderInput = {
@@ -22386,19 +19777,19 @@ export namespace Prisma {
     price: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    menuItem?: MenuItemCreateNestedOneWithoutIngredientsInput
     supplierIngredients?: SupplierIngredientCreateNestedManyWithoutIngredientInput
+    MenuItem?: MenuItemCreateNestedOneWithoutIngredientsInput
   }
 
   export type IngredientUncheckedCreateWithoutOrderItemsInput = {
     id?: string
-    menuItemId?: string | null
     name: string
     description?: string | null
     weight: number
     price: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    menuItemId?: string | null
     supplierIngredients?: SupplierIngredientUncheckedCreateNestedManyWithoutIngredientInput
   }
 
@@ -22414,7 +19805,7 @@ export namespace Prisma {
     phone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    locations?: SupplierLocationCreateNestedManyWithoutSupplierInput
+    location: LocationCreateNestedOneWithoutSuppliersInput
     supplierIngredients?: SupplierIngredientCreateNestedManyWithoutSupplierInput
     reviews?: ReviewCreateNestedManyWithoutSupplierInput
   }
@@ -22424,9 +19815,9 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    locationId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    locations?: SupplierLocationUncheckedCreateNestedManyWithoutSupplierInput
     supplierIngredients?: SupplierIngredientUncheckedCreateNestedManyWithoutSupplierInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutSupplierInput
   }
@@ -22442,7 +19833,7 @@ export namespace Prisma {
     country: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    suppliers?: SupplierLocationCreateNestedManyWithoutLocationInput
+    suppliers?: SupplierCreateNestedManyWithoutLocationInput
     SupplierIngredient?: SupplierIngredientCreateNestedManyWithoutLocationInput
   }
 
@@ -22452,7 +19843,7 @@ export namespace Prisma {
     country: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    suppliers?: SupplierLocationUncheckedCreateNestedManyWithoutLocationInput
+    suppliers?: SupplierUncheckedCreateNestedManyWithoutLocationInput
     SupplierIngredient?: SupplierIngredientUncheckedCreateNestedManyWithoutLocationInput
   }
 
@@ -22509,19 +19900,19 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    menuItem?: MenuItemUpdateOneWithoutIngredientsNestedInput
     supplierIngredients?: SupplierIngredientUpdateManyWithoutIngredientNestedInput
+    MenuItem?: MenuItemUpdateOneWithoutIngredientsNestedInput
   }
 
   export type IngredientUncheckedUpdateWithoutOrderItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    menuItemId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     weight?: FloatFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuItemId?: NullableStringFieldUpdateOperationsInput | string | null
     supplierIngredients?: SupplierIngredientUncheckedUpdateManyWithoutIngredientNestedInput
   }
 
@@ -22543,7 +19934,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    locations?: SupplierLocationUpdateManyWithoutSupplierNestedInput
+    location?: LocationUpdateOneRequiredWithoutSuppliersNestedInput
     supplierIngredients?: SupplierIngredientUpdateManyWithoutSupplierNestedInput
     reviews?: ReviewUpdateManyWithoutSupplierNestedInput
   }
@@ -22553,9 +19944,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    locationId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    locations?: SupplierLocationUncheckedUpdateManyWithoutSupplierNestedInput
     supplierIngredients?: SupplierIngredientUncheckedUpdateManyWithoutSupplierNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutSupplierNestedInput
   }
@@ -22577,7 +19968,7 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    suppliers?: SupplierLocationUpdateManyWithoutLocationNestedInput
+    suppliers?: SupplierUpdateManyWithoutLocationNestedInput
     SupplierIngredient?: SupplierIngredientUpdateManyWithoutLocationNestedInput
   }
 
@@ -22587,29 +19978,41 @@ export namespace Prisma {
     country?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    suppliers?: SupplierLocationUncheckedUpdateManyWithoutLocationNestedInput
+    suppliers?: SupplierUncheckedUpdateManyWithoutLocationNestedInput
     SupplierIngredient?: SupplierIngredientUncheckedUpdateManyWithoutLocationNestedInput
   }
 
-  export type ChefCreateWithoutReviewsInput = {
+  export type UserCreateWithoutReviewsInput = {
     id?: string
+    email: string
+    username: string
+    password: string
+    role?: $Enums.UserRole
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutChefInput
-    menus?: MenuCreateNestedManyWithoutChefInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    menus?: MenuCreateNestedManyWithoutUserInput
+    orders?: OrderCreateNestedManyWithoutUserInput
   }
 
-  export type ChefUncheckedCreateWithoutReviewsInput = {
+  export type UserUncheckedCreateWithoutReviewsInput = {
     id?: string
-    userId: string
+    email: string
+    username: string
+    password: string
+    role?: $Enums.UserRole
     createdAt?: Date | string
     updatedAt?: Date | string
-    menus?: MenuUncheckedCreateNestedManyWithoutChefInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    menus?: MenuUncheckedCreateNestedManyWithoutUserInput
+    orders?: OrderUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type ChefCreateOrConnectWithoutReviewsInput = {
-    where: ChefWhereUniqueInput
-    create: XOR<ChefCreateWithoutReviewsInput, ChefUncheckedCreateWithoutReviewsInput>
+  export type UserCreateOrConnectWithoutReviewsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
   }
 
   export type SupplierCreateWithoutReviewsInput = {
@@ -22619,7 +20022,7 @@ export namespace Prisma {
     phone: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    locations?: SupplierLocationCreateNestedManyWithoutSupplierInput
+    location: LocationCreateNestedOneWithoutSuppliersInput
     supplierIngredients?: SupplierIngredientCreateNestedManyWithoutSupplierInput
     OrderItem?: OrderItemCreateNestedManyWithoutSupplierInput
   }
@@ -22629,9 +20032,9 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    locationId: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    locations?: SupplierLocationUncheckedCreateNestedManyWithoutSupplierInput
     supplierIngredients?: SupplierIngredientUncheckedCreateNestedManyWithoutSupplierInput
     OrderItem?: OrderItemUncheckedCreateNestedManyWithoutSupplierInput
   }
@@ -22641,31 +20044,43 @@ export namespace Prisma {
     create: XOR<SupplierCreateWithoutReviewsInput, SupplierUncheckedCreateWithoutReviewsInput>
   }
 
-  export type ChefUpsertWithoutReviewsInput = {
-    update: XOR<ChefUpdateWithoutReviewsInput, ChefUncheckedUpdateWithoutReviewsInput>
-    create: XOR<ChefCreateWithoutReviewsInput, ChefUncheckedCreateWithoutReviewsInput>
-    where?: ChefWhereInput
+  export type UserUpsertWithoutReviewsInput = {
+    update: XOR<UserUpdateWithoutReviewsInput, UserUncheckedUpdateWithoutReviewsInput>
+    create: XOR<UserCreateWithoutReviewsInput, UserUncheckedCreateWithoutReviewsInput>
+    where?: UserWhereInput
   }
 
-  export type ChefUpdateToOneWithWhereWithoutReviewsInput = {
-    where?: ChefWhereInput
-    data: XOR<ChefUpdateWithoutReviewsInput, ChefUncheckedUpdateWithoutReviewsInput>
+  export type UserUpdateToOneWithWhereWithoutReviewsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReviewsInput, UserUncheckedUpdateWithoutReviewsInput>
   }
 
-  export type ChefUpdateWithoutReviewsInput = {
+  export type UserUpdateWithoutReviewsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutChefNestedInput
-    menus?: MenuUpdateManyWithoutChefNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    menus?: MenuUpdateManyWithoutUserNestedInput
+    orders?: OrderUpdateManyWithoutUserNestedInput
   }
 
-  export type ChefUncheckedUpdateWithoutReviewsInput = {
+  export type UserUncheckedUpdateWithoutReviewsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    menus?: MenuUncheckedUpdateManyWithoutChefNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    menus?: MenuUncheckedUpdateManyWithoutUserNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SupplierUpsertWithoutReviewsInput = {
@@ -22686,7 +20101,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    locations?: SupplierLocationUpdateManyWithoutSupplierNestedInput
+    location?: LocationUpdateOneRequiredWithoutSuppliersNestedInput
     supplierIngredients?: SupplierIngredientUpdateManyWithoutSupplierNestedInput
     OrderItem?: OrderItemUpdateManyWithoutSupplierNestedInput
   }
@@ -22696,9 +20111,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    locationId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    locations?: SupplierLocationUncheckedUpdateManyWithoutSupplierNestedInput
     supplierIngredients?: SupplierIngredientUncheckedUpdateManyWithoutSupplierNestedInput
     OrderItem?: OrderItemUncheckedUpdateManyWithoutSupplierNestedInput
   }
@@ -22721,6 +20136,22 @@ export namespace Prisma {
     id?: string
     sessionToken: string
     expires: Date | string
+  }
+
+  export type MenuCreateManyUserInput = {
+    id?: string
+    weekOfYear: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ReviewCreateManyUserInput = {
+    id?: string
+    supplierId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type OrderCreateManyUserInput = {
@@ -22791,6 +20222,56 @@ export namespace Prisma {
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type MenuUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weekOfYear?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuItems?: MenuItemUpdateManyWithoutMenuNestedInput
+  }
+
+  export type MenuUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weekOfYear?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuItems?: MenuItemUncheckedUpdateManyWithoutMenuNestedInput
+  }
+
+  export type MenuUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    weekOfYear?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supplier?: SupplierUpdateOneRequiredWithoutReviewsNestedInput
+  }
+
+  export type ReviewUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supplierId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    supplierId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type OrderUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22813,72 +20294,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type MenuCreateManyChefInput = {
-    id?: string
-    weekOfYear: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ReviewCreateManyChefInput = {
-    id?: string
-    supplierId: string
-    rating: number
-    comment?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type MenuUpdateWithoutChefInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    weekOfYear?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    menuItems?: MenuItemUpdateManyWithoutMenuNestedInput
-  }
-
-  export type MenuUncheckedUpdateWithoutChefInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    weekOfYear?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    menuItems?: MenuItemUncheckedUpdateManyWithoutMenuNestedInput
-  }
-
-  export type MenuUncheckedUpdateManyWithoutChefInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    weekOfYear?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ReviewUpdateWithoutChefInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    comment?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    supplier?: SupplierUpdateOneRequiredWithoutReviewsNestedInput
-  }
-
-  export type ReviewUncheckedUpdateWithoutChefInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supplierId?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    comment?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ReviewUncheckedUpdateManyWithoutChefInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    supplierId?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
-    comment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23025,11 +20440,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SupplierLocationCreateManySupplierInput = {
-    id?: string
-    locationId: string
-  }
-
   export type SupplierIngredientCreateManySupplierInput = {
     id?: string
     ingredientId: string
@@ -23038,7 +20448,7 @@ export namespace Prisma {
 
   export type ReviewCreateManySupplierInput = {
     id?: string
-    chefId: string
+    userId: string
     rating: number
     comment?: string | null
     createdAt?: Date | string
@@ -23053,21 +20463,6 @@ export namespace Prisma {
     quantity: number
     createdAt?: Date | string
     updatedAt?: Date | string
-  }
-
-  export type SupplierLocationUpdateWithoutSupplierInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    location?: LocationUpdateOneRequiredWithoutSuppliersNestedInput
-  }
-
-  export type SupplierLocationUncheckedUpdateWithoutSupplierInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    locationId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type SupplierLocationUncheckedUpdateManyWithoutSupplierInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    locationId?: StringFieldUpdateOperationsInput | string
   }
 
   export type SupplierIngredientUpdateWithoutSupplierInput = {
@@ -23094,12 +20489,12 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    chef?: ChefUpdateOneRequiredWithoutReviewsNestedInput
+    user?: UserUpdateOneRequiredWithoutReviewsNestedInput
   }
 
   export type ReviewUncheckedUpdateWithoutSupplierInput = {
     id?: StringFieldUpdateOperationsInput | string
-    chefId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23108,7 +20503,7 @@ export namespace Prisma {
 
   export type ReviewUncheckedUpdateManyWithoutSupplierInput = {
     id?: StringFieldUpdateOperationsInput | string
-    chefId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23145,9 +20540,13 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SupplierLocationCreateManyLocationInput = {
+  export type SupplierCreateManyLocationInput = {
     id?: string
-    supplierId: string
+    name: string
+    email: string
+    phone: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type SupplierIngredientCreateManyLocationInput = {
@@ -23166,19 +20565,37 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type SupplierLocationUpdateWithoutLocationInput = {
+  export type SupplierUpdateWithoutLocationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supplier?: SupplierUpdateOneRequiredWithoutLocationsNestedInput
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supplierIngredients?: SupplierIngredientUpdateManyWithoutSupplierNestedInput
+    reviews?: ReviewUpdateManyWithoutSupplierNestedInput
+    OrderItem?: OrderItemUpdateManyWithoutSupplierNestedInput
   }
 
-  export type SupplierLocationUncheckedUpdateWithoutLocationInput = {
+  export type SupplierUncheckedUpdateWithoutLocationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supplierId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    supplierIngredients?: SupplierIngredientUncheckedUpdateManyWithoutSupplierNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutSupplierNestedInput
+    OrderItem?: OrderItemUncheckedUpdateManyWithoutSupplierNestedInput
   }
 
-  export type SupplierLocationUncheckedUpdateManyWithoutLocationInput = {
+  export type SupplierUncheckedUpdateManyWithoutLocationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    supplierId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SupplierIngredientUpdateWithoutLocationInput = {
@@ -23279,10 +20696,6 @@ export namespace Prisma {
      */
     export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use ChefCountOutputTypeDefaultArgs instead
-     */
-    export type ChefCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ChefCountOutputTypeDefaultArgs<ExtArgs>
-    /**
      * @deprecated Use MenuCountOutputTypeDefaultArgs instead
      */
     export type MenuCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MenuCountOutputTypeDefaultArgs<ExtArgs>
@@ -23319,10 +20732,6 @@ export namespace Prisma {
      */
     export type SessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SessionDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use ChefDefaultArgs instead
-     */
-    export type ChefArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ChefDefaultArgs<ExtArgs>
-    /**
      * @deprecated Use MenuDefaultArgs instead
      */
     export type MenuArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MenuDefaultArgs<ExtArgs>
@@ -23342,10 +20751,6 @@ export namespace Prisma {
      * @deprecated Use LocationDefaultArgs instead
      */
     export type LocationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LocationDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use SupplierLocationDefaultArgs instead
-     */
-    export type SupplierLocationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SupplierLocationDefaultArgs<ExtArgs>
     /**
      * @deprecated Use SupplierIngredientDefaultArgs instead
      */

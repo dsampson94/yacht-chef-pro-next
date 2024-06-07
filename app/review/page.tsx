@@ -8,12 +8,8 @@ const Reviews = () => {
         <ResourceList
             resource={RESOURCES.REVIEWS}
             displayFields={[
-                { label: 'Chef ID', key: 'chefId' },
-                { label: 'Supplier ID', key: 'supplierId' },
                 { label: 'Rating', key: 'rating' },
                 { label: 'Comment', key: 'comment' },
-                { label: 'Created At', key: 'createdAt' },
-                { label: 'Updated At', key: 'updatedAt' }
             ]}
         />
     );

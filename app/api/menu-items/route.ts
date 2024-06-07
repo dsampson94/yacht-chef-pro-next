@@ -1,12 +1,16 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../lib/prisma';
 
-const RESOURCE_NAME = 'locations';
-const model = prisma.location;
+const RESOURCE_NAME = 'menuItems';
+const model = prisma.menuItem;
 
 export async function GET() {
     try {
-        const items = await model.findMany();
+        const items = await model.findMany({
+            include: {
+                ingredients: true
+            }
+        });
         return NextResponse.json(items);
     } catch (error) {
         console.error(`Error fetching ${RESOURCE_NAME}: ${error.message}`);
@@ -20,12 +24,14 @@ export async function POST(req: Request) {
     try {
         const newItem = await model.create({
             data: {
-                city: data.city,
-                country: data.country,
-                suppliers: {
-                    connect: data.suppliers.map((supplier: { id: string }) => ({ id: supplier.id })),
-                },
-            },
+                name: data.name,
+                description: data.description,
+                ingredients: {
+                    connect: data.ingredients.map((ingredient: { id: string }) => ({
+                        id: ingredient.id
+                    }))
+                }
+            }
         });
         return NextResponse.json(newItem, { status: 201 });
     } catch (error) {

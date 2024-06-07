@@ -151,16 +151,9 @@ exports.Prisma.SessionScalarFieldEnum = {
   expires: 'expires'
 };
 
-exports.Prisma.ChefScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.MenuScalarFieldEnum = {
   id: 'id',
-  chefId: 'chefId',
+  userId: 'userId',
   weekOfYear: 'weekOfYear',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -168,22 +161,22 @@ exports.Prisma.MenuScalarFieldEnum = {
 
 exports.Prisma.MenuItemScalarFieldEnum = {
   id: 'id',
-  menuId: 'menuId',
   name: 'name',
   description: 'description',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  menuId: 'menuId'
 };
 
 exports.Prisma.IngredientScalarFieldEnum = {
   id: 'id',
-  menuItemId: 'menuItemId',
   name: 'name',
   description: 'description',
   weight: 'weight',
   price: 'price',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  menuItemId: 'menuItemId'
 };
 
 exports.Prisma.SupplierScalarFieldEnum = {
@@ -191,6 +184,7 @@ exports.Prisma.SupplierScalarFieldEnum = {
   name: 'name',
   email: 'email',
   phone: 'phone',
+  locationId: 'locationId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -201,12 +195,6 @@ exports.Prisma.LocationScalarFieldEnum = {
   country: 'country',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
-};
-
-exports.Prisma.SupplierLocationScalarFieldEnum = {
-  id: 'id',
-  supplierId: 'supplierId',
-  locationId: 'locationId'
 };
 
 exports.Prisma.SupplierIngredientScalarFieldEnum = {
@@ -238,7 +226,7 @@ exports.Prisma.OrderItemScalarFieldEnum = {
 
 exports.Prisma.ReviewScalarFieldEnum = {
   id: 'id',
-  chefId: 'chefId',
+  userId: 'userId',
   supplierId: 'supplierId',
   rating: 'rating',
   comment: 'comment',
@@ -277,13 +265,11 @@ exports.Prisma.ModelName = {
   User: 'User',
   Account: 'Account',
   Session: 'Session',
-  Chef: 'Chef',
   Menu: 'Menu',
   MenuItem: 'MenuItem',
   Ingredient: 'Ingredient',
   Supplier: 'Supplier',
   Location: 'Location',
-  SupplierLocation: 'SupplierLocation',
   SupplierIngredient: 'SupplierIngredient',
   Order: 'Order',
   OrderItem: 'OrderItem',

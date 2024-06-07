@@ -1,12 +1,18 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../lib/prisma';
 
-const RESOURCE_NAME = 'locations';
-const model = prisma.location;
+const RESOURCE_NAME = 'ingredients';
+const model = prisma.ingredient;
 
 export async function GET() {
     try {
-        const items = await model.findMany();
+        const items = await model.findMany({
+            include: {
+                supplierIngredients: {
+                    include: { supplier: true, location: true }
+                }
+            }
+        });
         return NextResponse.json(items);
     } catch (error) {
         console.error(`Error fetching ${RESOURCE_NAME}: ${error.message}`);
@@ -20,12 +26,17 @@ export async function POST(req: Request) {
     try {
         const newItem = await model.create({
             data: {
-                city: data.city,
-                country: data.country,
-                suppliers: {
-                    connect: data.suppliers.map((supplier: { id: string }) => ({ id: supplier.id })),
-                },
-            },
+                name: data.name,
+                description: data.description,
+                weight: data.weight,
+                price: data.price,
+                supplierIngredients: {
+                    create: data.suppliers.map((supplier: { id: string, locationId: string }) => ({
+                        supplier: { connect: { id: supplier.id } },
+                        location: { connect: { id: supplier.locationId } }
+                    })),
+                }
+            }
         });
         return NextResponse.json(newItem, { status: 201 });
     } catch (error) {

@@ -10,7 +10,13 @@ export async function GET(req: Request, { params }: Params) {
     const { id } = params;
 
     try {
-        const item = await model.findUnique({ where: { id } });
+        const item = await model.findUnique({
+            where: { id },
+            include: { suppliers: true },
+        });
+        if (!item) {
+            return NextResponse.json({ error: 'Location not found' }, { status: 404 });
+        }
         return NextResponse.json(item);
     } catch (error) {
         console.error(`Error fetching ${RESOURCE_NAME}: ${error.message}`);
@@ -23,7 +29,16 @@ export async function PUT(req: Request, { params }: Params) {
     const data = await req.json();
 
     try {
-        const updatedItem = await model.update({ where: { id }, data });
+        const updatedItem = await model.update({
+            where: { id },
+            data: {
+                city: data.city,
+                country: data.country,
+                suppliers: {
+                    set: data.suppliers.map((supplier: { id: string }) => ({ id: supplier.id })),
+                },
+            },
+        });
         return NextResponse.json(updatedItem);
     } catch (error) {
         console.error(`Error updating ${RESOURCE_NAME}: ${error.message}`);

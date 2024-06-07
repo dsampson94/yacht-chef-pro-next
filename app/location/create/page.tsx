@@ -1,26 +1,111 @@
 'use client';
 
-import { useMemo } from 'react';
-import { useResource } from '../../../lib/hooks/useResource';
-import ResourceCreate from '../../../components/ResourceCreate';
-import { RESOURCES } from '../../../lib/constants';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { TextField, Button, Autocomplete } from '@mui/material';
+
+interface Supplier {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+}
 
 const CreateLocation = () => {
-    const { items: suppliers } = useResource('suppliers');
+    const [city, setCity] = useState('');
+    const [country, setCountry] = useState('');
+    const [suppliers, setSuppliers] = useState<Supplier[]>([]);
+    const [selectedSuppliers, setSelectedSuppliers] = useState<Supplier[]>([]);
+    const router = useRouter();
 
-    const supplierOptions = useMemo(() => {
-        return suppliers.map(supplier => ({ id: supplier.id, name: supplier.name }));
-    }, [suppliers]);
+    useEffect(() => {
+        const fetchSuppliers = async () => {
+            try {
+                const response = await fetch('/api/suppliers');
+                const data: Supplier[] = await response.json();
+                setSuppliers(data);
+            } catch (error) {
+                console.error('Error fetching suppliers:', error);
+            }
+        };
+
+        fetchSuppliers();
+    }, []);
+
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+
+        const locationData = {
+            city,
+            country,
+            suppliers: selectedSuppliers.map(supplier => ({ id: supplier.id })),
+        };
+
+        try {
+            const response = await fetch('/api/locations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(locationData),
+            });
+
+            if (response.ok) {
+                alert('Location created successfully');
+                router.push('/location');
+            } else {
+                const errorData = await response.json();
+                alert(`Error: ${errorData.error}`);
+            }
+        } catch (error) {
+            console.error('Error creating location:', error);
+            alert('An error occurred while creating the location.');
+        }
+    };
 
     return (
-        <ResourceCreate
-            resource={RESOURCES.LOCATIONS}
-            fields={[
-                { label: 'City', key: 'city', required: true },
-                { label: 'Country', key: 'country', required: true },
-                { label: 'Suppliers', key: 'suppliers', type: 'multiselect', options: supplierOptions, required: false }
-            ]}
-        />
+        <form onSubmit={handleSubmit}>
+            <div>
+                <TextField
+                    label="City"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    required
+                    fullWidth
+                    margin="normal"
+                />
+            </div>
+            <div>
+                <TextField
+                    label="Country"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    required
+                    fullWidth
+                    margin="normal"
+                />
+            </div>
+            <div>
+                <Autocomplete
+                    multiple
+                    options={suppliers}
+                    getOptionLabel={(option: Supplier) => option.name}
+                    value={selectedSuppliers}
+                    onChange={(event, newValue: Supplier[]) => setSelectedSuppliers(newValue)}
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Suppliers"
+                            margin="normal"
+                            fullWidth
+                        />
+                    )}
+                />
+            </div>
+            <Button type="submit" variant="contained" color="primary">
+                Create Location
+            </Button>
+        </form>
     );
 };
 

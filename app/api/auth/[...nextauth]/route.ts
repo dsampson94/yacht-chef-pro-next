@@ -3,6 +3,16 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import prisma from '../../../../lib/prisma';
 import bcrypt from 'bcryptjs';
+import memoizee from 'memoizee';
+
+const memoizedFindUniqueUser = memoizee(
+    async (username) => {
+        return prisma.user.findUnique({
+            where: { username },
+        });
+    },
+    { promise: true, maxAge: 60000 }
+);
 
 const authOptions = {
     providers: [
@@ -10,21 +20,19 @@ const authOptions = {
             name: 'Credentials',
             credentials: {
                 username: { label: 'Username', type: 'text' },
-                password: { label: 'Password', type: 'password' }
+                password: { label: 'Password', type: 'password' },
             },
             async authorize(credentials) {
                 if (!credentials) return null;
-                const user = await prisma.user.findUnique({
-                    where: { username: credentials.username }
-                });
+                const user = await memoizedFindUniqueUser(credentials.username);
 
                 if (user && await bcrypt.compare(credentials.password, user.password)) {
                     return { id: user.id, username: user.username, email: user.email };
                 }
 
                 return null;
-            }
-        })
+            },
+        }),
     ],
     adapter: PrismaAdapter(prisma),
     session: {

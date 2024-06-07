@@ -18,7 +18,8 @@ model User {
   updatedAt DateTime  @updatedAt
   accounts  Account[]
   sessions  Session[]
-  chef      Chef?
+  menus     Menu[]
+  reviews   Review[]
   orders    Order[]
 }
 
@@ -50,20 +51,10 @@ model Session {
   user User @relation(fields: [userId], references: [id])
 }
 
-model Chef {
-  id        String   @id @default(uuid())
-  userId    String   @unique
-  user      User     @relation(fields: [userId], references: [id])
-  menus     Menu[]
-  reviews   Review[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
 model Menu {
   id         String     @id @default(uuid())
-  chefId     String
-  chef       Chef       @relation(fields: [chefId], references: [id])
+  userId     String
+  user       User       @relation(fields: [userId], references: [id])
   menuItems  MenuItem[]
   weekOfYear Int
   createdAt  DateTime   @default(now())
@@ -72,19 +63,17 @@ model Menu {
 
 model MenuItem {
   id          String       @id @default(uuid())
-  menuId      String
-  menu        Menu         @relation(fields: [menuId], references: [id])
   name        String
   description String?
   ingredients Ingredient[]
   createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  updatedAt   DateTime     @default(now())
+  Menu        Menu?        @relation(fields: [menuId], references: [id])
+  menuId      String?
 }
 
 model Ingredient {
   id                  String               @id @default(uuid())
-  menuItemId          String?
-  menuItem            MenuItem?            @relation(fields: [menuItemId], references: [id])
   name                String
   description         String?
   weight              Float
@@ -92,7 +81,9 @@ model Ingredient {
   supplierIngredients SupplierIngredient[]
   orderItems          OrderItem[]
   createdAt           DateTime             @default(now())
-  updatedAt           DateTime             @updatedAt
+  updatedAt           DateTime             @default(now())
+  MenuItem            MenuItem?            @relation(fields: [menuItemId], references: [id])
+  menuItemId          String?
 
   @@unique([name, weight, price])
 }
@@ -102,11 +93,12 @@ model Supplier {
   name                String
   email               String               @unique
   phone               String
-  locations           SupplierLocation[]
+  locationId          String
+  location            Location             @relation(fields: [locationId], references: [id])
   supplierIngredients SupplierIngredient[]
   reviews             Review[]
   createdAt           DateTime             @default(now())
-  updatedAt           DateTime             @updatedAt
+  updatedAt           DateTime             @default(now())
   OrderItem           OrderItem[]
 
   @@unique([name])
@@ -116,23 +108,13 @@ model Location {
   id                 String               @id @default(uuid())
   city               String
   country            String
-  suppliers          SupplierLocation[]
+  suppliers          Supplier[]
   createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
   SupplierIngredient SupplierIngredient[]
   OrderItem          OrderItem[]
 
   @@unique([city, country])
-}
-
-model SupplierLocation {
-  id         String   @id @default(uuid())
-  supplierId String
-  locationId String
-  supplier   Supplier @relation(fields: [supplierId], references: [id], onDelete: Cascade)
-  location   Location @relation(fields: [locationId], references: [id])
-
-  @@unique([supplierId, locationId])
 }
 
 model SupplierIngredient {
@@ -155,7 +137,7 @@ model Order {
   date       DateTime
   status     OrderStatus
   createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  updatedAt  DateTime    @default(now())
 }
 
 model OrderItem {
@@ -177,9 +159,9 @@ model OrderItem {
 
 model Review {
   id         String   @id @default(uuid())
-  chefId     String
+  userId     String
   supplierId String
-  chef       Chef     @relation(fields: [chefId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
   supplier   Supplier @relation(fields: [supplierId], references: [id])
   rating     Int
   comment    String?

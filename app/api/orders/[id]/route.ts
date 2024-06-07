@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../../lib/prisma';
-import bcrypt from 'bcryptjs';
 
-const RESOURCE_NAME = 'users';
-const model = prisma.user;
+const RESOURCE_NAME = 'orders';
+const model = prisma.order;
 
 type Params = { params: { id: string } };
 
@@ -11,7 +10,22 @@ export async function GET(req: Request, { params }: Params) {
     const { id } = params;
 
     try {
-        const item = await model.findUnique({ where: { id } });
+        const item = await model.findUnique({
+            where: { id },
+            include: {
+                orderItems: {
+                    include: {
+                        ingredient: true,
+                        supplier: true,
+                        location: true,
+                    },
+                },
+                user: true,
+            },
+        });
+        if (!item) {
+            return NextResponse.json({ error: 'Order not found' }, { status: 404 });
+        }
         return NextResponse.json(item);
     } catch (error) {
         console.error(`Error fetching ${RESOURCE_NAME}: ${error.message}`);
@@ -23,20 +37,23 @@ export async function PUT(req: Request, { params }: Params) {
     const { id } = params;
     const data = await req.json();
 
-    const updateData: any = {
-        email: data.email,
-        username: data.username,
-        role: data.role,
-    };
-
-    if (data.password) {
-        updateData.password = await bcrypt.hash(data.password, 10);
-    }
-
     try {
         const updatedItem = await model.update({
             where: { id },
-            data: updateData,
+            data: {
+                userId: data.userId,
+                date: new Date(data.date),
+                status: data.status,
+                orderItems: {
+                    deleteMany: {},
+                    create: data.orderItems.map((item: { ingredientId: string, supplierId: string, locationId: string, quantity: number }) => ({
+                        ingredientId: item.ingredientId,
+                        supplierId: item.supplierId,
+                        locationId: item.locationId,
+                        quantity: item.quantity,
+                    })),
+                },
+            },
         });
         return NextResponse.json(updatedItem);
     } catch (error) {

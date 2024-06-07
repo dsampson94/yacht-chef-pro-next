@@ -11,8 +11,6 @@ const Users = () => {
                 { label: 'Email', key: 'email' },
                 { label: 'Username', key: 'username' },
                 { label: 'Role', key: 'role' },
-                { label: 'Created At', key: 'createdAt' },
-                { label: 'Updated At', key: 'updatedAt' }
             ]}
         />
     );
