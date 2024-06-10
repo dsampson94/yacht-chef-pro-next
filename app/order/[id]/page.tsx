@@ -13,9 +13,7 @@ interface Ingredient {
 }
 
 interface SupplierIngredient {
-    id: string;
     supplierId: string;
-    ingredientId: string;
     locationId: string;
     supplier: Supplier;
     location: Location;
@@ -40,7 +38,6 @@ interface User {
 }
 
 interface OrderItem {
-    id: string;
     ingredientId: string;
     supplierId: string;
     locationId: string;
@@ -53,22 +50,33 @@ interface Order {
     date: string;
     status: string;
     orderItems: OrderItem[];
+    menuId: string | null;
 }
 
-const EditOrder = () => {
+interface Menu {
+    id: string;
+    name: string;
+    recipes: Recipe[];
+}
+
+interface Recipe {
+    id: string;
+    name: string;
+    ingredients: Ingredient[];
+}
+
+const statusOptions = ["PENDING", "CONFIRMED", "DELIVERED", "CANCELLED"];
+
+const EditOrder: React.FC = () => {
     const { id } = useParams();
     const router = useRouter();
-    const [date, setDate] = useState('');
-    const [status, setStatus] = useState('');
-    const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-    const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>([]);
-    const [suppliers, setSuppliers] = useState<Supplier[]>([]);
-    const [selectedSuppliers, setSelectedSuppliers] = useState<Supplier[]>([]);
-    const [locations, setLocations] = useState<Location[]>([]);
-    const [selectedLocations, setSelectedLocations] = useState<Location[]>([]);
+    const [date, setDate] = useState<string>('');
+    const [status, setStatus] = useState<string>('');
+    const [menus, setMenus] = useState<Menu[]>([]);
+    const [selectedMenu, setSelectedMenu] = useState<Menu | null>(null);
     const [users, setUsers] = useState<User[]>([]);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
-    const [quantity, setQuantity] = useState<number>(0);
+    const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 
     useEffect(() => {
         const fetchOrder = async () => {
@@ -77,17 +85,28 @@ const EditOrder = () => {
                 const data: Order = await response.json();
                 setDate(new Date(data.date).toISOString().split('T')[0]);
                 setStatus(data.status);
+
+                if (data.userId) {
+                    const userResponse = await fetch(`/api/users/${data.userId}`);
+                    const user: User = await userResponse.json();
+                    setSelectedUser(user);
+                }
+
+                if (data.menuId) {
+                    const menuResponse = await fetch(`/api/menus/${data.menuId}`);
+                    const menu: Menu = await menuResponse.json();
+                    setSelectedMenu(menu);
+                }
+
                 const detailedIngredients = await fetchDetailedIngredients(data.orderItems);
-                setSelectedIngredients(detailedIngredients);
-                setSelectedUser(users.find(user => user.id === data.userId) || null);
-                setQuantity(data.orderItems[0]?.quantity || 0); // Assuming all items have the same quantity
+                setIngredients(detailedIngredients);
             } catch (error) {
                 console.error('Error fetching order:', error);
             }
         };
 
-        const fetchDetailedIngredients = async (orderItems: OrderItem[]) => {
-            const ingredientPromises = orderItems.map(async item => {
+        const fetchDetailedIngredients = async (orderItems: OrderItem[]): Promise<Ingredient[]> => {
+            const ingredientPromises = orderItems.map(async (item) => {
                 const ingredientResponse = await fetch(`/api/ingredients/${item.ingredientId}`);
                 const ingredient: Ingredient = await ingredientResponse.json();
                 return ingredient;
@@ -95,33 +114,13 @@ const EditOrder = () => {
             return Promise.all(ingredientPromises);
         };
 
-        const fetchIngredients = async () => {
+        const fetchMenus = async () => {
             try {
-                const response = await fetch('/api/ingredients');
-                const data: Ingredient[] = await response.json();
-                setIngredients(data);
+                const response = await fetch('/api/menus');
+                const data: Menu[] = await response.json();
+                setMenus(data);
             } catch (error) {
-                console.error('Error fetching ingredients:', error);
-            }
-        };
-
-        const fetchSuppliers = async () => {
-            try {
-                const response = await fetch('/api/suppliers');
-                const data: Supplier[] = await response.json();
-                setSuppliers(data);
-            } catch (error) {
-                console.error('Error fetching suppliers:', error);
-            }
-        };
-
-        const fetchLocations = async () => {
-            try {
-                const response = await fetch('/api/locations');
-                const data: Location[] = await response.json();
-                setLocations(data);
-            } catch (error) {
-                console.error('Error fetching locations:', error);
+                console.error('Error fetching menus:', error);
             }
         };
 
@@ -135,25 +134,48 @@ const EditOrder = () => {
             }
         };
 
-        fetchOrder();
-        fetchIngredients();
-        fetchSuppliers();
-        fetchLocations();
         fetchUsers();
+        fetchMenus();
+        fetchOrder();
     }, [id]);
+
+    useEffect(() => {
+        if (selectedMenu) {
+            const fetchIngredients = async () => {
+                try {
+                    const ingredientPromises = selectedMenu.recipes.map(recipe =>
+                        fetch(`/api/recipes/${recipe.id}`).then(res => res.json())
+                    );
+                    const recipeIngredients = await Promise.all(ingredientPromises);
+                    const allIngredients = recipeIngredients.flatMap(recipe => recipe.ingredients);
+                    const detailedIngredients = await Promise.all(
+                        allIngredients.map(ingredient =>
+                            fetch(`/api/ingredients/${ingredient.id}`).then(res => res.json())
+                        )
+                    );
+                    setIngredients(detailedIngredients);
+                } catch (error) {
+                    console.error('Error fetching ingredients:', error);
+                }
+            };
+            fetchIngredients();
+        } else {
+            setIngredients([]);
+        }
+    }, [selectedMenu]);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
         const orderData = {
             userId: selectedUser?.id,
-            date: new Date(date),
+            date: new Date(date).toISOString(),
             status,
-            orderItems: selectedIngredients.map((ingredient, index) => ({
+            orderItems: ingredients.map((ingredient) => ({
                 ingredientId: ingredient.id,
-                supplierId: selectedSuppliers[index]?.id,
-                locationId: selectedLocations[index]?.id,
-                quantity,
+                supplierId: ingredient.supplierIngredients[0]?.supplierId,
+                locationId: ingredient.supplierIngredients[0]?.locationId,
+                quantity: 1,
             })),
         };
 
@@ -167,6 +189,7 @@ const EditOrder = () => {
             });
 
             if (response.ok) {
+                const updatedOrder: Order = await response.json();
                 alert('Order updated successfully');
                 router.push('/orders');
             } else {
@@ -193,13 +216,14 @@ const EditOrder = () => {
                 />
             </div>
             <div>
-                <TextField
-                    label="Status"
+                <Autocomplete
+                    options={statusOptions}
+                    getOptionLabel={(option) => option}
                     value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                    required
-                    fullWidth
-                    margin="normal"
+                    onChange={(event, newValue) => setStatus(newValue || '')}
+                    renderInput={(params) => (
+                        <TextField {...params} label="Status" margin="normal" required fullWidth />
+                    )}
                 />
             </div>
             <div>
@@ -207,59 +231,61 @@ const EditOrder = () => {
                     options={users}
                     getOptionLabel={(option: User) => option.username}
                     value={selectedUser}
-                    onChange={(event, newValue: User | null) => setSelectedUser(newValue)}
+                    onChange={(event, newValue) => setSelectedUser(newValue)}
                     renderInput={(params) => (
                         <TextField {...params} label="User" margin="normal" required fullWidth />
                     )}
                 />
             </div>
             <div>
-                <TextField
-                    label="Quantity"
-                    type="number"
-                    value={quantity}
-                    onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
-                    required
-                    fullWidth
-                    margin="normal"
+                <Autocomplete
+                    options={menus}
+                    getOptionLabel={(option: Menu) => option.name}
+                    value={selectedMenu}
+                    onChange={(event, newValue) => setSelectedMenu(newValue)}
+                    renderInput={(params) => (
+                        <TextField {...params} label="Menu" margin="normal" required fullWidth />
+                    )}
                 />
             </div>
+            {selectedMenu && (
+                <div>
+                    <h3>Ingredients:</h3>
+                    <TableContainer component={Paper}>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Ingredient Name</TableCell>
+                                    <TableCell>Weight</TableCell>
+                                    <TableCell>Price</TableCell>
+                                    <TableCell>Supplier Name</TableCell>
+                                    <TableCell>Supplier Email</TableCell>
+                                    <TableCell>Supplier Phone</TableCell>
+                                    <TableCell>Supplier Location</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {ingredients.map((ingredient) => (
+                                    <TableRow key={ingredient.id}>
+                                        <TableCell>{ingredient.name}</TableCell>
+                                        <TableCell>{ingredient.weight}</TableCell>
+                                        <TableCell>{ingredient.price}</TableCell>
+                                        <TableCell>{ingredient.supplierIngredients[0]?.supplier.name}</TableCell>
+                                        <TableCell>{ingredient.supplierIngredients[0]?.supplier.email}</TableCell>
+                                        <TableCell>{ingredient.supplierIngredients[0]?.supplier.phone}</TableCell>
+                                        <TableCell>
+                                            {ingredient.supplierIngredients[0]?.location.city}, {ingredient.supplierIngredients[0]?.location.country}
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </div>
+            )}
             <Button type="submit" variant="contained" color="primary">
                 Update Order
             </Button>
-
-            {selectedIngredients.length > 0 && (
-                <TableContainer component={Paper} style={{ marginTop: '20px' }}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Ingredient Name</TableCell>
-                                <TableCell>Weight</TableCell>
-                                <TableCell>Price</TableCell>
-                                <TableCell>Supplier Name</TableCell>
-                                <TableCell>Supplier Email</TableCell>
-                                <TableCell>Supplier Phone</TableCell>
-                                <TableCell>Supplier Location</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {selectedIngredients.map((ingredient) => (
-                                <TableRow key={ingredient.id}>
-                                    <TableCell>{ingredient.name}</TableCell>
-                                    <TableCell>{ingredient.weight}</TableCell>
-                                    <TableCell>{ingredient.price}</TableCell>
-                                    <TableCell>{ingredient.supplierIngredients[0]?.supplier.name}</TableCell>
-                                    <TableCell>{ingredient.supplierIngredients[0]?.supplier.email}</TableCell>
-                                    <TableCell>{ingredient.supplierIngredients[0]?.supplier.phone}</TableCell>
-                                    <TableCell>
-                                        {ingredient.supplierIngredients[0]?.location.city}, {ingredient.supplierIngredients[0]?.location.country}
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            )}
         </form>
     );
 };

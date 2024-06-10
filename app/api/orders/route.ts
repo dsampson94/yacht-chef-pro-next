@@ -31,6 +31,7 @@ export async function POST(req: Request) {
 
     const orderData = {
         userId: data.userId,
+        menuId: data.menuId,
         date: new Date(data.date),
         status: data.status,
         orderItems: {

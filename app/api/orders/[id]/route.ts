@@ -73,6 +73,9 @@ export async function DELETE(req: Request, { params }: Params) {
     const { id } = params;
 
     try {
+        await prisma.orderItem.deleteMany({
+            where: { orderId: id }
+        });
         await model.delete({ where: { id } });
         return NextResponse.json({ message: `${RESOURCE_NAME.slice(0, -1)} deleted` });
     } catch (error) {

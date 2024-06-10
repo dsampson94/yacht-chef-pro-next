@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { TextField, Button, Autocomplete } from '@mui/material';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { TextField, Button, Autocomplete, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 interface Ingredient {
     id: string;
@@ -50,9 +49,11 @@ interface Menu {
     recipes: Recipe[];
 }
 
+const statusOptions = ["PENDING", "CONFIRMED", "DELIVERED", "CANCELLED"];
+
 const CreateOrder = () => {
     const [date, setDate] = useState('');
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState('PENDING');
     const [menus, setMenus] = useState<Menu[]>([]);
     const [selectedMenu, setSelectedMenu] = useState<Menu | null>(null);
     const [users, setUsers] = useState<User[]>([]);
@@ -124,7 +125,7 @@ const CreateOrder = () => {
         const orderData = {
             userId: selectedUser.id,
             menuId: selectedMenu.id,
-            date: new Date(date),
+            date: new Date(date).toISOString(),
             status,
             orderItems: ingredients.map(ingredient => ({
                 ingredientId: ingredient.id,
@@ -170,13 +171,14 @@ const CreateOrder = () => {
                 />
             </div>
             <div>
-                <TextField
-                    label="Status"
+                <Autocomplete
+                    options={statusOptions}
+                    getOptionLabel={(option) => option}
                     value={status}
-                    onChange={(e) => setStatus(e.target.value)}
-                    required
-                    fullWidth
-                    margin="normal"
+                    onChange={(event, newValue) => setStatus(newValue || 'PENDING')}
+                    renderInput={(params) => (
+                        <TextField {...params} label="Status" margin="normal" required fullWidth />
+                    )}
                 />
             </div>
             <div>

@@ -154,7 +154,7 @@ model OrderItem {
   ingredientId String
   supplierId   String
   locationId   String
-  order        Order      @relation(fields: [orderId], references: [id])
+  order        Order      @relation(fields: [orderId], references: [id], onDelete: Cascade)
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
   supplier     Supplier   @relation(fields: [supplierId], references: [id])
   location     Location   @relation(fields: [locationId], references: [id])
