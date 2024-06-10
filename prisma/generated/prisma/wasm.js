@@ -214,6 +214,7 @@ exports.Prisma.OrderScalarFieldEnum = {
   menuId: 'menuId',
   date: 'date',
   status: 'status',
+  pdfUrl: 'pdfUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

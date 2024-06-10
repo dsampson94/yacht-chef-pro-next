@@ -63,6 +63,16 @@ const ResourceList = ({ resource, displayFields }: ResourceListProps) => {
                                     >
                                         Delete
                                     </Button>
+                                    {item.pdfUrl && (
+                                        <Button
+                                            variant="contained"
+                                            style={{ marginLeft: '10px' }}
+                                            href={item.pdfUrl}
+                                            target="_blank"
+                                        >
+                                            Download PDF
+                                        </Button>
+                                    )}
                                 </TableCell>
                             </TableRow>
                         ))}

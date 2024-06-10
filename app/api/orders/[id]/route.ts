@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../../lib/prisma';
+import { generatePdf } from '../../../../lib/pdf';
 
 const RESOURCE_NAME = 'orders';
 const model = prisma.order;
@@ -10,19 +11,7 @@ export async function GET(req: Request, { params }: Params) {
     const { id } = params;
 
     try {
-        const item = await model.findUnique({
-            where: { id },
-            include: {
-                orderItems: {
-                    include: {
-                        ingredient: true,
-                        supplier: true,
-                        location: true,
-                    },
-                },
-                user: true,
-            },
-        });
+        const item = await getOrderDetails(id);
         if (!item) {
             return NextResponse.json({ error: 'Order not found' }, { status: 404 });
         }
@@ -54,7 +43,25 @@ export async function PUT(req: Request, { params }: Params) {
                     })),
                 },
             },
+            include: {
+                user: true,
+                orderItems: {
+                    include: {
+                        ingredient: true,
+                        supplier: true,
+                        location: true,
+                    },
+                },
+            },
         });
+
+        // Generate PDF
+        const pdfUrl = await generatePdf(updatedItem);
+        await model.update({
+            where: { id: updatedItem.id },
+            data: { pdfUrl },
+        });
+
         return NextResponse.json(updatedItem);
     } catch (error) {
         console.error(`Error updating ${RESOURCE_NAME}: ${error.message}`);
@@ -73,3 +80,19 @@ export async function DELETE(req: Request, { params }: Params) {
         return NextResponse.json({ error: `Error deleting ${RESOURCE_NAME}` }, { status: 500 });
     }
 }
+
+const getOrderDetails = async (orderId: string) => {
+    return prisma.order.findUnique({
+        where: { id: orderId },
+        include: {
+            user: true,
+            orderItems: {
+                include: {
+                    ingredient: true,
+                    supplier: true,
+                    location: true,
+                },
+            },
+        },
+    });
+};

@@ -11463,6 +11463,7 @@ export namespace Prisma {
     menuId: string | null
     date: Date | null
     status: $Enums.OrderStatus | null
+    pdfUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -11473,6 +11474,7 @@ export namespace Prisma {
     menuId: string | null
     date: Date | null
     status: $Enums.OrderStatus | null
+    pdfUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -11483,6 +11485,7 @@ export namespace Prisma {
     menuId: number
     date: number
     status: number
+    pdfUrl: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -11495,6 +11498,7 @@ export namespace Prisma {
     menuId?: true
     date?: true
     status?: true
+    pdfUrl?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -11505,6 +11509,7 @@ export namespace Prisma {
     menuId?: true
     date?: true
     status?: true
+    pdfUrl?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -11515,6 +11520,7 @@ export namespace Prisma {
     menuId?: true
     date?: true
     status?: true
+    pdfUrl?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -11598,6 +11604,7 @@ export namespace Prisma {
     menuId: string | null
     date: Date
     status: $Enums.OrderStatus
+    pdfUrl: string | null
     createdAt: Date
     updatedAt: Date
     _count: OrderCountAggregateOutputType | null
@@ -11625,6 +11632,7 @@ export namespace Prisma {
     menuId?: boolean
     date?: boolean
     status?: boolean
+    pdfUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -11639,6 +11647,7 @@ export namespace Prisma {
     menuId?: boolean
     date?: boolean
     status?: boolean
+    pdfUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -11665,6 +11674,7 @@ export namespace Prisma {
       menuId: string | null
       date: Date
       status: $Enums.OrderStatus
+      pdfUrl: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["order"]>
@@ -12097,6 +12107,7 @@ export namespace Prisma {
     readonly menuId: FieldRef<"Order", 'String'>
     readonly date: FieldRef<"Order", 'DateTime'>
     readonly status: FieldRef<"Order", 'OrderStatus'>
+    readonly pdfUrl: FieldRef<"Order", 'String'>
     readonly createdAt: FieldRef<"Order", 'DateTime'>
     readonly updatedAt: FieldRef<"Order", 'DateTime'>
   }
@@ -14645,6 +14656,7 @@ export namespace Prisma {
     menuId: 'menuId',
     date: 'date',
     status: 'status',
+    pdfUrl: 'pdfUrl',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -15442,6 +15454,7 @@ export namespace Prisma {
     menuId?: StringNullableFilter<"Order"> | string | null
     date?: DateTimeFilter<"Order"> | Date | string
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+    pdfUrl?: StringNullableFilter<"Order"> | string | null
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -15455,6 +15468,7 @@ export namespace Prisma {
     menuId?: SortOrderInput | SortOrder
     date?: SortOrder
     status?: SortOrder
+    pdfUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -15471,6 +15485,7 @@ export namespace Prisma {
     menuId?: StringNullableFilter<"Order"> | string | null
     date?: DateTimeFilter<"Order"> | Date | string
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+    pdfUrl?: StringNullableFilter<"Order"> | string | null
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -15484,6 +15499,7 @@ export namespace Prisma {
     menuId?: SortOrderInput | SortOrder
     date?: SortOrder
     status?: SortOrder
+    pdfUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: OrderCountOrderByAggregateInput
@@ -15500,6 +15516,7 @@ export namespace Prisma {
     menuId?: StringNullableWithAggregatesFilter<"Order"> | string | null
     date?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     status?: EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
+    pdfUrl?: StringNullableWithAggregatesFilter<"Order"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
   }
@@ -16338,6 +16355,7 @@ export namespace Prisma {
     id?: string
     date: Date | string
     status: $Enums.OrderStatus
+    pdfUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutOrdersInput
@@ -16351,6 +16369,7 @@ export namespace Prisma {
     menuId?: string | null
     date: Date | string
     status: $Enums.OrderStatus
+    pdfUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -16360,6 +16379,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutOrdersNestedInput
@@ -16373,6 +16393,7 @@ export namespace Prisma {
     menuId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orderItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -16384,6 +16405,7 @@ export namespace Prisma {
     menuId?: string | null
     date: Date | string
     status: $Enums.OrderStatus
+    pdfUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16392,6 +16414,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16402,6 +16425,7 @@ export namespace Prisma {
     menuId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17199,6 +17223,7 @@ export namespace Prisma {
     menuId?: SortOrder
     date?: SortOrder
     status?: SortOrder
+    pdfUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -17209,6 +17234,7 @@ export namespace Prisma {
     menuId?: SortOrder
     date?: SortOrder
     status?: SortOrder
+    pdfUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -17219,6 +17245,7 @@ export namespace Prisma {
     menuId?: SortOrder
     date?: SortOrder
     status?: SortOrder
+    pdfUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -18667,6 +18694,7 @@ export namespace Prisma {
     id?: string
     date: Date | string
     status: $Enums.OrderStatus
+    pdfUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     menu?: MenuCreateNestedOneWithoutOrderInput
@@ -18678,6 +18706,7 @@ export namespace Prisma {
     menuId?: string | null
     date: Date | string
     status: $Enums.OrderStatus
+    pdfUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -18838,6 +18867,7 @@ export namespace Prisma {
     menuId?: StringNullableFilter<"Order"> | string | null
     date?: DateTimeFilter<"Order"> | Date | string
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
+    pdfUrl?: StringNullableFilter<"Order"> | string | null
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
   }
@@ -19051,6 +19081,7 @@ export namespace Prisma {
     id?: string
     date: Date | string
     status: $Enums.OrderStatus
+    pdfUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutOrdersInput
@@ -19062,6 +19093,7 @@ export namespace Prisma {
     userId: string
     date: Date | string
     status: $Enums.OrderStatus
+    pdfUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -20157,6 +20189,7 @@ export namespace Prisma {
     id?: string
     date: Date | string
     status: $Enums.OrderStatus
+    pdfUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutOrdersInput
@@ -20169,6 +20202,7 @@ export namespace Prisma {
     menuId?: string | null
     date: Date | string
     status: $Enums.OrderStatus
+    pdfUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20276,6 +20310,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutOrdersNestedInput
@@ -20288,6 +20323,7 @@ export namespace Prisma {
     menuId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20574,6 +20610,7 @@ export namespace Prisma {
     menuId?: string | null
     date: Date | string
     status: $Enums.OrderStatus
+    pdfUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20706,6 +20743,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     menu?: MenuUpdateOneWithoutOrderNestedInput
@@ -20717,6 +20755,7 @@ export namespace Prisma {
     menuId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orderItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -20727,6 +20766,7 @@ export namespace Prisma {
     menuId?: NullableStringFieldUpdateOperationsInput | string | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20744,6 +20784,7 @@ export namespace Prisma {
     userId: string
     date: Date | string
     status: $Enums.OrderStatus
+    pdfUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -20778,6 +20819,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutOrdersNestedInput
@@ -20789,6 +20831,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     orderItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -20799,6 +20842,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    pdfUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

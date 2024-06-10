@@ -1,64 +1,67 @@
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import fs from 'fs';
+import path from 'path';
+import prisma from '../lib/prisma';
 
-export async function createPDF(order: any) {
-    const pdfDoc = await PDFDocument.create();
-    const page = pdfDoc.addPage([600, 400]);
-    const { width, height } = page.getSize();
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-    const fontSize = 12;
-    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+const getOrderDetails = async (orderId: string) => {
+    return prisma.order.findUnique({
+        where: { id: orderId },
+        include: {
+            user: true,
+            orderItems: {
+                include: {
+                    ingredient: true,
+                    supplier: true,
+                    location: true,
+                },
+            },
+        },
+    });
+};
 
-    let yPosition = height - fontSize * 2;
+type OrderWithDetails = Awaited<ReturnType<typeof getOrderDetails>>;
 
-    page.drawText(`Order ID: ${order.id}`, {
-        x: 50,
-        y: yPosition,
-        size: fontSize,
-        font,
+export const generatePdf = async (order: OrderWithDetails): Promise<string> => {
+    if (!order) throw new Error('Order not found');
+
+    const pdfPath = path.join(process.cwd(), 'public', 'pdfs', `${order.id}.pdf`);
+
+    const docDefinition = {
+        content: [
+            { text: `Order ID: ${order.id}`, style: 'header' },
+            { text: `User: ${order.user.username}`, style: 'subheader' },
+            { text: `Date: ${order.date}`, style: 'subheader' },
+            { text: `Status: ${order.status}`, style: 'subheader' },
+            { text: 'Order Items:', style: 'subheader' },
+            ...order.orderItems.map((item, index) => ({
+                text: `${index + 1}. Ingredient: ${item.ingredient.name}, Quantity: ${item.quantity}, Supplier: ${item.supplier.name}, Location: ${item.location.city}, ${item.location.country}`
+            })),
+        ],
+        styles: {
+            header: {
+                fontSize: 18,
+                bold: true,
+                margin: [0, 0, 0, 10]
+            },
+            subheader: {
+                fontSize: 14,
+                bold: true,
+                margin: [0, 10, 0, 5]
+            }
+        }
+    };
+
+    const pdfDoc = pdfMake.createPdf(docDefinition);
+
+    pdfDoc.getBuffer((buffer) => {
+        if (!fs.existsSync(path.dirname(pdfPath))) {
+            fs.mkdirSync(path.dirname(pdfPath), { recursive: true });
+        }
+        fs.writeFileSync(pdfPath, buffer);
     });
 
-    yPosition -= fontSize * 2;
-    page.drawText(`User: ${order.user.username}`, {
-        x: 50,
-        y: yPosition,
-        size: fontSize,
-        font,
-    });
-
-    yPosition -= fontSize * 2;
-    page.drawText(`Date: ${new Date(order.date).toLocaleDateString()}`, {
-        x: 50,
-        y: yPosition,
-        size: fontSize,
-        font,
-    });
-
-    yPosition -= fontSize * 2;
-    page.drawText(`Status: ${order.status}`, {
-        x: 50,
-        y: yPosition,
-        size: fontSize,
-        font,
-    });
-
-    yPosition -= fontSize * 2;
-    page.drawText(`Order Items:`, {
-        x: 50,
-        y: yPosition,
-        size: fontSize,
-        font,
-    });
-
-    order.orderItems.forEach((item: any, index: number) => {
-        yPosition -= fontSize * 2;
-        page.drawText(`${index + 1}. Ingredient: ${item.ingredient.name}, Supplier: ${item.supplier.name}, Location: ${item.location.city}, Quantity: ${item.quantity}`, {
-            x: 70,
-            y: yPosition,
-            size: fontSize,
-            font,
-        });
-    });
-
-    const pdfBytes = await pdfDoc.save();
-    return pdfBytes;
-}
+    return `/pdfs/${order.id}.pdf`;
+};
