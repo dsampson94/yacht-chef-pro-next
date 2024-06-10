@@ -9,64 +9,41 @@ interface Ingredient {
     name: string;
 }
 
-interface Supplier {
-    id: string;
-    name: string;
-}
-
-interface Location {
-    id: string;
-    city: string;
-    country: string;
-}
-
 interface User {
     id: string;
     username: string;
 }
 
+interface Recipe {
+    id: string;
+    name: string;
+}
+
+interface Menu {
+    id: string;
+    name: string;
+    recipes: Recipe[];
+}
+
 const CreateOrder = () => {
     const [date, setDate] = useState('');
     const [status, setStatus] = useState('');
-    const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-    const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>([]);
-    const [suppliers, setSuppliers] = useState<Supplier[]>([]);
-    const [selectedSuppliers, setSelectedSuppliers] = useState<Supplier[]>([]);
-    const [locations, setLocations] = useState<Location[]>([]);
-    const [selectedLocations, setSelectedLocations] = useState<Location[]>([]);
+    const [menus, setMenus] = useState<Menu[]>([]);
+    const [selectedMenu, setSelectedMenu] = useState<Menu | null>(null);
     const [users, setUsers] = useState<User[]>([]);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
-    const [quantity, setQuantity] = useState<number>(0);
+    const [ingredients, setIngredients] = useState<Ingredient[]>([]);
     const router = useRouter();
 
     useEffect(() => {
-        const fetchIngredients = async () => {
+        const fetchMenus = async () => {
             try {
-                const response = await fetch('/api/ingredients');
-                const data: Ingredient[] = await response.json();
-                setIngredients(data);
+                const response = await fetch('/api/menus');
+                const data: Menu[] = await response.json();
+                setMenus(data);
+                console.log('Fetched menus:', data); // Debugging
             } catch (error) {
-                console.error('Error fetching ingredients:', error);
-            }
-        };
-
-        const fetchSuppliers = async () => {
-            try {
-                const response = await fetch('/api/suppliers');
-                const data: Supplier[] = await response.json();
-                setSuppliers(data);
-            } catch (error) {
-                console.error('Error fetching suppliers:', error);
-            }
-        };
-
-        const fetchLocations = async () => {
-            try {
-                const response = await fetch('/api/locations');
-                const data: Location[] = await response.json();
-                setLocations(data);
-            } catch (error) {
-                console.error('Error fetching locations:', error);
+                console.error('Error fetching menus:', error);
             }
         };
 
@@ -75,29 +52,55 @@ const CreateOrder = () => {
                 const response = await fetch('/api/users');
                 const data: User[] = await response.json();
                 setUsers(data);
+                console.log('Fetched users:', data); // Debugging
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
         };
 
-        fetchIngredients();
-        fetchSuppliers();
-        fetchLocations();
+        fetchMenus();
         fetchUsers();
     }, []);
+
+    useEffect(() => {
+        if (selectedMenu) {
+            const fetchIngredients = async () => {
+                try {
+                    const ingredientPromises = selectedMenu.recipes.map(recipe =>
+                        fetch(`/api/recipes/${recipe.id}`).then(res => res.json())
+                    );
+                    const recipeIngredients = await Promise.all(ingredientPromises);
+                    const allIngredients = recipeIngredients.flatMap(recipe => recipe.ingredients);
+                    setIngredients(allIngredients);
+                    console.log('Fetched ingredients:', allIngredients); // Debugging
+                } catch (error) {
+                    console.error('Error fetching ingredients:', error);
+                }
+            };
+            fetchIngredients();
+        } else {
+            setIngredients([]);
+        }
+    }, [selectedMenu]);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
+        if (!selectedMenu || !selectedUser) {
+            alert('Please select a menu and a user.');
+            return;
+        }
+
         const orderData = {
-            userId: selectedUser?.id,
+            userId: selectedUser.id,
+            menuId: selectedMenu.id,
             date: new Date(date),
             status,
-            orderItems: selectedIngredients.map((ingredient, index) => ({
+            orderItems: ingredients.map(ingredient => ({
                 ingredientId: ingredient.id,
-                supplierId: selectedSuppliers[index]?.id,
-                locationId: selectedLocations[index]?.id,
-                quantity,
+                quantity: 1,
+                supplierId: 'supplier-id-placeholder',
+                locationId: 'location-id-placeholder',
             })),
         };
 
@@ -159,51 +162,25 @@ const CreateOrder = () => {
             </div>
             <div>
                 <Autocomplete
-                    multiple
-                    options={ingredients}
-                    getOptionLabel={(option: Ingredient) => option.name}
-                    value={selectedIngredients}
-                    onChange={(event, newValue: Ingredient[]) => setSelectedIngredients(newValue)}
+                    options={menus}
+                    getOptionLabel={(option: Menu) => option.name}
+                    value={selectedMenu}
+                    onChange={(event, newValue: Menu | null) => setSelectedMenu(newValue)}
                     renderInput={(params) => (
-                        <TextField {...params} label="Ingredients" margin="normal" required fullWidth />
+                        <TextField {...params} label="Menu" margin="normal" required fullWidth />
                     )}
                 />
             </div>
-            <div>
-                <Autocomplete
-                    multiple
-                    options={suppliers}
-                    getOptionLabel={(option: Supplier) => option.name}
-                    value={selectedSuppliers}
-                    onChange={(event, newValue: Supplier[]) => setSelectedSuppliers(newValue)}
-                    renderInput={(params) => (
-                        <TextField {...params} label="Suppliers" margin="normal" required fullWidth />
-                    )}
-                />
-            </div>
-            <div>
-                <Autocomplete
-                    multiple
-                    options={locations}
-                    getOptionLabel={(option: Location) => `${option.city}, ${option.country}`}
-                    value={selectedLocations}
-                    onChange={(event, newValue: Location[]) => setSelectedLocations(newValue)}
-                    renderInput={(params) => (
-                        <TextField {...params} label="Locations" margin="normal" required fullWidth />
-                    )}
-                />
-            </div>
-            <div>
-                <TextField
-                    label="Quantity"
-                    type="number"
-                    value={quantity}
-                    onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
-                    required
-                    fullWidth
-                    margin="normal"
-                />
-            </div>
+            {selectedMenu && (
+                <div>
+                    <h3>Ingredients:</h3>
+                    <ul>
+                        {ingredients.map(ingredient => (
+                            <li key={ingredient.id}>{ingredient.name}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
             <Button type="submit" variant="contained" color="primary">
                 Create Order
             </Button>

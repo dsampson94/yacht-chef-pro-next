@@ -63,6 +63,7 @@ model Menu {
   description String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  Order       Order[]
 }
 
 model Recipe {
@@ -137,6 +138,8 @@ model Order {
   id         String      @id @default(uuid())
   userId     String
   user       User        @relation(fields: [userId], references: [id])
+  menuId     String?
+  menu       Menu?       @relation(fields: [menuId], references: [id])
   orderItems OrderItem[]
   date       DateTime
   status     OrderStatus

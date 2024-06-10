@@ -211,6 +211,7 @@ exports.Prisma.SupplierIngredientScalarFieldEnum = {
 exports.Prisma.OrderScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  menuId: 'menuId',
   date: 'date',
   status: 'status',
   createdAt: 'createdAt',

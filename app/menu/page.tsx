@@ -9,6 +9,8 @@ const Menus = () => {
             resource={RESOURCES.MENUS}
             displayFields={[
                 { label: 'Week of Year', key: 'weekOfYear' },
+                { label: 'Name', key: 'name' },
+                { label: 'Description', key: 'description' },
             ]}
         />
     );
