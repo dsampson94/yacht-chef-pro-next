@@ -2,16 +2,30 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Autocomplete, Button, TextField } from '@mui/material';
+import { Autocomplete, Button, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 interface Ingredient {
     id: string;
     name: string;
+    weight: number;
+    price: number;
+    supplierIngredients: SupplierIngredient[];
+}
+
+interface SupplierIngredient {
+    id: string;
+    supplierId: string;
+    ingredientId: string;
+    locationId: string;
+    supplier: Supplier;
+    location: Location;
 }
 
 interface Supplier {
     id: string;
     name: string;
+    email: string;
+    phone: string;
 }
 
 interface Location {
@@ -63,14 +77,22 @@ const EditOrder = () => {
                 const data: Order = await response.json();
                 setDate(new Date(data.date).toISOString().split('T')[0]);
                 setStatus(data.status);
+                const detailedIngredients = await fetchDetailedIngredients(data.orderItems);
+                setSelectedIngredients(detailedIngredients);
                 setSelectedUser(users.find(user => user.id === data.userId) || null);
-                setSelectedIngredients(data.orderItems.map(item => ingredients.find(ingredient => ingredient.id === item.ingredientId) || { id: item.ingredientId, name: '' }));
-                setSelectedSuppliers(data.orderItems.map(item => suppliers.find(supplier => supplier.id === item.supplierId) || { id: item.supplierId, name: '' }));
-                setSelectedLocations(data.orderItems.map(item => locations.find(location => location.id === item.locationId) || { id: item.locationId, city: '', country: '' }));
                 setQuantity(data.orderItems[0]?.quantity || 0); // Assuming all items have the same quantity
             } catch (error) {
                 console.error('Error fetching order:', error);
             }
+        };
+
+        const fetchDetailedIngredients = async (orderItems: OrderItem[]) => {
+            const ingredientPromises = orderItems.map(async item => {
+                const ingredientResponse = await fetch(`/api/ingredients/${item.ingredientId}`);
+                const ingredient: Ingredient = await ingredientResponse.json();
+                return ingredient;
+            });
+            return Promise.all(ingredientPromises);
         };
 
         const fetchIngredients = async () => {
@@ -192,42 +214,6 @@ const EditOrder = () => {
                 />
             </div>
             <div>
-                <Autocomplete
-                    multiple
-                    options={ingredients}
-                    getOptionLabel={(option: Ingredient) => option.name}
-                    value={selectedIngredients}
-                    onChange={(event, newValue: Ingredient[]) => setSelectedIngredients(newValue)}
-                    renderInput={(params) => (
-                        <TextField {...params} label="Ingredients" margin="normal" required fullWidth />
-                    )}
-                />
-            </div>
-            <div>
-                <Autocomplete
-                    multiple
-                    options={suppliers}
-                    getOptionLabel={(option: Supplier) => option.name}
-                    value={selectedSuppliers}
-                    onChange={(event, newValue: Supplier[]) => setSelectedSuppliers(newValue)}
-                    renderInput={(params) => (
-                        <TextField {...params} label="Suppliers" margin="normal" required fullWidth />
-                    )}
-                />
-            </div>
-            <div>
-                <Autocomplete
-                    multiple
-                    options={locations}
-                    getOptionLabel={(option: Location) => `${option.city}, ${option.country}`}
-                    value={selectedLocations}
-                    onChange={(event, newValue: Location[]) => setSelectedLocations(newValue)}
-                    renderInput={(params) => (
-                        <TextField {...params} label="Locations" margin="normal" required fullWidth />
-                    )}
-                />
-            </div>
-            <div>
                 <TextField
                     label="Quantity"
                     type="number"
@@ -241,6 +227,39 @@ const EditOrder = () => {
             <Button type="submit" variant="contained" color="primary">
                 Update Order
             </Button>
+
+            {selectedIngredients.length > 0 && (
+                <TableContainer component={Paper} style={{ marginTop: '20px' }}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Ingredient Name</TableCell>
+                                <TableCell>Weight</TableCell>
+                                <TableCell>Price</TableCell>
+                                <TableCell>Supplier Name</TableCell>
+                                <TableCell>Supplier Email</TableCell>
+                                <TableCell>Supplier Phone</TableCell>
+                                <TableCell>Supplier Location</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {selectedIngredients.map((ingredient) => (
+                                <TableRow key={ingredient.id}>
+                                    <TableCell>{ingredient.name}</TableCell>
+                                    <TableCell>{ingredient.weight}</TableCell>
+                                    <TableCell>{ingredient.price}</TableCell>
+                                    <TableCell>{ingredient.supplierIngredients[0]?.supplier.name}</TableCell>
+                                    <TableCell>{ingredient.supplierIngredients[0]?.supplier.email}</TableCell>
+                                    <TableCell>{ingredient.supplierIngredients[0]?.supplier.phone}</TableCell>
+                                    <TableCell>
+                                        {ingredient.supplierIngredients[0]?.location.city}, {ingredient.supplierIngredients[0]?.location.country}
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            )}
         </form>
     );
 };

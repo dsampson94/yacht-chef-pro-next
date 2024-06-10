@@ -3,10 +3,34 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { TextField, Button, Autocomplete } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 interface Ingredient {
     id: string;
     name: string;
+    weight: number;
+    price: number;
+    supplierIngredients: SupplierIngredient[];
+}
+
+interface SupplierIngredient {
+    supplierId: string;
+    locationId: string;
+    supplier: Supplier;
+    location: Location;
+}
+
+interface Supplier {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+}
+
+interface Location {
+    id: string;
+    city: string;
+    country: string;
 }
 
 interface User {
@@ -17,6 +41,7 @@ interface User {
 interface Recipe {
     id: string;
     name: string;
+    ingredients: Ingredient[];
 }
 
 interface Menu {
@@ -41,7 +66,7 @@ const CreateOrder = () => {
                 const response = await fetch('/api/menus');
                 const data: Menu[] = await response.json();
                 setMenus(data);
-                console.log('Fetched menus:', data); // Debugging
+                console.log('Fetched menus:', data);
             } catch (error) {
                 console.error('Error fetching menus:', error);
             }
@@ -52,7 +77,7 @@ const CreateOrder = () => {
                 const response = await fetch('/api/users');
                 const data: User[] = await response.json();
                 setUsers(data);
-                console.log('Fetched users:', data); // Debugging
+                console.log('Fetched users:', data);
             } catch (error) {
                 console.error('Error fetching users:', error);
             }
@@ -71,8 +96,13 @@ const CreateOrder = () => {
                     );
                     const recipeIngredients = await Promise.all(ingredientPromises);
                     const allIngredients = recipeIngredients.flatMap(recipe => recipe.ingredients);
-                    setIngredients(allIngredients);
-                    console.log('Fetched ingredients:', allIngredients); // Debugging
+                    const detailedIngredients = await Promise.all(
+                        allIngredients.map(ingredient =>
+                            fetch(`/api/ingredients/${ingredient.id}`).then(res => res.json())
+                        )
+                    );
+                    setIngredients(detailedIngredients);
+                    console.log('Fetched ingredients:', detailedIngredients);
                 } catch (error) {
                     console.error('Error fetching ingredients:', error);
                 }
@@ -99,8 +129,8 @@ const CreateOrder = () => {
             orderItems: ingredients.map(ingredient => ({
                 ingredientId: ingredient.id,
                 quantity: 1,
-                supplierId: 'supplier-id-placeholder',
-                locationId: 'location-id-placeholder',
+                supplierId: ingredient.supplierIngredients[0]?.supplierId,
+                locationId: ingredient.supplierIngredients[0]?.locationId,
             })),
         };
 
@@ -115,7 +145,7 @@ const CreateOrder = () => {
 
             if (response.ok) {
                 alert('Order created successfully');
-                router.push('/orders');
+                router.push('/order');
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.error}`);
@@ -174,11 +204,36 @@ const CreateOrder = () => {
             {selectedMenu && (
                 <div>
                     <h3>Ingredients:</h3>
-                    <ul>
-                        {ingredients.map(ingredient => (
-                            <li key={ingredient.id}>{ingredient.name}</li>
-                        ))}
-                    </ul>
+                    <TableContainer component={Paper}>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Ingredient Name</TableCell>
+                                    <TableCell>Weight</TableCell>
+                                    <TableCell>Price</TableCell>
+                                    <TableCell>Supplier Name</TableCell>
+                                    <TableCell>Supplier Email</TableCell>
+                                    <TableCell>Supplier Phone</TableCell>
+                                    <TableCell>Supplier Location</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {ingredients.map((ingredient) => (
+                                    <TableRow key={ingredient.id}>
+                                        <TableCell>{ingredient.name}</TableCell>
+                                        <TableCell>{ingredient.weight}</TableCell>
+                                        <TableCell>{ingredient.price}</TableCell>
+                                        <TableCell>{ingredient.supplierIngredients[0]?.supplier.name}</TableCell>
+                                        <TableCell>{ingredient.supplierIngredients[0]?.supplier.email}</TableCell>
+                                        <TableCell>{ingredient.supplierIngredients[0]?.supplier.phone}</TableCell>
+                                        <TableCell>
+                                            {ingredient.supplierIngredients[0]?.location.city}, {ingredient.supplierIngredients[0]?.location.country}
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                 </div>
             )}
             <Button type="submit" variant="contained" color="primary">

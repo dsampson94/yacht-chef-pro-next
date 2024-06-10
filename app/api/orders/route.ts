@@ -1,3 +1,5 @@
+// pages/api/orders.ts
+
 import { NextResponse } from 'next/server';
 import prisma from '../../../lib/prisma';
 
@@ -45,6 +47,16 @@ export async function POST(req: Request) {
     try {
         const newItem = await prisma.order.create({
             data: orderData,
+            include: {
+                orderItems: {
+                    include: {
+                        ingredient: true,
+                        supplier: true,
+                        location: true,
+                    },
+                },
+                user: true,
+            },
         });
         return NextResponse.json(newItem, { status: 201 });
     } catch (error) {
