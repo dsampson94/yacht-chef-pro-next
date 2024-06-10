@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../lib/prisma';
 
-const RESOURCE_NAME = 'menuItems';
-const model = prisma.menuItem;
+const RESOURCE_NAME = 'recipes';
+const model = prisma.recipe;
 
 export async function GET() {
     try {

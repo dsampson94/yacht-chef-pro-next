@@ -1,34 +1,57 @@
 'use client';
 
+import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { TextField, Button, Autocomplete } from '@mui/material';
+import { Autocomplete, Button, TextField } from '@mui/material';
 
 interface Recipe {
     id: string;
     name: string;
 }
 
-const CreateMenu = () => {
-    const router = useRouter();
-    const { data: session } = useSession();
+interface Menu {
+    id: string;
+    name: string;
+    description: string;
+    weekOfYear: number;
+    startDate: string;
+    endDate: string;
+    recipes: Recipe[];
+    user: {
+        id: string;
+    };
+}
 
+const EditMenu = () => {
+    const { data: session } = useSession();
+    const router = useRouter();
+    const { id } = useParams();
     const [name, setName] = useState('');
-    const [weekOfYear, setWeekOfYear] = useState('');
     const [description, setDescription] = useState('');
+    const [weekOfYear, setWeekOfYear] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const [selectedRecipes, setSelectedRecipes] = useState<Recipe[]>([]);
     const [autocompleteError, setAutocompleteError] = useState(false);
 
-    const now = new Date();
-    const firstDayOfYear = new Date(now.getFullYear(), 0, 1);
-    const pastDaysOfYear = (now.getTime() - firstDayOfYear.getTime()) / 86400000;
-    const weekNumber = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
-    const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() + 1); // Start of the week (Monday)
-    const endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() + 7); // End of the week (Sunday)
-
     useEffect(() => {
+        const fetchMenu = async () => {
+            try {
+                const response = await fetch(`/api/menus/${id}`);
+                const data: Menu = await response.json();
+                setName(data.name);
+                setDescription(data.description);
+                setWeekOfYear(data.weekOfYear.toString());
+                setStartDate(data.startDate.split('T')[0]);
+                setEndDate(data.endDate.split('T')[0]);
+                setSelectedRecipes(data.recipes);
+            } catch (error) {
+                console.error('Error fetching menu:', error);
+            }
+        };
+
         const fetchRecipes = async () => {
             try {
                 const response = await fetch('/api/recipes');
@@ -39,16 +62,13 @@ const CreateMenu = () => {
             }
         };
 
+        fetchMenu();
         fetchRecipes();
-
-        setWeekOfYear(weekNumber.toString());
-        setName(`${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`);
-    }, []);
+    }, [id]);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
-        // @ts-ignore
         if (selectedRecipes.length === 0 || !session?.user?.id) {
             setAutocompleteError(true);
             return;
@@ -57,17 +77,16 @@ const CreateMenu = () => {
         const menuData = {
             name,
             weekOfYear: parseInt(weekOfYear, 10),
-            // @ts-ignore
             userId: session.user.id,
             description,
-            startDate,
-            endDate,
-            recipes: selectedRecipes.map(item => ({ id: item.id })),
+            startDate: new Date(startDate),
+            endDate: new Date(endDate),
+            recipes: selectedRecipes.map(item => ({ id: item.id }))
         };
 
         try {
-            const response = await fetch('/api/menus', {
-                method: 'POST',
+            const response = await fetch(`/api/menus/${id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -75,15 +94,15 @@ const CreateMenu = () => {
             });
 
             if (response.ok) {
-                alert('Menu created successfully');
+                alert('Menu updated successfully');
                 router.push('/menu');
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.error}`);
             }
         } catch (error) {
-            console.error('Error creating menu:', error);
-            alert('An error occurred while creating the menu.');
+            console.error('Error updating menu:', error);
+            alert('An error occurred while updating the menu.');
         }
     };
 
@@ -102,6 +121,16 @@ const CreateMenu = () => {
             </div>
             <div>
                 <TextField
+                    label="Description"
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    fullWidth
+                    margin="normal"
+                />
+            </div>
+            <div>
+                <TextField
                     label="Week of Year"
                     type="number"
                     value={weekOfYear}
@@ -113,10 +142,22 @@ const CreateMenu = () => {
             </div>
             <div>
                 <TextField
-                    label="Description"
-                    type="text"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    label="Start Date"
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    required
+                    fullWidth
+                    margin="normal"
+                />
+            </div>
+            <div>
+                <TextField
+                    label="End Date"
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    required
                     fullWidth
                     margin="normal"
                 />
@@ -144,10 +185,10 @@ const CreateMenu = () => {
                 />
             </div>
             <Button type="submit" variant="contained" color="primary">
-                Create Menu
+                Update Menu
             </Button>
         </form>
     );
 };
 
-export default CreateMenu;
+export default EditMenu;

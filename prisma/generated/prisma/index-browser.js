@@ -154,12 +154,16 @@ exports.Prisma.SessionScalarFieldEnum = {
 exports.Prisma.MenuScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  name: 'name',
   weekOfYear: 'weekOfYear',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  description: 'description',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.MenuItemScalarFieldEnum = {
+exports.Prisma.RecipeScalarFieldEnum = {
   id: 'id',
   name: 'name',
   description: 'description',
@@ -266,7 +270,7 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   Session: 'Session',
   Menu: 'Menu',
-  MenuItem: 'MenuItem',
+  Recipe: 'Recipe',
   Ingredient: 'Ingredient',
   Supplier: 'Supplier',
   Location: 'Location',

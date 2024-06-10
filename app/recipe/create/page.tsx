@@ -1,43 +1,23 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { Autocomplete, Button, TextField } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { TextField, Button, Autocomplete } from '@mui/material';
 
 interface Ingredient {
     id: string;
     name: string;
 }
 
-interface MenuItem {
-    id: string;
-    name: string;
-    description: string;
-    ingredients: Ingredient[];
-}
-
-const EditMenuItem = () => {
-    const router = useRouter();
-    const { id } = useParams();
+const CreateRecipe = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [ingredients, setIngredients] = useState<Ingredient[]>([]);
     const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>([]);
     const [autocompleteError, setAutocompleteError] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
-        const fetchMenuItem = async () => {
-            try {
-                const response = await fetch(`/api/menu-items/${id}`);
-                const data: MenuItem = await response.json();
-                setName(data.name);
-                setDescription(data.description);
-                setSelectedIngredients(data.ingredients);
-            } catch (error) {
-                console.error('Error fetching menu item:', error);
-            }
-        };
-
         const fetchIngredients = async () => {
             try {
                 const response = await fetch('/api/ingredients');
@@ -48,9 +28,8 @@ const EditMenuItem = () => {
             }
         };
 
-        fetchMenuItem();
         fetchIngredients();
-    }, [id]);
+    }, []);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -67,8 +46,8 @@ const EditMenuItem = () => {
         };
 
         try {
-            const response = await fetch(`/api/menu-items/${id}`, {
-                method: 'PUT',
+            const response = await fetch('/api/recipes', {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -76,15 +55,15 @@ const EditMenuItem = () => {
             });
 
             if (response.ok) {
-                alert('Menu item updated successfully');
-                router.push('/menu-item');
+                alert('Menu item created successfully');
+                router.push('/recipe');
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.error}`);
             }
         } catch (error) {
-            console.error('Error updating menu item:', error);
-            alert('An error occurred while updating the menu item.');
+            console.error('Error creating menu item:', error);
+            alert('An error occurred while creating the menu item.');
         }
     };
 
@@ -132,10 +111,10 @@ const EditMenuItem = () => {
                 />
             </div>
             <Button type="submit" variant="contained" color="primary">
-                Update Menu Item
+                Create Recipe
             </Button>
         </form>
     );
 };
 
-export default EditMenuItem;
+export default CreateRecipe;

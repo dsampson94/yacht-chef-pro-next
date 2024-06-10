@@ -6,7 +6,7 @@ import { RESOURCES } from '../../lib/constants';
 const MenuItems = () => {
     return (
         <ResourceList
-            resource={RESOURCES.MENU_ITEMS}
+            resource={RESOURCES.RECIPES}
             displayFields={[
                 { label: 'Name', key: 'name' },
                 { label: 'Description', key: 'description' },

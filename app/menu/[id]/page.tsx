@@ -2,33 +2,38 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import { Autocomplete, Button, TextField } from '@mui/material';
 
-interface MenuItem {
+interface Recipe {
     id: string;
     name: string;
 }
 
-interface Chef {
-    id: string;
-    username: string;
-}
-
 interface Menu {
     id: string;
+    name: string;
+    description: string;
     weekOfYear: number;
-    menuItems: MenuItem[];
-    user: Chef;
+    startDate: string; // Using string to handle date format easily
+    endDate: string;
+    recipes: Recipe[];
+    user: {
+        id: string;
+    };
 }
 
 const EditMenu = () => {
+    const { data: session } = useSession();
     const router = useRouter();
     const { id } = useParams();
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
     const [weekOfYear, setWeekOfYear] = useState('');
-    const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-    const [selectedMenuItems, setSelectedMenuItems] = useState<MenuItem[]>([]);
-    const [chefs, setChefs] = useState<Chef[]>([]);
-    const [selectedChef, setSelectedChef] = useState<Chef | null>(null);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [recipes, setRecipes] = useState<Recipe[]>([]);
+    const [selectedRecipes, setSelectedRecipes] = useState<Recipe[]>([]);
     const [autocompleteError, setAutocompleteError] = useState(false);
 
     useEffect(() => {
@@ -36,51 +41,49 @@ const EditMenu = () => {
             try {
                 const response = await fetch(`/api/menus/${id}`);
                 const data: Menu = await response.json();
+                setName(data.name);
+                setDescription(data.description);
                 setWeekOfYear(data.weekOfYear.toString());
-                setSelectedMenuItems(data.menuItems);
-                setSelectedChef(data.user);
+                setStartDate(data.startDate.split('T')[0]); // Format date
+                setEndDate(data.endDate.split('T')[0]);
+                setSelectedRecipes(data.recipes);
             } catch (error) {
                 console.error('Error fetching menu:', error);
             }
         };
 
-        const fetchMenuItems = async () => {
+        const fetchRecipes = async () => {
             try {
-                const response = await fetch('/api/menu-items');
-                const data: MenuItem[] = await response.json();
-                setMenuItems(data);
+                const response = await fetch('/api/recipes');
+                const data: Recipe[] = await response.json();
+                setRecipes(data);
             } catch (error) {
-                console.error('Error fetching menu items:', error);
-            }
-        };
-
-        const fetchChefs = async () => {
-            try {
-                const response = await fetch('/api/chefs');
-                const data: Chef[] = await response.json();
-                setChefs(data);
-            } catch (error) {
-                console.error('Error fetching chefs:', error);
+                console.error('Error fetching recipes:', error);
             }
         };
 
         fetchMenu();
-        fetchMenuItems();
-        fetchChefs();
+        fetchRecipes();
     }, [id]);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
-        if (selectedMenuItems.length === 0 || !selectedChef) {
+        // @ts-ignore
+        if (selectedRecipes.length === 0 || !session?.user?.id) {
             setAutocompleteError(true);
             return;
         }
 
         const menuData = {
+            name,
             weekOfYear: parseInt(weekOfYear, 10),
-            userId: selectedChef.id,
-            menuItems: selectedMenuItems.map(item => ({ id: item.id }))
+            // @ts-ignore
+            userId: session.user.id,
+            description,
+            startDate: new Date(startDate),
+            endDate: new Date(endDate),
+            recipes: selectedRecipes.map(item => ({ id: item.id }))
         };
 
         try {
@@ -109,6 +112,27 @@ const EditMenu = () => {
         <form onSubmit={handleSubmit}>
             <div>
                 <TextField
+                    label="Menu Name"
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    fullWidth
+                    margin="normal"
+                />
+            </div>
+            <div>
+                <TextField
+                    label="Description"
+                    type="text"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    fullWidth
+                    margin="normal"
+                />
+            </div>
+            <div>
+                <TextField
                     label="Week of Year"
                     type="number"
                     value={weekOfYear}
@@ -119,41 +143,45 @@ const EditMenu = () => {
                 />
             </div>
             <div>
+                <TextField
+                    label="Start Date"
+                    type="date"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    required
+                    fullWidth
+                    margin="normal"
+                />
+            </div>
+            <div>
+                <TextField
+                    label="End Date"
+                    type="date"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
+                    required
+                    fullWidth
+                    margin="normal"
+                />
+            </div>
+            <div>
                 <Autocomplete
                     multiple
-                    options={menuItems}
-                    getOptionLabel={(option: MenuItem) => option.name}
-                    value={selectedMenuItems}
-                    onChange={(event, newValue: MenuItem[]) => {
-                        setSelectedMenuItems(newValue);
+                    options={recipes}
+                    getOptionLabel={(option: Recipe) => option.name}
+                    value={selectedRecipes}
+                    onChange={(event, newValue: Recipe[]) => {
+                        setSelectedRecipes(newValue);
                         if (newValue.length > 0) setAutocompleteError(false);
                     }}
                     renderInput={(params) => (
                         <TextField
                             {...params}
-                            label="Menu Items"
+                            label="Recipes"
                             margin="normal"
                             fullWidth
                             error={autocompleteError}
-                            helperText={autocompleteError ? "Please select at least one menu item and a chef" : ""}
-                        />
-                    )}
-                />
-            </div>
-            <div>
-                <Autocomplete
-                    options={chefs}
-                    getOptionLabel={(option: Chef) => option.username}
-                    value={selectedChef}
-                    onChange={(event, newValue: Chef | null) => setSelectedChef(newValue)}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label="Chef"
-                            margin="normal"
-                            fullWidth
-                            error={autocompleteError}
-                            helperText={autocompleteError ? "Please select a chef" : ""}
+                            helperText={autocompleteError ? 'Please select at least one recipe' : ''}
                         />
                     )}
                 />

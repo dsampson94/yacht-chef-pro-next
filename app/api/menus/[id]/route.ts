@@ -12,7 +12,14 @@ export async function GET(req: Request, { params }: Params) {
     try {
         const item = await model.findUnique({
             where: { id },
-            include: { menuItems: true, user: { select: { id: true, username: true } } }
+            include: {
+                recipes: {
+                    include: {
+                        ingredients: true
+                    }
+                },
+                user: { select: { id: true, username: true } }
+            }
         });
         if (!item) {
             return NextResponse.json({ error: 'Menu not found' }, { status: 404 });
@@ -28,14 +35,22 @@ export async function PUT(req: Request, { params }: Params) {
     const { id } = params;
     const data = await req.json();
 
+    if (!data.recipes || !Array.isArray(data.recipes)) {
+        return NextResponse.json({ error: 'Invalid recipes data' }, { status: 400 });
+    }
+
     try {
         const updatedItem = await model.update({
             where: { id },
             data: {
+                name: data.name,
+                description: data.description,
                 weekOfYear: parseInt(data.weekOfYear, 10),
+                startDate: new Date(data.startDate),
+                endDate: new Date(data.endDate),
                 userId: data.userId,
-                menuItems: {
-                    set: data.menuItems.map((item: { id: string }) => ({ id: item.id }))
+                recipes: {
+                    set: data.recipes.map((item: { id: string }) => ({ id: item.id }))
                 }
             }
         });

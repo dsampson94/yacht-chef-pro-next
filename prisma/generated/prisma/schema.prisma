@@ -52,16 +52,20 @@ model Session {
 }
 
 model Menu {
-  id         String     @id @default(uuid())
-  userId     String
-  user       User       @relation(fields: [userId], references: [id])
-  menuItems  MenuItem[]
-  weekOfYear Int
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  name        String
+  recipes     Recipe[]
+  weekOfYear  Int
+  startDate   DateTime
+  endDate     DateTime
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
-model MenuItem {
+model Recipe {
   id          String       @id @default(uuid())
   name        String
   description String?
@@ -82,7 +86,7 @@ model Ingredient {
   orderItems          OrderItem[]
   createdAt           DateTime             @default(now())
   updatedAt           DateTime             @default(now())
-  MenuItem            MenuItem?            @relation(fields: [menuItemId], references: [id])
+  recipe              Recipe?              @relation(fields: [menuItemId], references: [id])
   menuItemId          String?
 
   @@unique([name, weight, price])

@@ -6,7 +6,7 @@ export const RESOURCES = {
     SESSIONS: 'sessions',
     CHEFS: 'chefs',
     MENUS: 'menus',
-    MENU_ITEMS: 'menu-items',
+    RECIPES: 'recipes',
     INGREDIENTS: 'ingredients',
     SUPPLIERS: 'suppliers',
     LOCATIONS: 'locations',

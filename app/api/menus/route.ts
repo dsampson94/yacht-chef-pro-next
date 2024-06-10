@@ -7,7 +7,10 @@ const model = prisma.menu;
 export async function GET() {
     try {
         const items = await model.findMany({
-            include: { menuItems: true, user: { select: { id: true, username: true } } }
+            include: {
+                recipes: true,
+                user: { select: { id: true, username: true } }
+            }
         });
         return NextResponse.json(items);
     } catch (error) {
@@ -19,11 +22,19 @@ export async function GET() {
 export async function POST(req: Request) {
     const data = await req.json();
 
+    if (!data.recipes || !Array.isArray(data.recipes)) {
+        return NextResponse.json({ error: 'Invalid recipes data' }, { status: 400 });
+    }
+
     const menuData = {
+        name: data.name,
+        description: data.description,
         weekOfYear: parseInt(data.weekOfYear, 10),
+        startDate: new Date(data.startDate),
+        endDate: new Date(data.endDate),
         userId: data.userId,
-        menuItems: {
-            connect: data.menuItems.map((item: { id: string }) => ({ id: item.id }))
+        recipes: {
+            connect: data.recipes.map((item: { id: string }) => ({ id: item.id }))
         }
     };
 
