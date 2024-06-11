@@ -63,8 +63,11 @@ const Auth = () => {
                         mb: 2
                     }}>
                         <WarningIcon sx={{ color: '#ff9800', marginRight: 1 }} />
-                        <Typography component="div" sx={{ fontWeight: 'bold', color: 'red', fontSize: '12px' }}>
-                            UNDER RAPID CONSTRUCTION BEWARE OF BUGS
+                        <Typography
+                            component="div"
+                            sx={{ fontWeight: 'bold', color: 'red', fontSize: '12px', textAlign: 'center' }}
+                        >
+                            ADMIN SERVER INTERFACE UNDER RAPID CONSTRUCTION BEWARE OF BUGS
                         </Typography>
                         <WarningIcon sx={{ color: '#ff9800', marginLeft: 1 }} />
                     </Box>
