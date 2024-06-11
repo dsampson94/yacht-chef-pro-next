@@ -13,7 +13,9 @@ interface Recipe {
     id: string;
     name: string;
     description: string;
-    ingredients: Ingredient[];
+    ingredients: {
+        ingredient: Ingredient;
+    }[];
 }
 
 const EditRecipe = () => {
@@ -32,9 +34,9 @@ const EditRecipe = () => {
                 const data: Recipe = await response.json();
                 setName(data.name);
                 setDescription(data.description);
-                setSelectedIngredients(data.ingredients);
+                setSelectedIngredients(data.ingredients.map(ri => ri.ingredient));
             } catch (error) {
-                console.error('Error fetching menu item:', error);
+                console.error('Error fetching recipe:', error);
             }
         };
 
@@ -60,7 +62,7 @@ const EditRecipe = () => {
             return;
         }
 
-        const menuItemData = {
+        const recipeData = {
             name,
             description,
             ingredients: selectedIngredients.map(ingredient => ({ id: ingredient.id })),
@@ -72,19 +74,19 @@ const EditRecipe = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(menuItemData),
+                body: JSON.stringify(recipeData),
             });
 
             if (response.ok) {
-                alert('Menu item updated successfully');
+                alert('Recipe updated successfully');
                 router.push('/recipe');
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.error}`);
             }
         } catch (error) {
-            console.error('Error updating menu item:', error);
-            alert('An error occurred while updating the menu item.');
+            console.error('Error updating recipe:', error);
+            alert('An error occurred while updating the recipe.');
         }
     };
 
@@ -132,7 +134,7 @@ const EditRecipe = () => {
                 />
             </div>
             <Button type="submit" variant="contained" color="primary">
-                Update Menu Item
+                Update Recipe
             </Button>
         </form>
     );

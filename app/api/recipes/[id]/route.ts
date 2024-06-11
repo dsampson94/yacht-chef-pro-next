@@ -12,10 +12,16 @@ export async function GET(req: Request, { params }: Params) {
     try {
         const item = await model.findUnique({
             where: { id },
-            include: { ingredients: true },
+            include: {
+                ingredients: {
+                    include: {
+                        ingredient: true,
+                    },
+                },
+            },
         });
         if (!item) {
-            return NextResponse.json({ error: 'Menu item not found' }, { status: 404 });
+            return NextResponse.json({ error: 'Recipe not found' }, { status: 404 });
         }
         return NextResponse.json(item);
     } catch (error) {
@@ -35,9 +41,11 @@ export async function PUT(req: Request, { params }: Params) {
                 name: data.name,
                 description: data.description,
                 ingredients: {
-                    set: data.ingredients.map((ingredient: { id: string }) => ({ id: ingredient.id })),
+                    set: data.ingredients.map((ingredient: { id: string }) => ({
+                        ingredient: { connect: { id: ingredient.id } },
+                    })),
                 },
-            }
+            },
         });
         return NextResponse.json(updatedItem);
     } catch (error) {
