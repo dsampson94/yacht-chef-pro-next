@@ -8,7 +8,7 @@ interface Supplier {
     id: string;
     name: string;
     locationId: string;
-    location: {
+    location?: {
         id: string;
         city: string;
         country: string;
@@ -154,7 +154,7 @@ const EditIngredient = () => {
                 <Autocomplete
                     multiple
                     options={suppliers}
-                    getOptionLabel={(option: Supplier) => `${option.name} (${option.location.city}, ${option.location.country})`}
+                    getOptionLabel={(option: Supplier) => `${option.name} ${option.location ? `(${option.location.city}, ${option.location.country})` : ''}`}
                     value={selectedSuppliers}
                     onChange={(event, newValue: Supplier[]) => {
                         setSelectedSuppliers(newValue);
