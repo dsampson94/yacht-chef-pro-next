@@ -8,7 +8,11 @@ export async function GET() {
     try {
         const items = await model.findMany({
             include: {
-                ingredients: true
+                ingredients: {
+                    include: {
+                        ingredient: true
+                    }
+                }
             }
         });
         return NextResponse.json(items);
@@ -27,8 +31,8 @@ export async function POST(req: Request) {
                 name: data.name,
                 description: data.description,
                 ingredients: {
-                    connect: data.ingredients.map((ingredient: { id: string }) => ({
-                        id: ingredient.id
+                    create: data.ingredients.map((ingredient: { id: string }) => ({
+                        ingredient: { connect: { id: ingredient.id } }
                     }))
                 }
             }

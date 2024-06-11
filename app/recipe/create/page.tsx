@@ -55,15 +55,15 @@ const CreateRecipe = () => {
             });
 
             if (response.ok) {
-                alert('Menu item created successfully');
+                alert('Recipe created successfully');
                 router.push('/recipe');
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.error}`);
             }
         } catch (error) {
-            console.error('Error creating menu item:', error);
-            alert('An error occurred while creating the menu item.');
+            console.error('Error creating recipe:', error);
+            alert('An error occurred while creating the recipe.');
         }
     };
 
