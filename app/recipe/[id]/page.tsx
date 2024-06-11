@@ -2,107 +2,89 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
 import { Autocomplete, Button, TextField } from '@mui/material';
+
+interface Ingredient {
+    id: string;
+    name: string;
+}
 
 interface Recipe {
     id: string;
     name: string;
-}
-
-interface Menu {
-    id: string;
-    name: string;
     description: string;
-    weekOfYear: number;
-    startDate: string;
-    endDate: string;
-    recipes: Recipe[];
-    user: {
-        id: string;
-    };
+    ingredients: Ingredient[];
 }
 
-const EditMenu = () => {
-    const { data: session } = useSession();
+const EditRecipe = () => {
     const router = useRouter();
     const { id } = useParams();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [weekOfYear, setWeekOfYear] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [recipes, setRecipes] = useState<Recipe[]>([]);
-    const [selectedRecipes, setSelectedRecipes] = useState<Recipe[]>([]);
+    const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+    const [selectedIngredients, setSelectedIngredients] = useState<Ingredient[]>([]);
     const [autocompleteError, setAutocompleteError] = useState(false);
 
     useEffect(() => {
-        const fetchMenu = async () => {
+        const fetchRecipe = async () => {
             try {
-                const response = await fetch(`/api/menus/${id}`);
-                const data: Menu = await response.json();
+                const response = await fetch(`/api/recipes/${id}`);
+                const data: Recipe = await response.json();
                 setName(data.name);
                 setDescription(data.description);
-                setWeekOfYear(data.weekOfYear.toString());
-                setStartDate(data.startDate.split('T')[0]);
-                setEndDate(data.endDate.split('T')[0]);
-                setSelectedRecipes(data.recipes);
+                setSelectedIngredients(data.ingredients);
             } catch (error) {
-                console.error('Error fetching menu:', error);
+                console.error('Error fetching menu item:', error);
             }
         };
 
-        const fetchRecipes = async () => {
+        const fetchIngredients = async () => {
             try {
-                const response = await fetch('/api/recipes');
-                const data: Recipe[] = await response.json();
-                setRecipes(data);
+                const response = await fetch('/api/ingredients');
+                const data: Ingredient[] = await response.json();
+                setIngredients(data);
             } catch (error) {
-                console.error('Error fetching recipes:', error);
+                console.error('Error fetching ingredients:', error);
             }
         };
 
-        fetchMenu();
-        fetchRecipes();
+        fetchRecipe();
+        fetchIngredients();
     }, [id]);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
-        if (selectedRecipes.length === 0 || !session?.user?.id) {
+        if (selectedIngredients.length === 0) {
             setAutocompleteError(true);
             return;
         }
 
-        const menuData = {
+        const menuItemData = {
             name,
-            weekOfYear: parseInt(weekOfYear, 10),
-            userId: session.user.id,
             description,
-            startDate: new Date(startDate),
-            endDate: new Date(endDate),
-            recipes: selectedRecipes.map(item => ({ id: item.id }))
+            ingredients: selectedIngredients.map(ingredient => ({ id: ingredient.id })),
         };
 
         try {
-            const response = await fetch(`/api/menus/${id}`, {
+            const response = await fetch(`/api/recipes/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(menuData),
+                body: JSON.stringify(menuItemData),
             });
 
             if (response.ok) {
-                alert('Menu updated successfully');
-                router.push('/menu');
+                alert('Menu item updated successfully');
+                router.push('/recipe');
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.error}`);
             }
         } catch (error) {
-            console.error('Error updating menu:', error);
-            alert('An error occurred while updating the menu.');
+            console.error('Error updating menu item:', error);
+            alert('An error occurred while updating the menu item.');
         }
     };
 
@@ -110,8 +92,7 @@ const EditMenu = () => {
         <form onSubmit={handleSubmit}>
             <div>
                 <TextField
-                    label="Menu Name"
-                    type="text"
+                    label="Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -122,7 +103,6 @@ const EditMenu = () => {
             <div>
                 <TextField
                     label="Description"
-                    type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     fullWidth
@@ -130,65 +110,32 @@ const EditMenu = () => {
                 />
             </div>
             <div>
-                <TextField
-                    label="Week of Year"
-                    type="number"
-                    value={weekOfYear}
-                    onChange={(e) => setWeekOfYear(e.target.value)}
-                    required
-                    fullWidth
-                    margin="normal"
-                />
-            </div>
-            <div>
-                <TextField
-                    label="Start Date"
-                    type="date"
-                    value={startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                    required
-                    fullWidth
-                    margin="normal"
-                />
-            </div>
-            <div>
-                <TextField
-                    label="End Date"
-                    type="date"
-                    value={endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                    required
-                    fullWidth
-                    margin="normal"
-                />
-            </div>
-            <div>
                 <Autocomplete
                     multiple
-                    options={recipes}
-                    getOptionLabel={(option: Recipe) => option.name}
-                    value={selectedRecipes}
-                    onChange={(event, newValue: Recipe[]) => {
-                        setSelectedRecipes(newValue);
+                    options={ingredients}
+                    getOptionLabel={(option: Ingredient) => option.name}
+                    value={selectedIngredients}
+                    onChange={(event, newValue: Ingredient[]) => {
+                        setSelectedIngredients(newValue);
                         if (newValue.length > 0) setAutocompleteError(false);
                     }}
                     renderInput={(params) => (
                         <TextField
                             {...params}
-                            label="Recipes"
+                            label="Ingredients"
                             margin="normal"
                             fullWidth
                             error={autocompleteError}
-                            helperText={autocompleteError ? 'Please select at least one recipe' : ''}
+                            helperText={autocompleteError ? "Please select at least one ingredient" : ""}
                         />
                     )}
                 />
             </div>
             <Button type="submit" variant="contained" color="primary">
-                Update Menu
+                Update Menu Item
             </Button>
         </form>
     );
 };
 
-export default EditMenu;
+export default EditRecipe;
