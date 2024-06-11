@@ -1,9 +1,8 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
-import { Autocomplete, Button, TextField } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
+import { TextField, Button, Autocomplete } from '@mui/material';
 
 interface Recipe {
     id: string;
@@ -14,44 +13,26 @@ interface Menu {
     id: string;
     name: string;
     description: string;
-    weekOfYear: number;
-    startDate: string; // Using string to handle date format easily
+    startDate: string;
     endDate: string;
+    weekOfYear: number;
     recipes: Recipe[];
-    user: {
-        id: string;
-    };
 }
 
 const EditMenu = () => {
-    const { data: session } = useSession();
-    const router = useRouter();
-    const { id } = useParams();
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [weekOfYear, setWeekOfYear] = useState('');
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [weekOfYear, setWeekOfYear] = useState('');
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const [selectedRecipes, setSelectedRecipes] = useState<Recipe[]>([]);
     const [autocompleteError, setAutocompleteError] = useState(false);
+    const [userId, setUserId] = useState(''); // Assuming you have a way to get the user ID
+    const router = useRouter();
+    const { id } = useParams();
 
     useEffect(() => {
-        const fetchMenu = async () => {
-            try {
-                const response = await fetch(`/api/menus/${id}`);
-                const data: Menu = await response.json();
-                setName(data.name);
-                setDescription(data.description);
-                setWeekOfYear(data.weekOfYear.toString());
-                setStartDate(data.startDate.split('T')[0]); // Format date
-                setEndDate(data.endDate.split('T')[0]);
-                setSelectedRecipes(data.recipes);
-            } catch (error) {
-                console.error('Error fetching menu:', error);
-            }
-        };
-
         const fetchRecipes = async () => {
             try {
                 const response = await fetch('/api/recipes');
@@ -62,28 +43,46 @@ const EditMenu = () => {
             }
         };
 
-        fetchMenu();
         fetchRecipes();
+    }, []);
+
+    useEffect(() => {
+        if (id) {
+            const fetchMenu = async () => {
+                try {
+                    const response = await fetch(`/api/menus/${id}`);
+                    const data: Menu = await response.json();
+                    setName(data.name);
+                    setDescription(data.description);
+                    setStartDate(data.startDate.split('T')[0]);
+                    setEndDate(data.endDate.split('T')[0]);
+                    setWeekOfYear(data.weekOfYear.toString());
+                    setSelectedRecipes(data.recipes);
+                } catch (error) {
+                    console.error('Error fetching menu:', error);
+                }
+            };
+
+            fetchMenu();
+        }
     }, [id]);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
-        // @ts-ignore
-        if (selectedRecipes.length === 0 || !session?.user?.id) {
+        if (selectedRecipes.length === 0) {
             setAutocompleteError(true);
             return;
         }
 
         const menuData = {
             name,
-            weekOfYear: parseInt(weekOfYear, 10),
-            // @ts-ignore
-            userId: session.user.id,
             description,
-            startDate: new Date(startDate), // Convert to Date object
-            endDate: new Date(endDate), // Convert to Date object
-            recipes: selectedRecipes.map(item => ({ id: item.id }))
+            startDate,
+            endDate,
+            weekOfYear,
+            userId,
+            recipes: selectedRecipes.map(recipe => ({ id: recipe.id })),
         };
 
         try {
@@ -97,7 +96,7 @@ const EditMenu = () => {
 
             if (response.ok) {
                 alert('Menu updated successfully');
-                router.push('/menu'); // Redirect to the menus list page
+                router.push('/menus');
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.error}`);
@@ -112,8 +111,7 @@ const EditMenu = () => {
         <form onSubmit={handleSubmit}>
             <div>
                 <TextField
-                    label="Menu Name"
-                    type="text"
+                    label="Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -124,20 +122,8 @@ const EditMenu = () => {
             <div>
                 <TextField
                     label="Description"
-                    type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    fullWidth
-                    margin="normal"
-                />
-            </div>
-            <div>
-                <TextField
-                    label="Week of Year"
-                    type="number"
-                    value={weekOfYear}
-                    onChange={(e) => setWeekOfYear(e.target.value)}
-                    required
                     fullWidth
                     margin="normal"
                 />
@@ -148,9 +134,9 @@ const EditMenu = () => {
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    required
                     fullWidth
                     margin="normal"
+                    InputLabelProps={{ shrink: true }}
                 />
             </div>
             <div>
@@ -159,7 +145,17 @@ const EditMenu = () => {
                     type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    required
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{ shrink: true }}
+                />
+            </div>
+            <div>
+                <TextField
+                    label="Week of Year"
+                    type="number"
+                    value={weekOfYear}
+                    onChange={(e) => setWeekOfYear(e.target.value)}
                     fullWidth
                     margin="normal"
                 />
@@ -181,7 +177,7 @@ const EditMenu = () => {
                             margin="normal"
                             fullWidth
                             error={autocompleteError}
-                            helperText={autocompleteError ? 'Please select at least one recipe' : ''}
+                            helperText={autocompleteError ? "Please select at least one recipe" : ""}
                         />
                     )}
                 />
