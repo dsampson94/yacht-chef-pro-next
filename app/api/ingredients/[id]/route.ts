@@ -1,3 +1,4 @@
+// pages/api/ingredients/[id].ts
 import { NextResponse } from 'next/server';
 import prisma from '../../../../lib/prisma';
 
@@ -12,7 +13,14 @@ export async function GET(req: Request, { params }: Params) {
     try {
         const item = await model.findUnique({
             where: { id },
-            include: { supplierIngredients: { include: { supplier: true, location: true } } },
+            include: {
+                supplierIngredients: {
+                    include: { supplier: true, location: true }
+                },
+                recipes: {
+                    include: { recipe: true }
+                }
+            },
         });
         if (!item) {
             return NextResponse.json({ error: 'Ingredient not found' }, { status: 404 });
@@ -42,6 +50,12 @@ export async function PUT(req: Request, { params }: Params) {
                         supplier: { connect: { id: supplier.id } },
                         location: { connect: { id: supplier.locationId } }
                     })),
+                },
+                recipes: {
+                    deleteMany: {},
+                    create: data.recipes.map((recipe: { id: string }) => ({
+                        recipe: { connect: { id: recipe.id } }
+                    })),
                 }
             }
         });
@@ -56,7 +70,9 @@ export async function DELETE(req: Request, { params }: Params) {
     const { id } = params;
 
     try {
-        await model.delete({ where: { id } });
+        await model.delete({
+            where: { id },
+        });
         return NextResponse.json({ message: `${RESOURCE_NAME.slice(0, -1)} deleted` });
     } catch (error) {
         console.error(`Error deleting ${RESOURCE_NAME}: ${error.message}`);

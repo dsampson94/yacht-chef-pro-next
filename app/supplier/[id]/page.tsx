@@ -4,7 +4,6 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Autocomplete, Button, TextField } from '@mui/material';
 
-// Define types for Location and Ingredient data
 interface Location {
     id: string;
     city: string;
@@ -106,7 +105,7 @@ const EditSupplier = () => {
 
             if (response.ok) {
                 alert('Supplier updated successfully');
-                router.push('/suppliers');
+                router.push('/supplier');
             } else {
                 const errorData = await response.json();
                 alert(`Error: ${errorData.error}`);

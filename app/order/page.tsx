@@ -8,7 +8,6 @@ const Orders = () => {
         <ResourceList
             resource={RESOURCES.ORDERS}
             displayFields={[
-                { label: 'Date', key: 'date' },
                 { label: 'Status', key: 'status' },
             ]}
         />

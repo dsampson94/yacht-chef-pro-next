@@ -1,3 +1,4 @@
+// pages/api/ingredients/index.ts
 import { NextResponse } from 'next/server';
 import prisma from '../../../lib/prisma';
 
@@ -10,6 +11,9 @@ export async function GET() {
             include: {
                 supplierIngredients: {
                     include: { supplier: true, location: true }
+                },
+                recipes: {
+                    include: { recipe: true }
                 }
             }
         });
@@ -22,6 +26,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
     const data = await req.json();
+    const { suppliers = [], recipes = [] } = data;
 
     try {
         const newItem = await model.create({
@@ -31,9 +36,14 @@ export async function POST(req: Request) {
                 weight: data.weight,
                 price: data.price,
                 supplierIngredients: {
-                    create: data.suppliers.map((supplier: { id: string, locationId: string }) => ({
+                    create: suppliers.map((supplier: { id: string, locationId: string }) => ({
                         supplier: { connect: { id: supplier.id } },
                         location: { connect: { id: supplier.locationId } }
+                    })),
+                },
+                recipes: {
+                    create: recipes.map((recipe: { id: string }) => ({
+                        recipe: { connect: { id: recipe.id } }
                     })),
                 }
             }

@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -36,7 +37,7 @@ const ResourceList = ({ resource, displayFields }: ResourceListProps) => {
                     <TableHead>
                         <TableRow>
                             {displayFields.map(field => (
-                                <TableCell key={field.key}>{field.label}</TableCell>
+                                <TableCell key={field.key} sx={{ whiteSpace: 'nowrap' }}>{field.label}</TableCell>
                             ))}
                             <TableCell>Actions</TableCell>
                         </TableRow>
@@ -45,7 +46,7 @@ const ResourceList = ({ resource, displayFields }: ResourceListProps) => {
                         {items.map((item) => (
                             <TableRow key={item.id}>
                                 {displayFields.map(field => (
-                                    <TableCell key={field.key}>{item[field.key]}</TableCell>
+                                    <TableCell key={field.key} sx={{ whiteSpace: 'nowrap' }}>{item[field.key]}</TableCell>
                                 ))}
                                 <TableCell>
                                     <Button
@@ -63,7 +64,7 @@ const ResourceList = ({ resource, displayFields }: ResourceListProps) => {
                                     >
                                         Delete
                                     </Button>
-                                    {item.pdfUrl && (
+                                    {resource === 'orders' && item.pdfUrl && (
                                         <Button
                                             variant="contained"
                                             style={{ marginLeft: '10px' }}
