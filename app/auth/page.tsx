@@ -6,6 +6,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 import { Box, Button, Container, Tab, Tabs, TextField, Typography } from '@mui/material';
+import WarningIcon from '@mui/icons-material/Warning';
 import logo from '../../images/YCPdraft-.png';
 import AuthLayout from './layout';
 
@@ -52,7 +53,21 @@ const Auth = () => {
         <AuthLayout>
             <Container sx={{ backgroundColor: 'white', borderRadius: '8px', boxShadow: 4 }} component="main"
                        maxWidth="xs">
-                <Box sx={{ marginTop: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Box sx={{ marginTop: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <Box sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        backgroundColor: '#ffecb3',
+                        padding: 1,
+                        borderRadius: 1,
+                        mb: 2
+                    }}>
+                        <WarningIcon sx={{ color: '#ff9800', marginRight: 1 }} />
+                        <Typography component="div" sx={{ fontWeight: 'bold', color: 'red', fontSize: '12px' }}>
+                            UNDER RAPID CONSTRUCTION BEWARE OF BUGS
+                        </Typography>
+                        <WarningIcon sx={{ color: '#ff9800', marginLeft: 1 }} />
+                    </Box>
                     <Image src={logo} alt="Logo" width={80} height={80} style={{ marginTop: '16px' }} priority />
                     <Typography component="h1" variant="h5">
                         {tab === 0 ? 'Sign In' : 'Sign Up'}
