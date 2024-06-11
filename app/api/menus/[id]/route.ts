@@ -15,7 +15,20 @@ export async function GET(req: Request, { params }: Params) {
             include: {
                 recipes: {
                     include: {
-                        ingredients: true
+                        ingredients: {
+                            include: {
+                                ingredient: {
+                                    include: {
+                                        supplierIngredients: {
+                                            include: {
+                                                supplier: true,
+                                                location: true
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 user: { select: { id: true, username: true } }

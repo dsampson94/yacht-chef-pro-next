@@ -62,7 +62,11 @@ interface Menu {
 interface Recipe {
     id: string;
     name: string;
-    ingredients: Ingredient[];
+    ingredients: RecipeIngredient[];
+}
+
+interface RecipeIngredient {
+    ingredient: Ingredient;
 }
 
 const statusOptions = ["PENDING", "CONFIRMED", "DELIVERED", "CANCELLED"];
@@ -143,17 +147,14 @@ const EditOrder: React.FC = () => {
         if (selectedMenu) {
             const fetchIngredients = async () => {
                 try {
-                    const ingredientPromises = selectedMenu.recipes.map(recipe =>
-                        fetch(`/api/recipes/${recipe.id}`).then(res => res.json())
-                    );
-                    const recipeIngredients = await Promise.all(ingredientPromises);
-                    const allIngredients = recipeIngredients.flatMap(recipe => recipe.ingredients);
-                    const detailedIngredients = await Promise.all(
-                        allIngredients.map(ingredient =>
-                            fetch(`/api/ingredients/${ingredient.id}`).then(res => res.json())
+                    const ingredientPromises = selectedMenu.recipes.flatMap(recipe =>
+                        recipe.ingredients.map(ri =>
+                            fetch(`/api/ingredients/${ri.ingredient.id}`).then(res => res.json())
                         )
                     );
-                    setIngredients(detailedIngredients);
+                    const detailedIngredients = await Promise.all(ingredientPromises);
+                    setIngredients(detailedIngredients.filter(ingredient => ingredient !== null));
+                    console.log('Fetched ingredients:', detailedIngredients);
                 } catch (error) {
                     console.error('Error fetching ingredients:', error);
                 }
@@ -173,8 +174,8 @@ const EditOrder: React.FC = () => {
             status,
             orderItems: ingredients.map((ingredient) => ({
                 ingredientId: ingredient.id,
-                supplierId: ingredient.supplierIngredients[0]?.supplierId,
-                locationId: ingredient.supplierIngredients[0]?.locationId,
+                supplierId: ingredient.supplierIngredients?.[0]?.supplierId || '',
+                locationId: ingredient.supplierIngredients?.[0]?.locationId || '',
                 quantity: 1,
             })),
         };
@@ -270,11 +271,13 @@ const EditOrder: React.FC = () => {
                                         <TableCell>{ingredient.name}</TableCell>
                                         <TableCell>{ingredient.weight}</TableCell>
                                         <TableCell>{ingredient.price}</TableCell>
-                                        <TableCell>{ingredient.supplierIngredients[0]?.supplier.name}</TableCell>
-                                        <TableCell>{ingredient.supplierIngredients[0]?.supplier.email}</TableCell>
-                                        <TableCell>{ingredient.supplierIngredients[0]?.supplier.phone}</TableCell>
+                                        <TableCell>{ingredient.supplierIngredients?.[0]?.supplier?.name || 'N/A'}</TableCell>
+                                        <TableCell>{ingredient.supplierIngredients?.[0]?.supplier?.email || 'N/A'}</TableCell>
+                                        <TableCell>{ingredient.supplierIngredients?.[0]?.supplier?.phone || 'N/A'}</TableCell>
                                         <TableCell>
-                                            {ingredient.supplierIngredients[0]?.location.city}, {ingredient.supplierIngredients[0]?.location.country}
+                                            {ingredient.supplierIngredients?.[0]?.location
+                                                ? `${ingredient.supplierIngredients[0].location.city}, ${ingredient.supplierIngredients[0].location.country}`
+                                                : 'N/A'}
                                         </TableCell>
                                     </TableRow>
                                 ))}
