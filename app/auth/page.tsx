@@ -57,7 +57,6 @@ const Auth = () => {
                     <Box sx={{
                         display: 'flex',
                         alignItems: 'center',
-                        backgroundColor: '#ffecb3',
                         padding: 1,
                         borderRadius: 1,
                         mb: 2
@@ -65,9 +64,9 @@ const Auth = () => {
                         <WarningIcon sx={{ color: '#ff9800', marginRight: 1 }} />
                         <Typography
                             component="div"
-                            sx={{ fontWeight: 'bold', color: 'red', fontSize: '12px', textAlign: 'center' }}
+                            sx={{ fontWeight: 'bold', color: 'black', fontSize: '12px', textAlign: 'center' }}
                         >
-                            ADMIN SERVER INTERFACE UNDER RAPID CONSTRUCTION BEWARE OF BUGS
+                            ADMIN GUI UNDER CONSTRUCTION
                         </Typography>
                         <WarningIcon sx={{ color: '#ff9800', marginLeft: 1 }} />
                     </Box>
