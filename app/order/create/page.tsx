@@ -92,18 +92,31 @@ const CreateOrder = () => {
         if (selectedMenu) {
             const fetchIngredients = async () => {
                 try {
-                    const ingredientPromises = selectedMenu.recipes.map(recipe =>
-                        fetch(`/api/recipes/${recipe.id}`).then(res => res.json())
-                    );
+                    const ingredientPromises = selectedMenu.recipes.map(async (recipe) => {
+                        const response = await fetch(`/api/recipes/${recipe.id}`);
+                        const recipeData = await response.json();
+                        console.log('Fetched recipe data:', recipeData); // Debugging statement
+                        return recipeData.ingredients.map((ingredient) => ingredient.ingredient);
+                    });
+
                     const recipeIngredients = await Promise.all(ingredientPromises);
-                    const allIngredients = recipeIngredients.flatMap(recipe => recipe.ingredients);
+                    const allIngredients = recipeIngredients.flat();
+                    console.log('All ingredients before detailed fetch:', allIngredients); // Debugging statement
+
                     const detailedIngredients = await Promise.all(
-                        allIngredients.map(ingredient =>
-                            fetch(`/api/ingredients/${ingredient.id}`).then(res => res.json())
-                        )
+                        allIngredients.map(async (ingredient) => {
+                            if (!ingredient.id) {
+                                console.error('Ingredient ID is missing:', ingredient); // Debugging statement
+                                return null;
+                            }
+                            const response = await fetch(`/api/ingredients/${ingredient.id}`);
+                            return await response.json();
+                        })
                     );
-                    setIngredients(detailedIngredients);
-                    console.log('Fetched ingredients:', detailedIngredients);
+
+                    const filteredIngredients = detailedIngredients.filter(Boolean); // Remove null values
+                    setIngredients(filteredIngredients);
+                    console.log('Fetched detailed ingredients:', filteredIngredients); // Debugging statement
                 } catch (error) {
                     console.error('Error fetching ingredients:', error);
                 }
