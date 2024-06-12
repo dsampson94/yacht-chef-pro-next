@@ -1,10 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useResource } from '../lib/hooks/useResource';
+import { useSession } from 'next-auth/react';
 import useDownloadPDF from '../lib/hooks/useDownloadPDF';
 
 interface Field {
@@ -17,10 +17,50 @@ interface ResourceListProps {
     displayFields: Field[];
 }
 
+interface ResourceItem {
+    id: string;
+    [key: string]: any;
+}
+
 const ResourceList = ({ resource, displayFields }: ResourceListProps) => {
-    const { items, deleteItem, error } = useResource(resource);
+    const { data: session } = useSession();
+    const [items, setItems] = useState<ResourceItem[]>([]);
+    const [error, setError] = useState<string>('');
     const { handleDownloadPDF } = useDownloadPDF();
     const router = useRouter();
+
+    const fetchItems = async () => {
+        try {
+            const response = await fetch(`/api/${resource}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch items');
+            }
+            const data = await response.json();
+            setItems(data);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    const deleteItem = async (id: string) => {
+        try {
+            const response = await fetch(`/api/${resource}/${id}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) {
+                throw new Error('Failed to delete item');
+            }
+            setItems(items.filter(item => item.id !== id));
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    useEffect(() => {
+        if (session) {
+            fetchItems();
+        }
+    }, [session, resource]);
 
     if (error) {
         return <p>Error: {error}</p>;
