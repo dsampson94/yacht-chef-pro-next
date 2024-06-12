@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { TextField, Button, Autocomplete } from '@mui/material';
+import { TextField, Button, Autocomplete, Box, MenuItem, Select } from '@mui/material';
 
 interface Recipe {
     id: string;
@@ -16,8 +16,11 @@ interface Menu {
     startDate: string;
     endDate: string;
     weekOfYear: number;
-    recipes: Recipe[];
+    recipes: { recipe: Recipe, day: string, meal: string }[];
 }
+
+const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const mealTimes = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
 
 const EditMenu = () => {
     const [name, setName] = useState('');
@@ -26,7 +29,7 @@ const EditMenu = () => {
     const [endDate, setEndDate] = useState('');
     const [weekOfYear, setWeekOfYear] = useState('');
     const [recipes, setRecipes] = useState<Recipe[]>([]);
-    const [selectedRecipes, setSelectedRecipes] = useState<Recipe[]>([]);
+    const [selectedRecipes, setSelectedRecipes] = useState<{ recipe: Recipe, day: string, meal: string }[]>([]);
     const [autocompleteError, setAutocompleteError] = useState(false);
     const [userId, setUserId] = useState(''); // Assuming you have a way to get the user ID
     const router = useRouter();
@@ -67,6 +70,20 @@ const EditMenu = () => {
         }
     }, [id]);
 
+    const handleAddRecipe = () => {
+        setSelectedRecipes([...selectedRecipes, { recipe: { id: '', name: '' }, day: '', meal: '' }]);
+    };
+
+    const handleRecipeChange = (index: number, field: 'recipe' | 'day' | 'meal', value: any) => {
+        const updatedRecipes = [...selectedRecipes];
+        if (field === 'recipe') {
+            updatedRecipes[index].recipe = recipes.find(r => r.id === value) || { id: '', name: '' };
+        } else {
+            updatedRecipes[index][field] = value;
+        }
+        setSelectedRecipes(updatedRecipes);
+    };
+
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
@@ -80,9 +97,9 @@ const EditMenu = () => {
             description,
             startDate,
             endDate,
-            weekOfYear,
+            weekOfYear: parseInt(weekOfYear, 10),
             userId,
-            recipes: selectedRecipes.map(recipe => ({ id: recipe.id })),
+            recipes: selectedRecipes.map(item => ({ id: item.recipe.id, day: item.day, meal: item.meal })),
         };
 
         try {
@@ -161,28 +178,56 @@ const EditMenu = () => {
                 />
             </div>
             <div>
-                <Autocomplete
-                    multiple
-                    options={recipes}
-                    getOptionLabel={(option: Recipe) => option.name}
-                    value={selectedRecipes}
-                    onChange={(event, newValue: Recipe[]) => {
-                        setSelectedRecipes(newValue);
-                        if (newValue.length > 0) setAutocompleteError(false);
-                    }}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label="Recipes"
-                            margin="normal"
-                            fullWidth
-                            error={autocompleteError}
-                            helperText={autocompleteError ? "Please select at least one recipe" : ""}
-                        />
-                    )}
-                />
+                <Button variant="contained" color="primary" onClick={handleAddRecipe}>
+                    Add Recipe
+                </Button>
             </div>
-            <Button type="submit" variant="contained" color="primary">
+            {selectedRecipes.map((selectedRecipe, index) => (
+                <Box key={index} display="flex" alignItems="center" gap={2} mt={2}>
+                    <Autocomplete
+                        options={recipes}
+                        getOptionLabel={(option: Recipe) => option.name}
+                        value={selectedRecipe.recipe}
+                        onChange={(event, newValue: Recipe | null) => handleRecipeChange(index, 'recipe', newValue?.id)}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Recipe"
+                                margin="normal"
+                                fullWidth
+                                error={autocompleteError}
+                                helperText={autocompleteError ? 'Please select at least one recipe' : ''}
+                            />
+                        )}
+                        style={{ flex: 1 }}
+                    />
+                    <Select
+                        value={selectedRecipe.day}
+                        onChange={(e) => handleRecipeChange(index, 'day', e.target.value)}
+                        displayEmpty
+                        fullWidth
+                        style={{ flex: 1 }}
+                    >
+                        <MenuItem value="" disabled>Select Day</MenuItem>
+                        {daysOfWeek.map(day => (
+                            <MenuItem key={day} value={day}>{day}</MenuItem>
+                        ))}
+                    </Select>
+                    <Select
+                        value={selectedRecipe.meal}
+                        onChange={(e) => handleRecipeChange(index, 'meal', e.target.value)}
+                        displayEmpty
+                        fullWidth
+                        style={{ flex: 1 }}
+                    >
+                        <MenuItem value="" disabled>Select Meal</MenuItem>
+                        {mealTimes.map(meal => (
+                            <MenuItem key={meal} value={meal}>{meal}</MenuItem>
+                        ))}
+                    </Select>
+                </Box>
+            ))}
+            <Button type="submit" variant="contained" color="primary" fullWidth>
                 Update Menu
             </Button>
         </form>

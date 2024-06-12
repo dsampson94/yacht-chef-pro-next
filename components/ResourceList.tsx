@@ -4,8 +4,8 @@ import React from 'react';
 import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { PDFDocument, rgb } from 'pdf-lib';
 import { useResource } from '../lib/hooks/useResource';
+import useDownloadPDF from '../lib/hooks/useDownloadPDF';
 
 interface Field {
     label: string;
@@ -19,62 +19,12 @@ interface ResourceListProps {
 
 const ResourceList = ({ resource, displayFields }: ResourceListProps) => {
     const { items, deleteItem, error } = useResource(resource);
+    const { handleDownloadPDF } = useDownloadPDF();
     const router = useRouter();
 
     if (error) {
         return <p>Error: {error}</p>;
     }
-
-    const handleDownloadPDF = async (orderId: string) => {
-        try {
-            const response = await fetch(`/api/orders/${orderId}`);
-            if (response.ok) {
-                const order = await response.json();
-                const pdfDoc = await PDFDocument.create();
-                const page = pdfDoc.addPage([600, 800]);
-                const { height } = page.getSize();
-                let y = height - 50;
-
-                page.drawText('Order Details', { x: 50, y, size: 20, color: rgb(0, 0, 0) });
-                y -= 40;
-
-                page.drawText(`Order ID: ${order.id}`, { x: 50, y, size: 12 });
-                y -= 20;
-                page.drawText(`User: ${order.user.username}`, { x: 50, y, size: 12 });
-                y -= 20;
-                page.drawText(`Date: ${new Date(order.date).toLocaleDateString()}`, { x: 50, y, size: 12 });
-                y -= 20;
-                page.drawText(`Status: ${order.status}`, { x: 50, y, size: 12 });
-                y -= 30;
-
-                page.drawText('Order Items', { x: 50, y, size: 16, color: rgb(0, 0, 0) });
-                y -= 20;
-                order.orderItems.forEach(item => {
-                    const ingredient = item.ingredient;
-                    page.drawText(`Ingredient: ${ingredient.name}, Quantity: ${item.quantity}`, { x: 50, y, size: 12 });
-                    y -= 20;
-                    page.drawText(`  Supplier: ${item.supplier.name}, Location: ${item.location.city}, ${item.location.country}`, { x: 70, y, size: 12 });
-                    y -= 20;
-                });
-
-                const pdfBytes = await pdfDoc.save();
-                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `order_${orderId}.pdf`;
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-            } else {
-                const errorData = await response.json();
-                alert(`Error: ${errorData.error}`);
-            }
-        } catch (error) {
-            console.error('Error downloading PDF:', error);
-            alert('An error occurred while downloading the PDF.');
-        }
-    };
 
     return (
         <Box>

@@ -3,12 +3,15 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { TextField, Button, Autocomplete } from '@mui/material';
+import { Autocomplete, Box, Button, MenuItem, Select, TextField } from '@mui/material';
 
 interface Recipe {
     id: string;
     name: string;
 }
+
+const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const mealTimes = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
 
 const CreateMenu = () => {
     const router = useRouter();
@@ -18,7 +21,7 @@ const CreateMenu = () => {
     const [weekOfYear, setWeekOfYear] = useState('');
     const [description, setDescription] = useState('');
     const [recipes, setRecipes] = useState<Recipe[]>([]);
-    const [selectedRecipes, setSelectedRecipes] = useState<Recipe[]>([]);
+    const [selectedRecipes, setSelectedRecipes] = useState<{ recipe: Recipe, day: string, meal: string }[]>([]);
     const [autocompleteError, setAutocompleteError] = useState(false);
 
     const now = new Date();
@@ -27,7 +30,6 @@ const CreateMenu = () => {
     const weekNumber = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
     const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() + 1); // Start of the week (Monday)
     const endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - now.getDay() + 7); // End of the week (Sunday)
-
     useEffect(() => {
         const fetchRecipes = async () => {
             try {
@@ -45,10 +47,23 @@ const CreateMenu = () => {
         setName(`${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`);
     }, []);
 
+    const handleAddRecipe = () => {
+        setSelectedRecipes([...selectedRecipes, { recipe: { id: '', name: '' }, day: '', meal: '' }]);
+    };
+
+    const handleRecipeChange = (index: number, field: 'recipe' | 'day' | 'meal', value: any) => {
+        const updatedRecipes = [...selectedRecipes];
+        if (field === 'recipe') {
+            updatedRecipes[index].recipe = recipes.find(r => r.id === value) || { id: '', name: '' };
+        } else {
+            updatedRecipes[index][field] = value;
+        }
+        setSelectedRecipes(updatedRecipes);
+    };
+
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
-        // @ts-ignore
         if (selectedRecipes.length === 0 || !session?.user?.id) {
             setAutocompleteError(true);
             return;
@@ -57,12 +72,11 @@ const CreateMenu = () => {
         const menuData = {
             name,
             weekOfYear: parseInt(weekOfYear, 10),
-            // @ts-ignore
             userId: session.user.id,
             description,
             startDate,
             endDate,
-            recipes: selectedRecipes.map(item => ({ id: item.id })),
+            recipes: selectedRecipes.map(item => ({ id: item.recipe.id, day: item.day, meal: item.meal })),
         };
 
         try {
@@ -122,28 +136,56 @@ const CreateMenu = () => {
                 />
             </div>
             <div>
-                <Autocomplete
-                    multiple
-                    options={recipes}
-                    getOptionLabel={(option: Recipe) => option.name}
-                    value={selectedRecipes}
-                    onChange={(event, newValue: Recipe[]) => {
-                        setSelectedRecipes(newValue);
-                        if (newValue.length > 0) setAutocompleteError(false);
-                    }}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label="Recipes"
-                            margin="normal"
-                            fullWidth
-                            error={autocompleteError}
-                            helperText={autocompleteError ? 'Please select at least one recipe' : ''}
-                        />
-                    )}
-                />
+                <Button variant="contained" color="primary" onClick={handleAddRecipe}>
+                    Add Recipe
+                </Button>
             </div>
-            <Button type="submit" variant="contained" color="primary">
+            {selectedRecipes.map((selectedRecipe, index) => (
+                <Box key={index} display="flex" alignItems="center" gap={2} mt={2}>
+                    <Autocomplete
+                        options={recipes}
+                        getOptionLabel={(option: Recipe) => option.name}
+                        value={selectedRecipe.recipe}
+                        onChange={(event, newValue: Recipe | null) => handleRecipeChange(index, 'recipe', newValue?.id)}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Recipe"
+                                margin="normal"
+                                fullWidth
+                                error={autocompleteError}
+                                helperText={autocompleteError ? 'Please select at least one recipe' : ''}
+                            />
+                        )}
+                        style={{ flex: 1 }}
+                    />
+                    <Select
+                        value={selectedRecipe.day}
+                        onChange={(e) => handleRecipeChange(index, 'day', e.target.value)}
+                        displayEmpty
+                        fullWidth
+                        style={{ flex: 1 }}
+                    >
+                        <MenuItem value="" disabled>Select Day</MenuItem>
+                        {daysOfWeek.map(day => (
+                            <MenuItem key={day} value={day}>{day}</MenuItem>
+                        ))}
+                    </Select>
+                    <Select
+                        value={selectedRecipe.meal}
+                        onChange={(e) => handleRecipeChange(index, 'meal', e.target.value)}
+                        displayEmpty
+                        fullWidth
+                        style={{ flex: 1 }}
+                    >
+                        <MenuItem value="" disabled>Select Meal</MenuItem>
+                        {mealTimes.map(meal => (
+                            <MenuItem key={meal} value={meal}>{meal}</MenuItem>
+                        ))}
+                    </Select>
+                </Box>
+            ))}
+            <Button type="submit" variant="contained" color="primary" fullWidth>
                 Create Menu
             </Button>
         </form>

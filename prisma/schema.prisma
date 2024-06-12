@@ -52,18 +52,30 @@ model Session {
 }
 
 model Menu {
-  id          String   @id @default(uuid())
+  id          String       @id @default(uuid())
   userId      String
-  user        User     @relation(fields: [userId], references: [id])
+  user        User         @relation(fields: [userId], references: [id])
   name        String
-  recipes     Recipe[]
   weekOfYear  Int
   startDate   DateTime
   endDate     DateTime
   description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  Order       Order[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  recipes     MenuRecipe[]
+  orders      Order[]
+}
+
+model MenuRecipe {
+  id       String @id @default(uuid())
+  menuId   String
+  menu     Menu   @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  recipeId String
+  recipe   Recipe @relation(fields: [recipeId], references: [id], onDelete: Cascade)
+  day      String // e.g., 'Monday', 'Tuesday', etc.
+  meal     String // e.g., 'Breakfast', 'Lunch', 'Dinner', 'Snack'
+
+  @@unique([menuId, recipeId, day, meal])
 }
 
 model Recipe {
@@ -73,8 +85,7 @@ model Recipe {
   ingredients RecipeIngredient[]
   createdAt   DateTime           @default(now())
   updatedAt   DateTime           @default(now())
-  Menu        Menu?              @relation(fields: [menuId], references: [id])
-  menuId      String?
+  menus       MenuRecipe[]
 }
 
 model RecipeIngredient {

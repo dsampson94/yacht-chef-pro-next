@@ -15,20 +15,7 @@ export async function GET(req: Request, { params }: Params) {
             include: {
                 recipes: {
                     include: {
-                        ingredients: {
-                            include: {
-                                ingredient: {
-                                    include: {
-                                        supplierIngredients: {
-                                            include: {
-                                                supplier: true,
-                                                location: true
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        recipe: true
                     }
                 },
                 user: { select: { id: true, username: true } }
@@ -63,7 +50,12 @@ export async function PUT(req: Request, { params }: Params) {
                 endDate: new Date(data.endDate),
                 userId: data.userId,
                 recipes: {
-                    set: data.recipes.map((item: { id: string }) => ({ id: item.id }))
+                    deleteMany: {}, // Delete existing records to allow updating
+                    create: data.recipes.map((item: { id: string, day: string, meal: string }) => ({
+                        recipeId: item.id,
+                        day: item.day,
+                        meal: item.meal
+                    }))
                 }
             }
         });
