@@ -50,7 +50,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
         { text: 'Ingredients', icon: <KitchenIcon />, path: `/${ENDPOINTS.ingredients.slice(0, -1)}` },
         { text: 'Locations', icon: <LocationOnIcon />, path: `/${ENDPOINTS.locations.slice(0, -1)}` },
         { text: 'Suppliers', icon: <LocalGroceryStoreIcon />, path: `/${ENDPOINTS.suppliers.slice(0, -1)}` },
-        { text: 'Reviews', icon: <RateReviewIcon />, path: `/${ENDPOINTS.reviews.slice(0, -1)}` }
+        // { text: 'Reviews', icon: <RateReviewIcon />, path: `/${ENDPOINTS.reviews.slice(0, -1)}` }
     ];
 
     return (

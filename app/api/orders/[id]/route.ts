@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../../lib/prisma';
-import { generatePdf } from '../../../../lib/pdf';
 
 const RESOURCE_NAME = 'orders';
 const model = prisma.order;
@@ -53,13 +52,6 @@ export async function PUT(req: Request, { params }: Params) {
                     },
                 },
             },
-        });
-
-        // Generate PDF
-        const pdfUrl = await generatePdf(updatedItem);
-        await model.update({
-            where: { id: updatedItem.id },
-            data: { pdfUrl },
         });
 
         return NextResponse.json(updatedItem);
