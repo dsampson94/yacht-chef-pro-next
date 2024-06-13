@@ -64,6 +64,7 @@ const CreateMenu = () => {
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
+        // @ts-ignore
         if (selectedRecipes.length === 0 || !session?.user?.id) {
             setAutocompleteError(true);
             return;
@@ -72,6 +73,7 @@ const CreateMenu = () => {
         const menuData = {
             name,
             weekOfYear: parseInt(weekOfYear, 10),
+            // @ts-ignore
             userId: session.user.id,
             description,
             startDate,
