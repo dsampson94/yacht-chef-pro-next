@@ -1,20 +1,21 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import prisma from '../../../lib/prisma';
+import { addWeeks, startOfYear, formatISO } from 'date-fns';
 
 export async function POST(req: Request) {
     const passwordHash = await bcrypt.hash('password123', 10);
 
     try {
-        // // Clear existing data
-        // await prisma.menuRecipe.deleteMany();
-        // await prisma.menu.deleteMany();
-        // await prisma.recipeIngredient.deleteMany();
-        // await prisma.recipe.deleteMany();
-        // await prisma.ingredient.deleteMany();
-        // await prisma.supplier.deleteMany();
-        // await prisma.location.deleteMany();
-        // await prisma.user.deleteMany();
+        // Clear existing data
+        await prisma.menuRecipe.deleteMany();
+        await prisma.menu.deleteMany();
+        await prisma.recipeIngredient.deleteMany();
+        await prisma.recipe.deleteMany();
+        await prisma.ingredient.deleteMany();
+        await prisma.supplier.deleteMany();
+        await prisma.location.deleteMany();
+        await prisma.user.deleteMany();
 
         // Seed users
         await prisma.user.createMany({
@@ -106,29 +107,27 @@ export async function POST(req: Request) {
             ],
         });
 
-        // Seed menus
-        await prisma.menu.createMany({
-            data: [
-                { id: 'menu1', userId: 'user2', name: 'Menu 1', weekOfYear: 1, startDate: new Date(), endDate: new Date(), description: 'Menu for Week 1' },
-                { id: 'menu2', userId: 'user2', name: 'Menu 2', weekOfYear: 2, startDate: new Date(), endDate: new Date(), description: 'Menu for Week 2' },
-                { id: 'menu3', userId: 'user2', name: 'Menu 3', weekOfYear: 3, startDate: new Date(), endDate: new Date(), description: 'Menu for Week 3' },
-            ],
-        });
+        // Seed menus for the current year and the next two years
+        const currentYear = new Date().getFullYear();
+        const years = [currentYear, currentYear + 1, currentYear + 2];
 
-        // Seed menu recipes
-        await prisma.menuRecipe.createMany({
-            data: [
-                { id: 'menuRecipe1', menuId: 'menu1', recipeId: 'recipe1', day: 'Monday', meal: 'Breakfast' },
-                { id: 'menuRecipe2', menuId: 'menu1', recipeId: 'recipe2', day: 'Tuesday', meal: 'Lunch' },
-                { id: 'menuRecipe3', menuId: 'menu1', recipeId: 'recipe3', day: 'Wednesday', meal: 'Dinner' },
-                { id: 'menuRecipe4', menuId: 'menu2', recipeId: 'recipe1', day: 'Thursday', meal: 'Snack' },
-                { id: 'menuRecipe5', menuId: 'menu2', recipeId: 'recipe2', day: 'Friday', meal: 'Breakfast' },
-                { id: 'menuRecipe6', menuId: 'menu2', recipeId: 'recipe3', day: 'Saturday', meal: 'Lunch' },
-                { id: 'menuRecipe7', menuId: 'menu3', recipeId: 'recipe1', day: 'Sunday', meal: 'Dinner' },
-                { id: 'menuRecipe8', menuId: 'menu3', recipeId: 'recipe2', day: 'Monday', meal: 'Snack' },
-                { id: 'menuRecipe9', menuId: 'menu3', recipeId: 'recipe3', day: 'Tuesday', meal: 'Breakfast' },
-            ],
-        });
+        for (const year of years) {
+            let startDate = startOfYear(new Date(year, 0, 1));
+            for (let week = 1; week <= 52; week++) {
+                const endDate = addWeeks(startDate, 1);
+                await prisma.menu.create({
+                    data: {
+                        userId: 'user2', // Assuming 'chef' user
+                        name: `Menu ${week} of ${year}`,
+                        weekOfYear: week,
+                        startDate: formatISO(startDate),
+                        endDate: formatISO(endDate),
+                        description: `Menu for Week ${week} of ${year}`
+                    }
+                });
+                startDate = endDate;
+            }
+        }
 
         return NextResponse.json({ message: 'Seeding completed successfully' });
     } catch (error) {
